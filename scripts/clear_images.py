@@ -40,7 +40,7 @@ def filter_validation_data(val_folder, train_labels):
     new_image_count = 0
     image_name_mapping = {}
     
-    with open(val_annotations_file, 'r') as annotations_file:
+    with open(val_annotations_file, 'r', encoding='utf-8') as annotations_file:
         lines_seen = set()  # To keep track of unique lines
         for line in annotations_file:
             parts = line.strip().split('\t')
@@ -65,7 +65,7 @@ def filter_validation_data(val_folder, train_labels):
         filtered_annotations = list(set(filtered_annotations))
         
     # Rewrite the filtered annotations without empty lines and update the annotations file
-    with open(val_annotations_file, 'w') as annotations_file:
+    with open(val_annotations_file, 'w', encoding='utf-8') as annotations_file:
         annotations_file.write('\n'.join(filtered_annotations))
 
     return image_name_mapping
@@ -81,6 +81,15 @@ def count_images(folder):
     int: Number of images.
     '''
     return sum([len(files) for _, _, files in os.walk(folder)])
+
+
+
+
+
+
+
+
+
 
 # Define paths
 train_folder = "./nano-imagenet-30/nano-imagenet-30/train"
@@ -98,7 +107,7 @@ image_name_mapping = filter_validation_data(val_folder, train_labels)
 
 # Update the lines in val_annotations.txt with the new image names
 updated_image_names = set(image_name_mapping.values())
-with open(os.path.join(val_folder, "val_annotations.txt"), 'r+') as annotations_file:
+with open(os.path.join(val_folder, "val_annotations.txt"), 'r+', encoding='utf-8') as annotations_file:
     lines = annotations_file.readlines()
     annotations_file.seek(0)
     for line in lines:
