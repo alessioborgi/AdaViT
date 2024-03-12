@@ -83,6 +83,7 @@ def visualize_patches(images, n_patches, title):
     plt.show()
 
 
+'''
 if __name__ == "__main__":
 
     # Define the AViT_DataModule.
@@ -116,3 +117,4 @@ if __name__ == "__main__":
 
     # Visualize patches for a Test Image.
     visualize_patches(test_batch[0], n_patches=8, title='Test Patches')
+'''
