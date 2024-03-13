@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from ViTMain import AViT_DataModule
 
 
-def Make_Patches_from_Image(images, n_patches):
+def make_matches_from_image(images, n_patches):
     """
     Extract patches from input images.
 
