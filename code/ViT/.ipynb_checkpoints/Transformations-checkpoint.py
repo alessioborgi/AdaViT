@@ -11,8 +11,8 @@ class ViT_Transformations:
     def __init__(self):
 
         self.transform = transforms.Compose([
-            # Resize to 224x224
-            transforms.Resize(224),
+            # Resize preserving aspect ratio
+            transforms.Resize((224, 224)),
             transforms.RandomHorizontalFlip(p=0.3),
             transforms.RandomRotation(degrees=(-15, 15)),
             transforms.ToTensor(),
@@ -24,6 +24,29 @@ class ViT_Transformations:
         return self.transform(sample)
 
 
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 # Transformation Class with Custom Cutout Implementation. 
 class ViT_Transformations_With_Cutout:

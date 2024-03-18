@@ -124,7 +124,9 @@ class CustomValidationTinyImagenet(pl.LightningDataModule):
         Returns:
         - labels (dict): Dictionary mapping image names to labels.
         """
-        label_path = "./dataset/pico-imagenet-10/val/val_annotations.txt"
+        
+        #label_path = "./dataset/pico-imagenet-10/val/val_annotations.txt"
+        label_path = os.path.dirname(os.path.dirname(self.root))+"/val_annotations.txt"
         labels = {}
 
         with open(label_path, "r") as f:

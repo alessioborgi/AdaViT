@@ -6,7 +6,7 @@ import torch
 import matplotlib.pyplot as plt
 
 
-def make_matches_from_image(images, n_patches):
+def make_patches_from_image(images, n_patches):
     """
     Extract patches from input images.
 
