@@ -1,7 +1,17 @@
+# Importing PyTorch-related Libraries.
 import torch
 from torch import nn
 import re
 
+# Importing PyTorch Lightning-Related Libraries.
+import pytorch_lightning as pl
+
+# Importing General Libraries.
+import os
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+from utils import seed_everything
 
 def adapt_torch_state_dict(torch_state_dict, num_classes:int):
     """
@@ -18,6 +28,7 @@ def adapt_torch_state_dict(torch_state_dict, num_classes:int):
         dict: The adapted state dictionary with updated keys.
     """
     
+    seed_everything(31)
     new_state_dict = {}
     def adapt_param_name(param):
         p = param.replace('mlp.0', 'mlp.fc1').replace('mlp.3', 'mlp.fc2').replace('heads.head', 'head')
@@ -46,7 +57,7 @@ def adapt_torch_state_dict(torch_state_dict, num_classes:int):
     return new_state_dict
 
 
-def adapt_timm_state_dict(timm_state_dict, num_classes:int):
+def adapt_timm_state_dict(timm_state_dict, num_classes: int):
     """
     Adapt the weights of a Timm Vision Transformer state dictionary to a VisionTransformer as defined in this repository.
     Possibly edit the head to match the number of classes.
@@ -58,10 +69,12 @@ def adapt_timm_state_dict(timm_state_dict, num_classes:int):
     Returns:
         dict: The adapted state dictionary with updated keys.
     """
-
+    
+    seed_everything(31)  # Ensure seed consistency
     new_state_dict = {}
-    def adapt_param_name(p):
 
+    def adapt_param_name(p):
+        # Ensure deterministic parameter name adaptation
         p = p.replace('norm1', 'ln_1').replace('norm2', 'ln_2')
         p = p.replace('attn.qkv.bias', 'self_attention.self_attention.in_proj_bias')
         p = p.replace('attn.qkv.weight', 'self_attention.self_attention.in_proj_weight')
@@ -78,8 +91,7 @@ def adapt_timm_state_dict(timm_state_dict, num_classes:int):
         p = p.replace('norm.weight', 'encoder.ln.weight')
         p = p.replace('norm.bias', 'encoder.ln.bias')
 
-
-        p =  re.sub(r'blocks.(\d+)', r'encoder.layers.\1', p)
+        p = re.sub(r'blocks.(\d+)', r'encoder.layers.\1', p)
         return p
 
     for param_name, param in timm_state_dict.items():
