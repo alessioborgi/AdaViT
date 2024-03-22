@@ -59,17 +59,16 @@ def generalized_attention_MHSA_Cosine(q, k, v, d_head):
     return attended_values
 
 
-
-
 class MHSA(nn.Module):
 
-    def __init__(self, d, n_heads=2):
+    def __init__(self, d, n_heads=3, mhsa_dropout=None):
         """
         Multi-Head Self Attention (MHSA) Module.
 
         Parameters:
         - d (int): Dimension of the input tokens.
         - n_heads (int): Number of attention heads.
+        - dropout (float): Dropout probability.
 
         Returns:
         None
@@ -78,6 +77,7 @@ class MHSA(nn.Module):
         super(MHSA, self).__init__()
         self.d = d
         self.n_heads = n_heads
+        self.MHSA_dropout = nn.Dropout(p=mhsa_dropout)
 
         assert d % n_heads == 0, f"Can't divide dimension {d} into {n_heads} heads"
 
@@ -92,14 +92,9 @@ class MHSA(nn.Module):
         # Number of Heads.
         self.d_head = d_head
 
-        # Trainable Output Matrix.
-        # self.W_output = nn.Linear(n_heads * d_head, d)
-
         # Softmax Definition.
         self.softmax = nn.Softmax(dim=-1)
 
-        # Initialize weights.
-        self.initialize_weights_msa()
 
     def forward(self, sequences):
         """
@@ -128,15 +123,15 @@ class MHSA(nn.Module):
                 # Calculate Attention Scores with one of the methods.
                 # 1) Basic MHSA with Dot Product.
                 attention = attention_MHSA_Dot_Product(q, k, v, self.d_head)
-
+                
                 # 2) Generalized MHSA with Cosine Similarity.
                 #attention = generalized_attention_MHSA_Cosine(q, k, v, self.d_head)
 
+                # Apply dropout to the attention scores
+                attention = self.MHSA_dropout(attention)
+
                 # Append the Attention Scores.
                 seq_result.append(attention)
-
-            # Apply the trainable output matrix W_output.
-            # seq_result = self.W_output(seq_result)
 
             # Concatenate the results coming from the different Heads and Stack Vertically the result.
             result.append(torch.hstack(seq_result).to("cuda"))
@@ -144,25 +139,5 @@ class MHSA(nn.Module):
         # Concatenate results for all the sequences.
         return torch.cat([torch.unsqueeze(r, dim=0) for r in result]).to("cuda")
 
-
-    def initialize_weights_msa(self):
-        """
-        Initialize weights for linear layers in the MHSA module.
-
-        Parameters:
-        None
-
-        Returns:
-        None
-        """
-
-        # Initialize weights for the q, k, v values.
-        for q_mapping, k_mapping, v_mapping in zip(self.q_mappings, self.k_mappings, self.v_mappings):
-            nn.init.xavier_uniform_(q_mapping.weight)
-            nn.init.xavier_uniform_(k_mapping.weight)
-            nn.init.xavier_uniform_(v_mapping.weight)
-
-        # Initialize weights for the output matrix W_output.
-        # nn.init.xavier_uniform_(self.W_output.weight)
 
 
