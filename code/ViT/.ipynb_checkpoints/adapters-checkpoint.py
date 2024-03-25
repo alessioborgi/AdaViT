@@ -28,7 +28,7 @@ def adapt_torch_state_dict(torch_state_dict, num_classes:int):
         dict: The adapted state dictionary with updated keys.
     """
     
-    seed_everything(31)
+    #seed_everything(31)
     new_state_dict = {}
     def adapt_param_name(param):
         p = param.replace('mlp.0', 'mlp.fc1').replace('mlp.3', 'mlp.fc2').replace('heads.head', 'head')
@@ -70,10 +70,11 @@ def adapt_timm_state_dict(timm_state_dict, num_classes: int):
         dict: The adapted state dictionary with updated keys.
     """
     
-    seed_everything(31)  # Ensure seed consistency
+    #seed_everything(31)  # Ensure seed consistency
     new_state_dict = {}
 
     def adapt_param_name(p):
+
         # Ensure deterministic parameter name adaptation
         p = p.replace('norm1', 'ln_1').replace('norm2', 'ln_2')
         p = p.replace('attn.qkv.bias', 'self_attention.self_attention.in_proj_bias')
@@ -101,6 +102,7 @@ def adapt_timm_state_dict(timm_state_dict, num_classes: int):
     # if num classes is different from the original, replace the head with a randomly initialized one
     old_head_shape = new_state_dict['head.weight'].shape
     if old_head_shape[0] != num_classes:
+        print(num_classes)
         print('Loading weights for a different number of classes. Replacing head with random weights. You should fine-tune the model.')
         new_head_shape = (num_classes, old_head_shape[1])
         new_state_dict['head.weight'] = torch.zeros(new_head_shape)
