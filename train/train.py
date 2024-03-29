@@ -15,11 +15,11 @@ from torch.utils.data import Subset
 
 
 
-from peekvit.utils.utils import get_checkpoint_path, save_state, load_state, make_experiment_directory
-from peekvit.models.topology import reinit_class_tokens, train_only_these_params
-from peekvit.utils.losses import LossCompose
-from peekvit.utils.visualize import plot_masked_images
-from peekvit.models.topology import remove_layers_and_stitch
+from AdaViT.utils.utils import get_checkpoint_path, save_state, load_state, make_experiment_directory
+from AdaViT.models.topology import reinit_class_tokens, train_only_these_params
+from AdaViT.utils.losses import LossCompose
+from AdaViT.utils.visualize import plot_masked_images
+from AdaViT.models.topology import remove_layers_and_stitch
 
 try:
     import wandb
