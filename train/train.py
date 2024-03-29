@@ -30,8 +30,8 @@ except ImportError:
 
 
 
-
-@hydra.main(version_base=None, config_path="../configs", config_name="train_config_personal")
+#@hydra.main(version_base=None, config_path="../configs", config_name="train_config_personal")
+@hydra.main(version_base=None, config_path="../configs", config_name="train_config")
 def train(cfg: DictConfig):
 
     torch.manual_seed(cfg.seed)

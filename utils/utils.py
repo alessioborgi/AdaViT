@@ -1,11 +1,11 @@
-AdaViTimport os, sys
+import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from collections import OrderedDict, defaultdict
 from typing import Any, List
 import torch
 from datetime import datetime
 from os.path import join
-from peekvit.models.models import build_model
+from AdaViT.models.models import build_model
 
 
 def make_experiment_directory(dir_path):

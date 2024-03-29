@@ -64,7 +64,7 @@ def get_moes(model):
     Returns:
         dict: A dictionary containing the names of MoE modules as keys and the modules themselves as values.
     """
-    from AdaViT.models.moevit import MoE
+    from peekvit.models.moevit import MoE
     moes = {}
     for module_name, module in model.named_modules():
         if isinstance(module, MoE) and module.num_experts > 1: # only add MoE modules with more than 1 expert
@@ -85,7 +85,7 @@ def get_last_forward_gates(model):
         gatin probs shape: (batch_size, sequence_len, num_experts)
     """
 
-    from AdaViT.models.moevit import MoE
+    from peekvit.models.moevit import MoE
     gates = {}
     for module_name, module in model.named_modules():
         if isinstance(module, MoE) and module.num_experts > 1:
@@ -108,7 +108,7 @@ def get_forward_masks(model, incremental=False):
         masks: A dictionary containing the forward masks for each ResidualModule in the model.
                The masks have shape (batch_size, sequence_len, 1).
     """
-    from AdaViT.models.residualvit import ResidualModule
+    from peekvit.models.residualvit import ResidualModule
     masks = {}
     previous_mask = torch.tensor(1.0)
     for module_name, module in model.named_modules():
@@ -124,7 +124,7 @@ def get_forward_masks(model, incremental=False):
 
 def get_learned_thresholds(model):
 
-    from AdaViT.models.residualvit import ResidualModule
+    from peekvit.models.residualvit import ResidualModule
     thresholds = {}
     for module_name, module in model.named_modules():
         if isinstance(module, ResidualModule) and module.skip not in {None, 'none'}:
@@ -147,7 +147,7 @@ def get_rankingvit_blocks(model):
     Returns:
         blocks: A dictionary containing the RankingViT blocks for each RankingViTBlock in the model.
     """
-    from AdaViT.models.rankvit import RankViTBlock
+    from peekvit.models.rankvit import RankViTBlock
     blocks = {}
     for module_name, module in model.named_modules():
         if isinstance(module, RankViTBlock):
@@ -172,7 +172,7 @@ def add_noise(model, layer: int, noise_type:str,  std: float = None, snr: float 
         noise_snr (float): The signal-to-noise ratio of the noise.
         prob (float): The probability of applying the noise for token dropping.
     """
-    from AdaViT.models.blocks import NoiseBlock
+    from peekvit.models.blocks import NoiseBlock
     noise_module = NoiseBlock(noise_type=noise_type, std=std, snr=snr, prob=prob)
     new_layers = list(model.encoder.layers)
 
