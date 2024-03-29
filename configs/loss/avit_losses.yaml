@@ -6,9 +6,9 @@ AdaViT.AdaViTclassification_loss:
 # for more info see peekvit/losses.py
 additional_losses:
     distr_prior_loss:
-        _target_:  peekvit.utils.losses.AViTDPriorLoss
+        _target_:  AdaViT.utils.losses.AViTDPriorLoss
         target_depth: 7
         weight: 0.1
     ponder_loss:
-        _target_:  peekvit.utils.losses.AViTPonderLoss
+        _target_:  AdaViT.utils.losses.AViTPonderLoss
         weight: 0.0005

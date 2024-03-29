@@ -1,4 +1,4 @@
-_target_: peekvit.models.eeresidualvit.EEResidualVisionTransformer
+_target_: AdaViT.models.eeresidualvit.EEResidualVisionTransformer
 num_classes: ${dataset.num_classes}
 image_size: ${dataset.image_size}
 patch_size: 8

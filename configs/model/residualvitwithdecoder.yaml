@@ -1,4 +1,4 @@
-AdaViT_target_: peekvit.models.encdecresidualvit.ResidualVisionTransformerWithDecoder
+AdaViT_target_: AdaViT.models.encdecresidualvit.ResidualVisionTransformerWithDecoder
 num_classes: ${dataset.num_classes}
 image_size: ${dataset.image_size}
 patch_size: 8

@@ -1,4 +1,4 @@
-_target_: AdaViT.utils.logging.WandbLogger
-wandb_entity: '<your_username>'     # set to your username
-wandb_project: 'peekvit'    # set to your project name
+AdaViT.AdaViT_target_: AdaViT.utils.logging.WandbLogger
+wandb_entity: '<b3bce19a09c51bdf8a19eb3dc58f7c44de929e13>'     # set to your username
+wandb_project: 'adavit'    # set to your project name
 wandb_run: '${experiment_name}'

@@ -1,4 +1,4 @@
-AdaViT.AdaViT_target_:  peekvit.models.rankvit.RankVisionTransformer
+AdaViT.AdaViT_target_:  AdaViT.models.rankvit.RankVisionTransformer
 image_size: 224
 patch_size: 16
 num_layers: 12

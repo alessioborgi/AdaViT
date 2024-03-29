@@ -1,1 +1,1 @@
-AdaViT.AdaViT_target_: peekvit.utils.logging.SimpleLogger
+AdaViT.AdaViT_target_: AdaViT.utils.logging.SimpleLogger

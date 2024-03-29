@@ -6,12 +6,12 @@ AdaViT.AdaViTclassification_loss:
 # for more info see peekvit/losses.py
 additional_losses:
     mse:
-        _target_:  peekvit.utils.losses.MSELoss
+        _target_:  AdaViT.utils.losses.MSELoss
         weight: 0.2
         strict: True
         budget: null    # budget will be sampled at runtime if null
     channel:
-        _target_:  peekvit.utils.losses.ChannelMSELoss
+        _target_:  AdaViT.utils.losses.ChannelMSELoss
         weight: 0.2
         strict: False
         skip_layers: [0,1,3] # 4 layers model, channel is in the middle

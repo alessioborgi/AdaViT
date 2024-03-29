@@ -1,4 +1,4 @@
-AdaViT.AdaViT_target_: peekvit.data.tinyimagenet.TinyImageNet
+_target_: AdaViT.data.tinyimagenet.TinyImageNet
 root: '/hdd2/aledev/datasets/'
 image_size: 160       # used by default by model as well 
 num_classes: 200      # used by default by model as well

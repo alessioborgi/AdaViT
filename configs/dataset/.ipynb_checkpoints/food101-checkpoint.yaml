@@ -1,4 +1,4 @@
-AdaViT._target_: peekvit.data.food101.Food101Dataset
+_target_: AdaViT.data.food101.Food101Dataset
 root: '/hdd2/aledev/datasets/food101'
 image_size: 224                                   # used by default by model as well
 split: 'train+test'

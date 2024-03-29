@@ -6,7 +6,7 @@ AdaViTclassification_loss:
 # for more info see peekvit/losses.py
 additional_losses:
     mse:
-        _target_:  peekvit.utils.losses.MSELoss
+        _target_:  AdaViT.utils.losses.MSELoss
         weight: 0.1
         strict: True
         budget: null
