@@ -58,6 +58,7 @@ def train(cfg: DictConfig):
 
     # model
     model = instantiate(cfg.model)
+    print("The Model is: ", model)
     model.to(device)
 
     # load from checkpoint if requested

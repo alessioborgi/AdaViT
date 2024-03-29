@@ -16,7 +16,7 @@ experiments_dir: '${workspace}/runs/'
 experiment_name: '${now:%Y-%m-%d-%H-%M-%S}'
 
 device: 'cuda:0'
-seed: 0
+seed: 31
 load_from: null
 
 hydra:
@@ -28,8 +28,8 @@ hydra:
 defaults:
   - logger: wandb
   - dataset: imagenette
-  - model: vit_tiny
-  - training: base
+  - model: deit_t_16_224
+  - training: finetune
   - optimizer: adam
   - scheduler: null
   - loss: crossentropy

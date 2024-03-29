@@ -1,4 +1,4 @@
-AdaViT.AdaViT_target_: AdaViT.models.rankpct.PointCloudTransformer
+_target_: AdaViT.models.rankpct.PointCloudTransformer
 num_points: ${dataset.num_points}
 num_classes: ${dataset.num_classes}
 hidden_dim: 128

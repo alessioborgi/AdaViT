@@ -55,6 +55,18 @@ class WandbLogger:
             name=wandb_run,
             dir=dir,
         )
+    wandb.init(
+    # set the wandb project where this run will be logged
+    project="my-awesome-project",
+
+    # track hyperparameters and run metadata
+    config={
+    "learning_rate": 0.02,
+    "architecture": "CNN",
+    "dataset": "CIFAR-100",
+    "epochs": 10,
+    }
+)
     
     def log(self, dict_to_log):
         wandb.log(dict_to_log)

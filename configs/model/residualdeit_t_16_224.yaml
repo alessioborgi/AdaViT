@@ -1,4 +1,4 @@
-AdaViT_target_:  AdaViT.models.residualvit.ResidualVisionTransformer
+_target_:  AdaViT.models.residualvit.ResidualVisionTransformer
 num_classes: ${dataset.num_classes}
 image_size: 224
 patch_size: 16

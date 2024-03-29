@@ -1,1 +1,1 @@
-AdaViT.AdaViT_target_: AdaViT.utils.logging.SimpleLogger
+_target_: AdaViT.utils.logging.SimpleLogger
