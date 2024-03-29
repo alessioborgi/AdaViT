@@ -1,0 +1,52 @@
+logger:
+  _target_: peekvit.utils.logging.WandbLogger
+  wandb_entity: <your_username>
+  wandb_project: peekvit
+  wandb_run: ${experiment_name}
+dataset:
+  _target_: peekvit.data.imagenette.Imagenette
+  root: ${workspace}/imagenette_dataset
+  image_size: 160
+  num_classes: 10
+  augmentation_ops: 2
+  augmentation_magnitude: 9
+model:
+  _target_: peekvit.models.vit.VisionTransformer
+  num_classes: ${dataset.num_classes}
+  image_size: ${dataset.image_size}
+  patch_size: 8
+  hidden_dim: 256
+  mlp_dim: 768
+  num_layers: 4
+  num_heads: 8
+training:
+  train_batch_size: 64
+  eval_batch_size: 32
+  clip_grad_norm: 1.0
+  num_epochs: 300
+  eval_every: 10
+  checkpoint_every: 10
+  plot_masks_every: -1
+  num_images_to_plot: 10
+  reinit_class_tokens: false
+  train_backbone: true
+  num_workers: 28
+  train_budget: 0.9
+  val_budgets:
+  - 0.2
+  - 0.8
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.001
+  weight_decay: 0
+loss:
+  classification_loss:
+    _target_: torch.nn.CrossEntropyLoss
+  additional_losses: null
+noise: {}
+workspace: <your_workspace>
+experiments_dir: ${workspace}/runs/
+experiment_name: ${now:%Y-%m-%d-%H-%M-%S}
+device: cuda:0
+seed: 0
+load_from: null
