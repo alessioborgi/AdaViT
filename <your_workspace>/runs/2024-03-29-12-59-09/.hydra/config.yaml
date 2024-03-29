@@ -1,4 +1,4 @@
-AdaViT.logger:
+AdaViT.data.imagenette.ImagenetteAdaViT.logger:
   _target_: peekvit.utils.logging.WandbLogger
   wandb_entity: <your_username>
   wandb_project: peekvit
