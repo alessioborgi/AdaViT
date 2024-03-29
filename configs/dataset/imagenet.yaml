@@ -1,4 +1,4 @@
-_target_: peekvit.data.imagenet.ImageNetDataset
+AdaViT._target_: peekvit.data.imagenet.ImageNetDataset
 root: '/hdd2/aledev/datasets/imagenet'
 image_size: 224
 split: 'val'

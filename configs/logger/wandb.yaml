@@ -1,4 +1,4 @@
-AdaViT_target_: peekvit.utils.logging.WandbLogger
+AdaViT.AdaViT_target_: peekvit.utils.logging.WandbLogger
 wandb_entity: '<your_username>'     # set to your username
 wandb_project: 'peekvit'    # set to your project name
 wandb_run: '${experiment_name}'

@@ -1,4 +1,4 @@
-_target_:  peekvit.models.avit.AdaptiveVisionTransformer
+AdaViT._target_:  peekvit.models.avit.AdaptiveVisionTransformer
 image_size: 224
 patch_size: 16
 num_layers: 12
