@@ -27,11 +27,11 @@ hydra:
 defaults:
   - logger: wandb
   - dataset: imagenette
-  - model: deit_t_16_224
+  - model: avit_t_16_224
   - training: finetune
   - optimizer: adam
   - scheduler: null
-  - loss: crossentropy
+  - loss: avit_losses
   - noise: no_noise 
   - _self_
 

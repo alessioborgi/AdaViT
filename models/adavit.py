@@ -129,6 +129,7 @@ class AViTEncoder(nn.Module):
 
 
     def forward(self, input: torch.Tensor):
+        
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
         input = input + self.pos_embedding
         input = self.dropout(input)
@@ -145,6 +146,7 @@ class AViTEncoder(nn.Module):
 
 
         if self.c_token is None or bs != self.c_token.size()[0]:
+            
             self.c_token = Variable(torch.zeros(bs, self.seq_length).cuda())
             self.R_token = Variable(torch.ones(bs, self.seq_length).cuda())
             self.mask_token = Variable(torch.ones(bs, self.seq_length).cuda())
@@ -156,6 +158,7 @@ class AViTEncoder(nn.Module):
         mask_token = self.mask_token.clone()
         self.rho_token = self.rho_token.detach() * 0.
         self.counter_token = self.counter_token.detach() * 0 + 1.
+        
         # Will contain the output of this residual layer (weighted sum of outputs of the residual blocks)
         output = None
         # Use out to backbone

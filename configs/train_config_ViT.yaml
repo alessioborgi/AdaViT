@@ -1,0 +1,41 @@
+# Structure of the workspace:
+#
+# workspace
+# ├── configs/
+# │   └── config.yaml
+# ├── runs/
+#     ├── YYYY-mm-dd-hh-MM-SS/
+#         ├── checkpoints/
+#         ├── images/    
+#         ├── logs.txt
+#
+
+workspace: 'AdaViT'
+experiments_dir: '${workspace}/runs/'
+experiment_name: '${now:%Y-%m-%d-%H-%M-%S}'
+
+device: 'cuda:0'
+seed: 31
+load_from: null
+
+hydra:
+  run:
+    dir: '${experiments_dir}/${experiment_name}/'
+
+
+
+defaults:
+  - logger: wandb
+  - dataset: imagenette
+  - model: deit_t_16_224
+  - training: finetune
+  - optimizer: adam
+  - scheduler: null
+  - loss: crossentropy
+  - noise: no_noise 
+  - _self_
+
+
+
+
+

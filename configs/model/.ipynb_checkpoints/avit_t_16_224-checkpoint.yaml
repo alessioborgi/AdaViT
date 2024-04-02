@@ -1,4 +1,4 @@
-_target_:  AdaViT.models.avit.AdaptiveVisionTransformer
+_target_:  AdaViT.models.adavit.AdaptiveVisionTransformer
 image_size: 224
 patch_size: 16
 num_layers: 12

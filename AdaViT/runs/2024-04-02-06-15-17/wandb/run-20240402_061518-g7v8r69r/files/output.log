@@ -1,0 +1,8 @@
+Archive found at AdaViT/imagenette_dataset/imagenette.zip, skipping download
+Extracted file found at AdaViT/imagenette_dataset/imagenette2-160, skipping extraction
+Warning: num_classes is not used for Imagenette dataset.
+Ignoring the argument and using default number of classes in this dataset (10).
+Error executing job with overrides: []
+Error locating target 'AdaViT.models.avit.AdaptiveVisionTransformer', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: model
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
