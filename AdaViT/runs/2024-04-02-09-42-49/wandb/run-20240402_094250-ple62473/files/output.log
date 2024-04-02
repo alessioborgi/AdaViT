@@ -1,0 +1,91 @@
+Using cache found in /home/studio-lab-user/.cache/torch/hub/facebookresearch_deit_main
+Training epoch 0:   0%|                                                                                                                                                                                                                   | 0/74 [00:00<?, ?it/s]
+Archive found at AdaViT/imagenette_dataset/imagenette.zip, skipping download
+Extracted file found at AdaViT/imagenette_dataset/imagenette2-160, skipping extraction
+Warning: num_classes is not used for Imagenette dataset.
+Ignoring the argument and using default number of classes in this dataset (10).
+Loading timm pretrained weights:  ['facebookresearch/deit:main', 'deit_tiny_patch16_224']
+Downloading timm pretrained weights:  ['facebookresearch/deit:main', 'deit_tiny_patch16_224']
+Loading weights for a different number of classes. Replacing head with random weights. You should fine-tune the model.
+The Model is:  AdaptiveVisionTransformer(
+  (conv_proj): Conv2d(3, 192, kernel_size=(16, 16), stride=(16, 16))
+  (encoder): AViTEncoder(
+    (dropout): Dropout(p=0.0, inplace=False)
+    (layers): ModuleList(
+      (0-11): 12 x AViTBlock(
+        (ln_1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (self_attention): SelfAttention(
+          (self_attention): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=192, out_features=192, bias=True)
+          )
+        )
+        (dropout): Dropout(p=0.0, inplace=False)
+        (ln_2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+        (mlp): MLP(
+          (fc1): Linear(in_features=192, out_features=768, bias=True)
+          (fc2): Linear(in_features=768, out_features=192, bias=True)
+        )
+      )
+    )
+    (ln): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+  )
+  (head): Linear(in_features=192, out_features=10, bias=True)
+)
+Reinitializing class_tokens... Reinitialized!
+Freezing all parameters except for those containing any of these words in their names:  ['gate', 'class', 'head', 'threshold', 'budget']
+Trainable parameters: ['class_tokens', 'head.weight', 'head.bias']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Training epoch 0: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 74/74 [00:31<00:00,  2.33it/s]
+
+
+Validation epoch 0 : 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 31/31 [00:06<00:00,  4.95it/s]
+Training epoch 1:   0%|                                                                                                                                                                                                                   | 0/74 [00:00<?, ?it/s]
+Saving training state for epoch 0.
+[WARNING] Plotting masks is only supported for models with a budget. Skipping...
+
+
+
+
+
+
+
+Training epoch 1:  50%|█████████████████████████████████████████████████████████████████████████████████████████████████████                                                                                                     | 37/74 [00:15<00:15,  2.36it/s]
+Traceback (most recent call last):
+  File "/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py", line 218, in <module>
+    train()
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+  File "/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py", line 196, in train
+    train_epoch(model, train_loader, optimizer, epoch)
+  File "/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py", line 119, in train_epoch
+    loss.backward()
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

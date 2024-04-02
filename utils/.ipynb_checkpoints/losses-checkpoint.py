@@ -189,9 +189,11 @@ def avit_distr_prior_loss(model, target_depth=7, **kwargs):
         torch.Tensor: The distribution prior loss.
     """
     
-    # Gaussian_Loss
-    target_dist = torch.distributions.Normal(loc=target_depth, scale=1.0)
+    # Gaussian_Distribution
+    #target_dist = torch.distributions.Normal(loc=target_depth, scale=1.0)
     
+    # Laplace_Distribution
+    target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(1.0))
     
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
