@@ -2,4 +2,3 @@ _target_: AdaViT.utils.logging.WandbLogger
 wandb_entity: 'alessioborgi3'     # set to your username
 wandb_project: 'adavit'    # set to your project name
 wandb_run: '${experiment_name}'
-train_config_path: '../train_config.yaml'

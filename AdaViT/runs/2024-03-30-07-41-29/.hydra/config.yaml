@@ -1,0 +1,55 @@
+logger:
+  _target_: AdaViT.utils.logging.WandbLogger
+  wandb_entity: alessioborgi3
+  wandb_project: adavit
+  wandb_run: ${experiment_name}
+  train_config_path: configs/../train_config.yaml
+dataset:
+  _target_: AdaViT.data.imagenette.Imagenette
+  root: ${workspace}/imagenette_dataset
+  image_size: 160
+  num_classes: 10
+  augmentation_ops: 2
+  augmentation_magnitude: 9
+model:
+  _target_: AdaViT.models.vit.VisionTransformer
+  image_size: 224
+  patch_size: 16
+  num_layers: 12
+  hidden_dim: 192
+  mlp_dim: 768
+  num_heads: 3
+  num_classes: ${dataset.num_classes}
+  timm_pretrained_weights:
+  - facebookresearch/deit:main
+  - deit_tiny_patch16_224
+training:
+  train_batch_size: 128
+  eval_batch_size: 128
+  clip_grad_norm: 1.0
+  num_epochs: 10
+  eval_every: 10
+  checkpoint_every: 10
+  plot_masks_every: 10
+  num_images_to_plot: 10
+  reinit_class_tokens: true
+  train_backbone: false
+  num_workers: 4
+  val_budgets:
+  - 0.2
+  - 0.8
+optimizer:
+  _target_: torch.optim.Adam
+  lr: 0.001
+  weight_decay: 0
+loss:
+  classification_loss:
+    _target_: torch.nn.CrossEntropyLoss
+  additional_losses: null
+noise: {}
+workspace: AdaViT
+experiments_dir: ${workspace}/runs/
+experiment_name: ${now:%Y-%m-%d-%H-%M-%S}
+device: cuda:0
+seed: 31
+load_from: null

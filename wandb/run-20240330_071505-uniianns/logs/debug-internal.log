@@ -1,0 +1,29 @@
+2024-03-30 07:15:05,873 INFO    StreamThr :1128 [internal.py:wandb_internal():86] W&B internal server running at pid: 1128, started at: 2024-03-30 07:15:05.872415
+2024-03-30 07:15:05,875 DEBUG   HandlerThread:1128 [handler.py:handle_request():146] handle_request: status
+2024-03-30 07:15:05,876 INFO    WriterThread:1128 [datastore.py:open_for_write():87] open: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_071505-uniianns/run-uniianns.wandb
+2024-03-30 07:15:05,877 DEBUG   SenderThread:1128 [sender.py:send():379] send: header
+2024-03-30 07:15:05,893 DEBUG   SenderThread:1128 [sender.py:send():379] send: run
+2024-03-30 07:15:06,097 INFO    SenderThread:1128 [dir_watcher.py:__init__():211] watching files in: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_071505-uniianns/files
+2024-03-30 07:15:06,098 INFO    SenderThread:1128 [sender.py:_start_run_threads():1124] run started: uniianns with start time 1711782905.87246
+2024-03-30 07:15:06,107 DEBUG   HandlerThread:1128 [handler.py:handle_request():146] handle_request: check_version
+2024-03-30 07:15:06,107 DEBUG   SenderThread:1128 [sender.py:send_request():406] send_request: check_version
+2024-03-30 07:15:06,152 DEBUG   HandlerThread:1128 [handler.py:handle_request():146] handle_request: run_start
+2024-03-30 07:15:07,996 DEBUG   HandlerThread:1128 [system_info.py:__init__():26] System info init
+2024-03-30 07:15:07,996 DEBUG   HandlerThread:1128 [system_info.py:__init__():41] System info init done
+2024-03-30 07:15:07,996 INFO    HandlerThread:1128 [system_monitor.py:start():194] Starting system monitor
+2024-03-30 07:15:07,997 INFO    SystemMonitor:1128 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-30 07:15:07,997 INFO    HandlerThread:1128 [system_monitor.py:probe():214] Collecting system info
+2024-03-30 07:15:07,997 INFO    SystemMonitor:1128 [interfaces.py:start():190] Started cpu monitoring
+2024-03-30 07:15:07,998 INFO    SystemMonitor:1128 [interfaces.py:start():190] Started disk monitoring
+2024-03-30 07:15:07,999 INFO    SystemMonitor:1128 [interfaces.py:start():190] Started gpu monitoring
+2024-03-30 07:15:07,999 INFO    SystemMonitor:1128 [interfaces.py:start():190] Started memory monitoring
+2024-03-30 07:15:08,000 INFO    SystemMonitor:1128 [interfaces.py:start():190] Started network monitoring
+2024-03-30 07:15:08,022 DEBUG   HandlerThread:1128 [system_info.py:probe():150] Probing system
+2024-03-30 07:15:08,027 DEBUG   HandlerThread:1128 [system_info.py:_probe_git():135] Probing git
+2024-03-30 07:15:08,037 DEBUG   HandlerThread:1128 [system_info.py:_probe_git():143] Probing git done
+2024-03-30 07:15:08,037 DEBUG   HandlerThread:1128 [system_info.py:probe():198] Probing system done
+2024-03-30 07:15:08,037 DEBUG   HandlerThread:1128 [system_monitor.py:probe():223] {'os': 'Linux-4.14.336-257.566.amzn2.x86_64-x86_64-with-glibc2.31', 'python': '3.9.16', 'heartbeatAt': '2024-03-30T07:15:08.022405', 'startedAt': '2024-03-30T07:15:05.866850', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'codePathLocal': 'train/train.py', 'codePath': 'train/train.py', 'git': {'remote': 'https://github.com/alessioborgi/AdaViT.git', 'commit': '577beb3d50fddedd127cfe6a9d2de0cbeef7d522'}, 'email': 'borgi.1952442@studenti.uniroma1.it', 'root': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT', 'host': 'default', 'username': 'studio-lab-user', 'executable': '/home/studio-lab-user/.conda/envs/studiolab/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3203.879, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 3199.848, 'min': 0.0, 'max': 0.0}, {'current': 3211.381, 'min': 0.0, 'max': 0.0}, {'current': 3200.095, 'min': 0.0, 'max': 0.0}, {'current': 3204.192, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 32.0, 'used': 6.866455078125e-05}}, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_devices': [{'name': 'Tesla T4', 'memory_total': 16106127360}], 'memory': {'total': 15.362648010253906}}
+2024-03-30 07:15:08,037 INFO    HandlerThread:1128 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-30 07:15:08,037 INFO    HandlerThread:1128 [system_monitor.py:probe():227] Publishing system info
+2024-03-30 07:15:08,038 DEBUG   HandlerThread:1128 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-03-30 07:15:08,101 INFO    Thread-12 :1128 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_071505-uniianns/files/conda-environment.yaml

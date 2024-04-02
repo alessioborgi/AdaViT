@@ -1,0 +1,18 @@
+2024-03-30 17:47:55,559 INFO    MainThread:383 [wandb_setup.py:_flush():76] Current SDK version is 0.16.5
+2024-03-30 17:47:55,559 INFO    MainThread:383 [wandb_setup.py:_flush():76] Configure stats pid to 383
+2024-03-30 17:47:55,559 INFO    MainThread:383 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/.config/wandb/settings
+2024-03-30 17:47:55,559 INFO    MainThread:383 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/settings
+2024-03-30 17:47:55,559 INFO    MainThread:383 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train/train.py', 'program_abspath': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py'}
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_init.py:_log_setup():527] Logging user logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_174755-azstw1gv/logs/debug.log
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_init.py:_log_setup():528] Logging internal logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_174755-azstw1gv/logs/debug-internal.log
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_init.py:init():567] calling init triggers
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_init.py:init():574] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.02, 'architecture': 'CNN', 'dataset': 'CIFAR-100', 'epochs': 10}
+2024-03-30 17:47:55,560 INFO    MainThread:383 [wandb_init.py:init():612] wandb.init() called when a run is still active
+2024-03-30 17:49:46,904 INFO    MainThread:383 [wandb_run.py:_finish():2052] finishing run alessioborgi3/adavit/sxsflvaj
+2024-03-30 17:49:46,904 INFO    MainThread:383 [wandb_run.py:_atexit_cleanup():2292] got exitcode: 0
+2024-03-30 17:49:46,904 INFO    MainThread:383 [wandb_run.py:_restore():2275] restore
+2024-03-30 17:49:46,904 INFO    MainThread:383 [wandb_run.py:_restore():2281] restore done

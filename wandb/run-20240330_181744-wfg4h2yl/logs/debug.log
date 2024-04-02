@@ -1,0 +1,14 @@
+2024-03-30 18:17:44,065 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Current SDK version is 0.16.5
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Configure stats pid to 2673
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/.config/wandb/settings
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/settings
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train/train.py', 'program_abspath': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py'}
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_init.py:_log_setup():527] Logging user logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_181744-wfg4h2yl/logs/debug.log
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_init.py:_log_setup():528] Logging internal logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_181744-wfg4h2yl/logs/debug-internal.log
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_init.py:init():567] calling init triggers
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_init.py:init():574] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.02, 'architecture': 'CNN', 'dataset': 'CIFAR-100', 'epochs': 10}
+2024-03-30 18:17:44,066 INFO    MainThread:2673 [wandb_init.py:init():612] wandb.init() called when a run is still active

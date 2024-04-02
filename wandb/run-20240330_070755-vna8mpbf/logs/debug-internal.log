@@ -1,0 +1,193 @@
+2024-03-30 07:07:55,702 INFO    StreamThr :358 [internal.py:wandb_internal():86] W&B internal server running at pid: 358, started at: 2024-03-30 07:07:55.701874
+2024-03-30 07:07:55,705 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: status
+2024-03-30 07:07:55,708 INFO    WriterThread:358 [datastore.py:open_for_write():87] open: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/run-vna8mpbf.wandb
+2024-03-30 07:07:55,708 DEBUG   SenderThread:358 [sender.py:send():379] send: header
+2024-03-30 07:07:55,728 DEBUG   SenderThread:358 [sender.py:send():379] send: run
+2024-03-30 07:07:56,090 INFO    SenderThread:358 [dir_watcher.py:__init__():211] watching files in: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files
+2024-03-30 07:07:56,090 INFO    SenderThread:358 [sender.py:_start_run_threads():1124] run started: vna8mpbf with start time 1711782475.702966
+2024-03-30 07:07:56,099 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: check_version
+2024-03-30 07:07:56,099 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: check_version
+2024-03-30 07:07:56,146 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: run_start
+2024-03-30 07:07:57,988 DEBUG   HandlerThread:358 [system_info.py:__init__():26] System info init
+2024-03-30 07:07:57,988 DEBUG   HandlerThread:358 [system_info.py:__init__():41] System info init done
+2024-03-30 07:07:57,988 INFO    HandlerThread:358 [system_monitor.py:start():194] Starting system monitor
+2024-03-30 07:07:57,988 INFO    SystemMonitor:358 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-30 07:07:57,988 INFO    HandlerThread:358 [system_monitor.py:probe():214] Collecting system info
+2024-03-30 07:07:57,989 INFO    SystemMonitor:358 [interfaces.py:start():190] Started cpu monitoring
+2024-03-30 07:07:57,989 INFO    SystemMonitor:358 [interfaces.py:start():190] Started disk monitoring
+2024-03-30 07:07:57,990 INFO    SystemMonitor:358 [interfaces.py:start():190] Started gpu monitoring
+2024-03-30 07:07:57,991 INFO    SystemMonitor:358 [interfaces.py:start():190] Started memory monitoring
+2024-03-30 07:07:57,991 INFO    SystemMonitor:358 [interfaces.py:start():190] Started network monitoring
+2024-03-30 07:07:58,018 DEBUG   HandlerThread:358 [system_info.py:probe():150] Probing system
+2024-03-30 07:07:58,023 DEBUG   HandlerThread:358 [system_info.py:_probe_git():135] Probing git
+2024-03-30 07:07:58,034 DEBUG   HandlerThread:358 [system_info.py:_probe_git():143] Probing git done
+2024-03-30 07:07:58,034 DEBUG   HandlerThread:358 [system_info.py:probe():198] Probing system done
+2024-03-30 07:07:58,034 DEBUG   HandlerThread:358 [system_monitor.py:probe():223] {'os': 'Linux-4.14.336-257.566.amzn2.x86_64-x86_64-with-glibc2.31', 'python': '3.9.16', 'heartbeatAt': '2024-03-30T07:07:58.018462', 'startedAt': '2024-03-30T07:07:55.697315', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'codePathLocal': 'train/train.py', 'codePath': 'train/train.py', 'git': {'remote': 'https://github.com/alessioborgi/AdaViT.git', 'commit': '577beb3d50fddedd127cfe6a9d2de0cbeef7d522'}, 'email': 'borgi.1952442@studenti.uniroma1.it', 'root': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT', 'host': 'default', 'username': 'studio-lab-user', 'executable': '/home/studio-lab-user/.conda/envs/studiolab/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3201.0995000000003, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 3199.994, 'min': 0.0, 'max': 0.0}, {'current': 3200.188, 'min': 0.0, 'max': 0.0}, {'current': 3200.742, 'min': 0.0, 'max': 0.0}, {'current': 3203.474, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 32.0, 'used': 6.4849853515625e-05}}, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_devices': [{'name': 'Tesla T4', 'memory_total': 16106127360}], 'memory': {'total': 15.362648010253906}}
+2024-03-30 07:07:58,034 INFO    HandlerThread:358 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-30 07:07:58,034 INFO    HandlerThread:358 [system_monitor.py:probe():227] Publishing system info
+2024-03-30 07:07:58,034 DEBUG   HandlerThread:358 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-03-30 07:07:58,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/conda-environment.yaml
+2024-03-30 07:08:05,063 DEBUG   HandlerThread:358 [system_info.py:_save_conda():222] Saving conda packages done
+2024-03-30 07:08:05,063 INFO    HandlerThread:358 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-30 07:08:05,068 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 07:08:05,068 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: keepalive
+2024-03-30 07:08:05,068 DEBUG   SenderThread:358 [sender.py:send():379] send: files
+2024-03-30 07:08:05,069 INFO    SenderThread:358 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-03-30 07:08:05,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/conda-environment.yaml
+2024-03-30 07:08:05,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/wandb-metadata.json
+2024-03-30 07:08:05,287 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: python_packages
+2024-03-30 07:08:05,288 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: python_packages
+2024-03-30 07:08:05,289 DEBUG   SenderThread:358 [sender.py:send():379] send: telemetry
+2024-03-30 07:08:05,290 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 07:08:05,292 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 07:08:05,293 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 07:08:05,443 DEBUG   SenderThread:358 [sender.py:send():379] send: telemetry
+2024-03-30 07:08:05,443 DEBUG   SenderThread:358 [sender.py:send():379] send: telemetry
+2024-03-30 07:08:05,466 INFO    wandb-upload_0:358 [upload_job.py:push():131] Uploaded file /tmp/tmps3rb3e8zwandb/j2mvhn8x-wandb-metadata.json
+2024-03-30 07:08:05,495 DEBUG   SenderThread:358 [sender.py:send():379] send: exit
+2024-03-30 07:08:05,495 INFO    SenderThread:358 [sender.py:send_exit():586] handling exit code: 1
+2024-03-30 07:08:05,495 INFO    SenderThread:358 [sender.py:send_exit():588] handling runtime: 9
+2024-03-30 07:08:05,496 INFO    SenderThread:358 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 07:08:05,497 INFO    SenderThread:358 [sender.py:send_exit():594] send defer
+2024-03-30 07:08:05,497 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,497 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 0
+2024-03-30 07:08:05,497 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,497 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-03-30 07:08:05,497 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 1
+2024-03-30 07:08:05,497 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,497 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 1
+2024-03-30 07:08:05,498 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,498 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-03-30 07:08:05,498 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 2
+2024-03-30 07:08:05,498 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,498 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 2
+2024-03-30 07:08:05,498 INFO    HandlerThread:358 [system_monitor.py:finish():203] Stopping system monitor
+2024-03-30 07:08:05,498 DEBUG   SystemMonitor:358 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-30 07:08:05,498 INFO    HandlerThread:358 [interfaces.py:finish():202] Joined cpu monitor
+2024-03-30 07:08:05,498 DEBUG   SystemMonitor:358 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-03-30 07:08:05,499 INFO    HandlerThread:358 [interfaces.py:finish():202] Joined disk monitor
+2024-03-30 07:08:05,499 DEBUG   SystemMonitor:358 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-03-30 07:08:05,502 INFO    HandlerThread:358 [interfaces.py:finish():202] Joined gpu monitor
+2024-03-30 07:08:05,502 INFO    HandlerThread:358 [interfaces.py:finish():202] Joined memory monitor
+2024-03-30 07:08:05,502 INFO    HandlerThread:358 [interfaces.py:finish():202] Joined network monitor
+2024-03-30 07:08:05,503 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 3
+2024-03-30 07:08:05,503 DEBUG   SenderThread:358 [sender.py:send():379] send: stats
+2024-03-30 07:08:05,503 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,503 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 3
+2024-03-30 07:08:05,503 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 4
+2024-03-30 07:08:05,503 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,503 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 4
+2024-03-30 07:08:05,503 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-03-30 07:08:05,503 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 5
+2024-03-30 07:08:05,504 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,504 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 5
+2024-03-30 07:08:05,504 DEBUG   SenderThread:358 [sender.py:send():379] send: summary
+2024-03-30 07:08:05,505 INFO    SenderThread:358 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 07:08:05,505 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,505 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-03-30 07:08:05,505 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 6
+2024-03-30 07:08:05,505 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,505 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 6
+2024-03-30 07:08:05,505 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,505 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-03-30 07:08:05,509 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 07:08:05,571 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 7
+2024-03-30 07:08:05,572 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:05,572 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 7
+2024-03-30 07:08:05,572 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:05,572 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-03-30 07:08:06,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/config.yaml
+2024-03-30 07:08:06,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/wandb-summary.json
+2024-03-30 07:08:06,093 INFO    Thread-12 :358 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/output.log
+2024-03-30 07:08:06,094 INFO    Thread-12 :358 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/requirements.txt
+2024-03-30 07:08:06,495 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 07:08:07,447 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 8
+2024-03-30 07:08:07,447 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 07:08:07,447 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:07,447 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 8
+2024-03-30 07:08:07,447 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:07,447 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-03-30 07:08:07,447 INFO    SenderThread:358 [job_builder.py:build():318] Attempting to build job artifact
+2024-03-30 07:08:07,448 INFO    SenderThread:358 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-03-30 07:08:07,467 INFO    SenderThread:358 [job_builder.py:build():431] adding wandb-job metadata file
+2024-03-30 07:08:07,470 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 9
+2024-03-30 07:08:07,470 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:07,470 DEBUG   SenderThread:358 [sender.py:send():379] send: artifact
+2024-03-30 07:08:07,470 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 9
+2024-03-30 07:08:07,496 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 07:08:08,007 INFO    wandb-upload_1:358 [upload_job.py:push():86] Skipped uploading /home/studio-lab-user/.local/share/wandb/artifacts/staging/tmpfwzt1a7g
+2024-03-30 07:08:08,094 INFO    Thread-12 :358 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/output.log
+2024-03-30 07:08:08,207 INFO    wandb-upload_0:358 [upload_job.py:push():89] Uploaded file /tmp/tmpu103y6px/wandb-job.json
+2024-03-30 07:08:08,920 INFO    SenderThread:358 [sender.py:send_artifact():1468] sent artifact job-https___github.com_alessioborgi_AdaViT.git_train_train.py - {'id': 'QXJ0aWZhY3Q6Nzc2NzM4MjAx', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE1NDA3ODE0NA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6Nzc2NDA1MDE0', 'versionIndex': 0}}}
+2024-03-30 07:08:08,920 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:08,920 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-03-30 07:08:08,920 INFO    SenderThread:358 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-03-30 07:08:09,094 INFO    SenderThread:358 [dir_watcher.py:finish():388] scan: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files
+2024-03-30 07:08:09,094 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/config.yaml config.yaml
+2024-03-30 07:08:09,095 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/conda-environment.yaml conda-environment.yaml
+2024-03-30 07:08:09,095 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/wandb-metadata.json wandb-metadata.json
+2024-03-30 07:08:09,097 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/requirements.txt requirements.txt
+2024-03-30 07:08:09,099 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/output.log output.log
+2024-03-30 07:08:09,100 INFO    SenderThread:358 [dir_watcher.py:finish():402] scan save: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/wandb-summary.json wandb-summary.json
+2024-03-30 07:08:09,102 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 10
+2024-03-30 07:08:09,102 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 07:08:09,103 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:09,106 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 10
+2024-03-30 07:08:09,106 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:09,106 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-03-30 07:08:09,106 INFO    SenderThread:358 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-30 07:08:09,330 INFO    wandb-upload_1:358 [upload_job.py:push():131] Uploaded file /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/config.yaml
+2024-03-30 07:08:09,424 INFO    wandb-upload_0:358 [upload_job.py:push():131] Uploaded file /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/conda-environment.yaml
+2024-03-30 07:08:09,441 INFO    wandb-upload_2:358 [upload_job.py:push():131] Uploaded file /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/requirements.txt
+2024-03-30 07:08:09,468 INFO    wandb-upload_3:358 [upload_job.py:push():131] Uploaded file /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/output.log
+2024-03-30 07:08:09,475 INFO    wandb-upload_4:358 [upload_job.py:push():131] Uploaded file /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/files/wandb-summary.json
+2024-03-30 07:08:09,497 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 07:08:09,497 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 07:08:09,676 INFO    Thread-11 :358 [sender.py:transition_state():614] send defer: 11
+2024-03-30 07:08:09,676 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:09,676 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 11
+2024-03-30 07:08:09,677 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:09,677 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-03-30 07:08:09,677 INFO    SenderThread:358 [file_pusher.py:join():178] waiting for file pusher
+2024-03-30 07:08:09,677 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 12
+2024-03-30 07:08:09,677 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:09,677 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 12
+2024-03-30 07:08:09,677 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:09,677 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-03-30 07:08:09,677 INFO    SenderThread:358 [file_stream.py:finish():614] file stream finish called
+2024-03-30 07:08:09,736 INFO    SenderThread:358 [file_stream.py:finish():618] file stream finish is done
+2024-03-30 07:08:09,736 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 13
+2024-03-30 07:08:09,736 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:09,736 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 13
+2024-03-30 07:08:09,736 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:09,737 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-03-30 07:08:09,737 INFO    SenderThread:358 [sender.py:transition_state():614] send defer: 14
+2024-03-30 07:08:09,737 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 07:08:09,737 INFO    HandlerThread:358 [handler.py:handle_request_defer():172] handle defer: 14
+2024-03-30 07:08:09,737 DEBUG   SenderThread:358 [sender.py:send():379] send: final
+2024-03-30 07:08:09,737 DEBUG   SenderThread:358 [sender.py:send():379] send: footer
+2024-03-30 07:08:09,737 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: defer
+2024-03-30 07:08:09,737 INFO    SenderThread:358 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-03-30 07:08:09,738 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 07:08:09,738 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 07:08:09,738 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 07:08:09,739 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 07:08:09,739 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: server_info
+2024-03-30 07:08:09,739 DEBUG   SenderThread:358 [sender.py:send_request():406] send_request: server_info
+2024-03-30 07:08:09,741 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: get_summary
+2024-03-30 07:08:09,742 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: sampled_history
+2024-03-30 07:08:09,742 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 07:08:09,795 INFO    MainThread:358 [wandb_run.py:_footer_history_summary_info():3920] rendering history
+2024-03-30 07:08:09,795 INFO    MainThread:358 [wandb_run.py:_footer_history_summary_info():3952] rendering summary
+2024-03-30 07:08:09,795 INFO    MainThread:358 [wandb_run.py:_footer_sync_info():3879] logging synced files
+2024-03-30 07:08:09,796 DEBUG   HandlerThread:358 [handler.py:handle_request():146] handle_request: shutdown
+2024-03-30 07:08:09,796 INFO    HandlerThread:358 [handler.py:finish():866] shutting down handler
+2024-03-30 07:08:10,739 INFO    WriterThread:358 [datastore.py:close():296] close: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_070755-vna8mpbf/run-vna8mpbf.wandb
+2024-03-30 07:08:10,795 INFO    SenderThread:358 [sender.py:finish():1546] shutting down sender
+2024-03-30 07:08:10,795 INFO    SenderThread:358 [file_pusher.py:finish():172] shutting down file pusher
+2024-03-30 07:08:10,795 INFO    SenderThread:358 [file_pusher.py:join():178] waiting for file pusher

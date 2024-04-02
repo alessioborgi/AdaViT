@@ -1,0 +1,1556 @@
+2024-03-30 08:19:57,984 INFO    StreamThr :2968 [internal.py:wandb_internal():86] W&B internal server running at pid: 2968, started at: 2024-03-30 08:19:57.983709
+2024-03-30 08:19:57,985 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status
+2024-03-30 08:19:57,988 INFO    WriterThread:2968 [datastore.py:open_for_write():87] open: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/run-b96oum9i.wandb
+2024-03-30 08:19:57,989 DEBUG   SenderThread:2968 [sender.py:send():379] send: header
+2024-03-30 08:19:58,007 DEBUG   SenderThread:2968 [sender.py:send():379] send: run
+2024-03-30 08:19:58,272 INFO    SenderThread:2968 [dir_watcher.py:__init__():211] watching files in: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files
+2024-03-30 08:19:58,272 INFO    SenderThread:2968 [sender.py:_start_run_threads():1124] run started: b96oum9i with start time 1711786797.983731
+2024-03-30 08:19:58,282 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: check_version
+2024-03-30 08:19:58,282 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: check_version
+2024-03-30 08:19:58,332 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: run_start
+2024-03-30 08:19:58,361 DEBUG   HandlerThread:2968 [system_info.py:__init__():26] System info init
+2024-03-30 08:19:58,361 DEBUG   HandlerThread:2968 [system_info.py:__init__():41] System info init done
+2024-03-30 08:19:58,361 INFO    HandlerThread:2968 [system_monitor.py:start():194] Starting system monitor
+2024-03-30 08:19:58,362 INFO    SystemMonitor:2968 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-03-30 08:19:58,362 INFO    HandlerThread:2968 [system_monitor.py:probe():214] Collecting system info
+2024-03-30 08:19:58,362 INFO    SystemMonitor:2968 [interfaces.py:start():190] Started cpu monitoring
+2024-03-30 08:19:58,363 INFO    SystemMonitor:2968 [interfaces.py:start():190] Started disk monitoring
+2024-03-30 08:19:58,363 INFO    SystemMonitor:2968 [interfaces.py:start():190] Started gpu monitoring
+2024-03-30 08:19:58,368 INFO    SystemMonitor:2968 [interfaces.py:start():190] Started memory monitoring
+2024-03-30 08:19:58,369 INFO    SystemMonitor:2968 [interfaces.py:start():190] Started network monitoring
+2024-03-30 08:19:58,379 DEBUG   HandlerThread:2968 [system_info.py:probe():150] Probing system
+2024-03-30 08:19:58,385 DEBUG   HandlerThread:2968 [system_info.py:_probe_git():135] Probing git
+2024-03-30 08:19:58,398 DEBUG   HandlerThread:2968 [system_info.py:_probe_git():143] Probing git done
+2024-03-30 08:19:58,398 DEBUG   HandlerThread:2968 [system_info.py:probe():198] Probing system done
+2024-03-30 08:19:58,398 DEBUG   HandlerThread:2968 [system_monitor.py:probe():223] {'os': 'Linux-4.14.336-257.566.amzn2.x86_64-x86_64-with-glibc2.31', 'python': '3.9.16', 'heartbeatAt': '2024-03-30T08:19:58.379874', 'startedAt': '2024-03-30T08:19:57.979223', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'codePathLocal': 'train/train.py', 'codePath': 'train/train.py', 'git': {'remote': 'https://github.com/alessioborgi/AdaViT.git', 'commit': '577beb3d50fddedd127cfe6a9d2de0cbeef7d522'}, 'email': 'borgi.1952442@studenti.uniroma1.it', 'root': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT', 'host': 'default', 'username': 'studio-lab-user', 'executable': '/home/studio-lab-user/.conda/envs/studiolab/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 3099.8252500000003, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 3099.737, 'min': 0.0, 'max': 0.0}, {'current': 3100.027, 'min': 0.0, 'max': 0.0}, {'current': 3099.973, 'min': 0.0, 'max': 0.0}, {'current': 3099.564, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 32.0, 'used': 7.62939453125e-05}}, 'gpu': 'Tesla T4', 'gpu_count': 1, 'gpu_devices': [{'name': 'Tesla T4', 'memory_total': 16106127360}], 'memory': {'total': 15.362648010253906}}
+2024-03-30 08:19:58,398 INFO    HandlerThread:2968 [system_monitor.py:probe():224] Finished collecting system info
+2024-03-30 08:19:58,398 INFO    HandlerThread:2968 [system_monitor.py:probe():227] Publishing system info
+2024-03-30 08:19:58,398 DEBUG   HandlerThread:2968 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-03-30 08:19:59,275 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/conda-environment.yaml
+2024-03-30 08:20:05,730 DEBUG   HandlerThread:2968 [system_info.py:_save_conda():222] Saving conda packages done
+2024-03-30 08:20:05,730 INFO    HandlerThread:2968 [system_monitor.py:probe():229] Finished publishing system info
+2024-03-30 08:20:05,733 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:05,734 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: keepalive
+2024-03-30 08:20:05,734 DEBUG   SenderThread:2968 [sender.py:send():379] send: files
+2024-03-30 08:20:05,734 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-03-30 08:20:05,905 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: python_packages
+2024-03-30 08:20:05,905 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: python_packages
+2024-03-30 08:20:05,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:20:05,906 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:20:05,914 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:20:05,993 DEBUG   SenderThread:2968 [sender.py:send():379] send: telemetry
+2024-03-30 08:20:05,993 DEBUG   SenderThread:2968 [sender.py:send():379] send: telemetry
+2024-03-30 08:20:05,993 DEBUG   SenderThread:2968 [sender.py:send():379] send: telemetry
+2024-03-30 08:20:06,113 INFO    wandb-upload_0:2968 [upload_job.py:push():131] Uploaded file /tmp/tmpq1ex7bmewandb/x195e5uf-wandb-metadata.json
+2024-03-30 08:20:06,117 DEBUG   SenderThread:2968 [sender.py:send():379] send: telemetry
+2024-03-30 08:20:06,275 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/conda-environment.yaml
+2024-03-30 08:20:06,275 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/requirements.txt
+2024-03-30 08:20:06,275 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:06,275 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-metadata.json
+2024-03-30 08:20:08,277 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:08,647 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:09,311 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:09,313 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:09,313 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:09,314 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:09,643 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:09,645 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:09,645 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:09,646 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:09,977 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:09,979 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:09,979 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:09,979 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:10,277 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:10,278 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_created():271] file/dir created: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:10,313 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:10,314 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:10,314 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:10,315 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:10,645 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:10,646 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:10,646 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:10,646 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:10,979 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:10,979 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:10,980 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:10,980 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:11,278 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:11,314 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:11,315 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:11,315 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:11,316 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:11,646 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:11,647 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:11,647 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:11,648 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:11,984 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:11,985 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:11,985 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:11,986 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:12,278 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:12,279 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:12,319 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:12,321 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:12,322 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:12,322 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:12,654 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:12,655 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:12,656 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:12,656 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:12,989 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:12,990 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:12,990 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:12,991 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:13,279 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:13,323 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:13,324 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:13,325 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:13,325 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:13,662 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:13,663 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:13,663 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:13,664 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:13,663 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:13,995 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:13,996 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:13,997 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:13,998 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:14,279 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:14,280 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:14,331 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:14,331 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:14,332 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:14,332 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:14,665 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:14,666 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:14,666 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:14,667 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:14,999 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:15,000 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:15,000 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:15,001 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:15,280 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:15,332 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:15,332 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:15,333 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:15,333 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:15,666 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:15,667 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:15,667 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:15,668 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:16,000 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:16,002 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:16,002 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:16,003 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:16,280 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:16,281 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:16,334 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:16,335 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:16,335 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:16,336 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:16,667 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:16,668 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:16,668 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:16,669 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:17,001 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:17,007 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:17,007 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:17,008 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:17,280 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:17,333 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:17,334 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:17,334 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:17,335 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:17,668 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:17,669 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:17,669 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:17,670 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:18,002 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:18,003 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:18,003 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:18,004 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:18,281 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:18,281 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:18,336 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:18,337 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:18,337 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:18,338 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:18,673 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:18,674 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:18,674 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:18,674 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:18,675 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:19,009 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:19,010 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:19,010 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:19,011 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:19,281 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:19,345 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:19,350 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:19,350 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:19,351 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:19,679 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:19,680 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:19,680 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:19,681 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:20,012 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:20,018 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:20,019 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:20,019 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:20,282 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:20,282 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:20,347 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:20,347 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:20,348 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:20,348 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:20,682 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:20,683 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:20,683 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:20,685 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:20,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:20:20,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:20:20,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:20:21,018 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:21,019 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:21,020 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:21,020 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:21,282 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:21,352 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:21,355 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:21,355 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:21,355 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:21,687 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:21,688 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:21,688 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:21,689 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:22,020 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:22,021 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:22,022 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:22,022 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:22,287 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:22,287 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:22,355 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:22,356 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:22,356 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:22,358 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:22,689 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:22,691 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:22,691 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:22,692 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:23,027 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:23,028 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:23,029 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:23,029 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:23,287 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:23,359 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:23,361 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:23,361 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:23,362 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:23,694 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:23,695 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:23,695 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:23,696 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:23,696 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:24,029 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:24,030 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:24,031 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:24,031 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:24,288 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:24,288 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:24,363 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:24,364 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:24,365 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:24,365 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:24,697 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:24,699 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:24,699 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:24,699 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:25,033 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:25,034 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:25,034 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:25,035 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:25,288 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:25,367 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:25,368 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:25,369 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:25,369 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:25,703 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:25,704 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:25,704 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:25,704 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:26,037 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:26,038 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:26,039 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:26,039 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:26,289 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:26,289 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:26,372 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:26,373 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:26,373 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:26,374 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:26,708 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:26,709 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:26,709 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:26,710 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:27,043 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:27,044 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:27,044 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:27,048 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:27,289 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:27,379 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:27,380 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:27,380 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:27,381 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:27,716 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:27,718 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:27,718 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:27,719 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:28,055 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:28,056 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:28,056 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:28,056 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:28,289 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:28,290 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:28,398 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:28,399 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:28,399 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:28,400 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:28,733 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:28,734 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:28,739 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:28,818 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:28,819 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:29,069 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:29,070 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:29,070 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:29,071 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:29,290 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/config.yaml
+2024-03-30 08:20:29,290 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:29,406 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:29,407 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:29,407 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:29,408 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:29,742 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:29,743 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:29,744 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:29,745 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:30,078 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:30,079 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:30,079 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:30,080 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:30,290 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:30,290 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:30,415 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:30,421 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:30,421 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:30,422 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:30,751 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:30,754 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:30,755 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:30,755 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:31,090 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:31,091 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:31,092 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:31,092 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:31,291 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:31,425 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:31,426 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:31,426 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:31,427 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:31,762 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:31,763 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:31,764 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:31,764 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:32,099 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:32,100 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:32,100 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:32,101 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:32,291 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:32,291 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:32,435 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:32,436 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:32,436 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:32,437 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:32,764 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:32,765 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:32,765 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:32,765 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:33,101 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:33,102 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:33,102 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:33,102 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:33,291 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:33,436 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:33,437 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:33,437 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:33,438 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:33,763 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:33,763 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:33,764 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:33,765 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:34,292 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:34,292 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:34,720 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:35,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:20:35,906 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:20:35,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:20:36,293 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:38,293 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:39,474 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:39,475 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:39,475 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:39,476 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:40,294 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:40,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:40,524 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:40,771 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:40,773 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:40,773 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:40,774 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:41,111 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:41,112 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:41,112 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:41,113 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:41,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:41,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:41,456 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:41,457 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:41,458 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:41,458 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:41,795 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:41,797 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:41,797 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:41,797 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:42,132 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:42,133 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:42,133 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:42,133 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:42,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:42,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:42,468 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:42,468 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:42,469 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:42,469 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:42,802 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:42,803 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:42,803 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:42,804 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:43,139 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:43,142 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:43,143 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:43,143 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:43,295 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:43,474 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:43,475 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:43,476 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:43,476 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:43,815 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:43,816 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:43,816 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:43,817 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:44,151 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:44,152 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:44,152 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:44,153 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:44,296 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:44,296 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:44,488 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:44,489 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:44,489 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:44,490 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:44,822 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:44,823 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:44,823 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:44,824 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:45,157 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:45,158 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:45,158 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:45,159 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:45,296 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:45,490 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:45,491 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:45,492 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:45,492 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:45,827 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:45,828 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:45,828 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:45,829 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:45,829 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:46,164 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:46,165 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:46,166 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:46,168 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:46,297 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:46,297 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:46,499 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:46,505 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:46,505 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:46,506 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:46,836 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:46,838 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:46,838 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:46,838 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:47,170 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:47,171 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:47,172 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:47,172 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:47,297 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:47,507 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:47,508 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:47,509 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:47,509 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:47,843 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:47,844 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:47,844 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:47,845 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:48,179 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:48,180 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:48,180 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:48,181 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:48,298 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:48,298 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:48,514 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:48,515 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:48,516 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:48,516 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:48,852 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:48,853 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:48,854 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:48,854 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:49,190 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:49,190 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:49,191 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:49,192 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:49,298 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:49,524 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:49,526 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:49,526 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:49,526 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:49,860 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:49,861 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:49,861 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:49,862 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:50,198 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:50,199 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:50,199 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:50,199 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:50,298 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:50,299 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:50,534 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:50,534 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:50,535 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:50,535 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:50,869 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:50,870 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:50,871 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:50,871 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:50,872 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:50,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:20:50,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:20:50,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:20:51,204 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:51,205 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:51,205 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:51,206 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:51,299 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:51,541 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:51,541 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:51,542 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:51,542 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:51,875 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:51,876 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:51,877 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:51,877 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:52,212 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:52,217 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:52,217 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:52,217 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:52,299 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:52,300 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:52,550 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:52,551 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:52,551 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:52,552 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:52,886 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:52,888 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:52,889 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:52,889 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:53,224 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:53,229 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:53,229 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:53,230 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:53,300 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:53,560 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:53,561 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:53,561 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:53,562 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:53,896 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:53,897 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:53,897 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:53,897 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:54,232 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:54,233 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:54,233 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:54,234 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:54,300 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:54,301 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:54,568 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:54,569 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:54,569 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:54,570 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:54,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:54,907 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:54,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:54,908 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:55,242 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:55,244 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:55,244 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:55,244 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:55,301 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:55,577 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:55,578 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:55,579 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:55,580 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:55,913 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:55,915 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:55,916 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:55,916 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:20:55,916 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:56,248 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:56,249 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:56,249 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:56,250 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:56,301 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:56,301 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:56,585 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:56,586 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:56,586 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:56,587 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:56,920 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:56,926 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:56,926 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:56,926 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:57,257 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:57,258 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:57,259 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:57,259 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:57,302 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:57,593 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:57,594 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:57,594 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:57,595 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:57,929 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:57,930 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:57,930 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:57,930 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:58,267 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:58,268 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:58,268 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:58,268 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:58,302 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:20:58,302 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:58,369 DEBUG   SystemMonitor:2968 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-03-30 08:20:58,370 DEBUG   SenderThread:2968 [sender.py:send():379] send: stats
+2024-03-30 08:20:58,603 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:58,609 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:58,609 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:58,610 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:58,941 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:58,942 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:58,942 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:58,943 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:59,276 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:59,277 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:59,277 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:59,278 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:59,302 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:20:59,613 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:59,614 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:59,615 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:59,615 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:20:59,950 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:20:59,951 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:20:59,951 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:20:59,952 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:00,288 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:00,289 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:00,289 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:00,289 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:00,303 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:00,303 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:00,624 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:00,626 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:00,626 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:00,627 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:00,961 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:00,962 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:00,962 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:00,963 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:00,963 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:01,297 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:01,298 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:01,298 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:01,299 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:01,303 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:01,632 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:01,633 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:01,634 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:01,634 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:01,968 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:01,973 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:01,973 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:01,976 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:02,304 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:02,304 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:02,305 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:02,306 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:02,307 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:02,308 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:02,643 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:02,645 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:02,645 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:02,646 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:02,982 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:02,983 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:02,983 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:02,984 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:03,304 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:03,318 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:03,319 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:03,319 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:03,320 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:03,655 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:03,656 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:03,656 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:03,657 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:03,993 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:03,994 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:03,994 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:03,994 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:04,305 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:04,305 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:04,330 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:04,331 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:04,331 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:04,331 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:04,665 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:04,666 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:04,666 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:04,666 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:05,000 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:05,001 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:05,002 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:05,002 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:05,305 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:05,331 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:05,332 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:05,332 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:05,333 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:05,907 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:21:05,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:21:05,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:21:05,968 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:06,306 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:06,306 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:06,652 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:06,653 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:06,654 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:06,654 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:07,001 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:07,002 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:07,002 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:07,002 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:07,306 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:07,306 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:07,338 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:07,339 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:07,339 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:07,339 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:07,675 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:07,676 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:07,677 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:07,677 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:08,018 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:08,019 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:08,019 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:08,021 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:08,306 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:08,307 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:08,356 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:08,356 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:08,357 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:08,357 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:08,693 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:08,694 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:08,694 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:08,695 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:09,029 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:09,030 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:09,031 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:09,031 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:09,307 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:09,364 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:09,369 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:09,369 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:09,369 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:09,703 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:09,704 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:09,704 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:09,704 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:10,037 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:10,038 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:10,038 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:10,039 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:10,307 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:10,308 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:10,374 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:10,375 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:10,375 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:10,376 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:10,712 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:10,713 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:10,714 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:10,714 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:11,050 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:11,051 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:11,052 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:11,053 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:11,053 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:11,308 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:11,386 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:11,387 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:11,387 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:11,388 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:11,723 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:11,725 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:11,725 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:11,725 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:12,059 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:12,059 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:12,060 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:12,060 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:12,308 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:12,309 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:12,397 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:12,398 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:12,398 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:12,399 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:12,734 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:12,736 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:12,737 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:12,737 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:13,072 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:13,073 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:13,073 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:13,073 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:13,309 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:13,408 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:13,409 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:13,409 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:13,410 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:13,745 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:13,747 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:13,747 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:13,747 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:14,085 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:14,087 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:14,087 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:14,087 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:14,309 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:14,310 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:14,421 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:14,423 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:14,424 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:14,425 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:14,758 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:14,759 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:14,759 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:14,760 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:15,096 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:15,097 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:15,097 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:15,098 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:15,310 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:15,433 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:15,435 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:15,435 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:15,435 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:15,770 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:15,771 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:15,771 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:15,772 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:16,105 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:16,106 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:16,107 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:16,107 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:16,107 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:16,310 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:16,310 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:16,442 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:16,444 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:16,444 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:16,445 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:16,779 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:16,780 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:16,780 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:16,781 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:17,118 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:17,119 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:17,120 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:17,120 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:17,310 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:17,455 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:17,456 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:17,456 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:17,457 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:17,791 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:17,792 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:17,792 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:17,793 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:18,129 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:18,130 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:18,131 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:18,131 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:18,311 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:18,312 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:18,466 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:18,467 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:18,468 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:18,468 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:18,805 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:18,806 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:18,806 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:18,806 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:19,140 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:19,141 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:19,142 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:19,142 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:19,311 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:19,478 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:19,479 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:19,479 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:19,480 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:19,816 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:19,817 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:19,817 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:19,818 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:20,151 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:20,152 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:20,152 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:20,153 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:20,312 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:20,312 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:20,487 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:20,488 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:20,488 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:20,489 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:20,825 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:20,826 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:20,826 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:20,827 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:20,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:21:20,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:21:20,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:21:21,163 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:21,164 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:21,164 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:21,164 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:21,165 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:21,312 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:21,500 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:21,501 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:21,502 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:21,502 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:21,837 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:21,838 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:21,838 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:21,839 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:22,174 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:22,176 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:22,176 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:22,176 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:22,313 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:22,313 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:22,511 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:22,512 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:22,512 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:22,513 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:22,848 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:22,849 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:22,849 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:22,851 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:23,185 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:23,191 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:23,192 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:23,192 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:23,313 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:23,523 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:23,524 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:23,524 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:23,525 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:23,861 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:23,862 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:23,862 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:23,863 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:24,198 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:24,199 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:24,199 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:24,200 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:24,313 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:24,314 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:24,536 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:24,537 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:24,537 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:24,538 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:24,871 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:24,872 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:24,872 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:24,873 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:25,210 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:25,211 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:25,211 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:25,212 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:25,314 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:25,545 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:25,546 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:25,547 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:25,547 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:25,880 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:25,881 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:25,881 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:25,882 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:26,216 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:26,217 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:26,217 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:26,218 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:26,218 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:26,314 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:26,315 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:26,554 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:26,557 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:26,557 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:26,557 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:26,891 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:26,892 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:26,893 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:26,893 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:27,228 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:27,229 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:27,230 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:27,230 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:27,315 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:27,566 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:27,567 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:27,567 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:27,567 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:27,903 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:27,905 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:27,905 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:27,905 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:28,240 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:28,241 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:28,241 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:28,242 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:28,315 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:28,315 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:28,371 DEBUG   SenderThread:2968 [sender.py:send():379] send: stats
+2024-03-30 08:21:28,577 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:28,580 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:28,580 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:28,580 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:28,912 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:28,913 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:28,914 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:28,914 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:29,248 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:29,249 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:29,249 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:29,250 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:29,315 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:29,584 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:29,585 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:29,586 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:29,586 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:29,923 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:29,924 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:29,924 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:29,925 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:30,262 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:30,263 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:30,263 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:30,264 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:30,316 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:30,316 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:30,598 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:30,599 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:30,599 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:30,599 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:30,934 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:30,935 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:30,936 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:30,936 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:31,265 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:31,266 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:31,267 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:31,267 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:31,267 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:31,316 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:32,317 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:32,541 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:32,542 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:32,542 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:32,542 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:32,909 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:32,910 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:32,910 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:32,911 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:33,248 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:33,249 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:33,249 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:33,250 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:33,317 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:33,318 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:33,623 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:33,624 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:33,624 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:33,624 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:33,967 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:33,970 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:33,970 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:33,971 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:34,304 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:34,305 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:34,306 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:34,306 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:34,317 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:34,318 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:34,644 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:34,648 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:34,648 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:34,648 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:34,980 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:34,981 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:34,981 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:34,982 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:35,317 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:35,318 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:35,319 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:35,320 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:35,320 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:35,654 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:35,655 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:35,656 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:35,656 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:35,907 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:21:35,908 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:21:35,911 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:21:35,990 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:35,999 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:36,000 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:36,001 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:36,320 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:36,321 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:36,324 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:36,325 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:36,326 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:36,326 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:36,327 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:36,659 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:36,661 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:36,661 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:36,663 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:36,997 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:36,998 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:36,998 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:36,999 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:37,321 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:37,332 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:37,333 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:37,333 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:37,334 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:37,673 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:37,674 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:37,675 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:37,675 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:38,010 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:38,011 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:38,011 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:38,012 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:38,321 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:38,321 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:38,348 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:38,349 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:38,349 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:38,350 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:38,688 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:38,689 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:38,689 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:38,689 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:39,026 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:39,027 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:39,027 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:39,028 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:39,321 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:39,363 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:39,364 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:39,364 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:39,365 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:39,702 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:39,703 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:39,703 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:39,704 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:40,039 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:40,040 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:40,040 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:40,041 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:40,322 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:40,322 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:40,374 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:40,375 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:40,375 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:40,376 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:40,711 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:40,712 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:40,713 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:40,713 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:41,049 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:41,050 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:41,050 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:41,051 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:41,322 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:41,388 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:41,389 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:41,389 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:41,390 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:41,390 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:41,725 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:41,726 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:41,726 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:41,727 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:42,062 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:42,064 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:42,064 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:42,065 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:42,323 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:42,323 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:42,397 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:42,398 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:42,398 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:42,399 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:42,734 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:42,735 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:42,735 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:42,736 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:43,070 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:43,071 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:43,071 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:43,072 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:43,323 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:43,408 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:43,410 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:43,410 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:43,410 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:43,744 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:43,745 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:43,746 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:43,746 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:44,078 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:44,079 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:44,080 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:44,080 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:44,324 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:44,324 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:44,415 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:44,416 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:44,417 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:44,418 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:44,754 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:44,755 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:44,755 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:44,755 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:45,090 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:45,091 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:45,092 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:45,092 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:45,324 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:45,427 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:45,428 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:45,428 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:45,429 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:45,765 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:45,766 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:45,766 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:45,766 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:46,103 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:46,104 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:46,105 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:46,105 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:46,324 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:46,325 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:46,441 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:46,441 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:46,442 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:46,442 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:46,443 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:46,776 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:46,777 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:46,777 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:46,778 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:47,112 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:47,116 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:47,117 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:47,117 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:47,325 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:47,451 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:47,452 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:47,452 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:47,452 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:47,789 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:47,790 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:47,790 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:47,791 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:48,129 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:48,130 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:48,130 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:48,131 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:48,325 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:48,325 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:48,467 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:48,468 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:48,469 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:48,469 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:48,804 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:48,805 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:48,805 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:48,806 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:49,140 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:49,141 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:49,142 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:49,143 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:49,325 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:49,477 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:49,478 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:49,479 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:49,479 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:49,816 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:49,817 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:49,817 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:49,817 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:50,151 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:50,152 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:50,153 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:50,153 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:50,326 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:50,326 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:50,489 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:50,490 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:50,490 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:50,490 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:50,826 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:50,826 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:50,827 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:50,827 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:50,906 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: stop_status
+2024-03-30 08:21:50,907 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: stop_status
+2024-03-30 08:21:50,910 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: internal_messages
+2024-03-30 08:21:51,163 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:51,164 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:51,164 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:51,165 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:51,326 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:51,501 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:51,501 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:51,502 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:51,502 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:51,503 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:51,838 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:51,839 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:51,839 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:51,840 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:52,175 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:52,176 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:52,177 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:52,177 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:52,327 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:52,327 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:52,512 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:52,513 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:52,513 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:52,514 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:52,848 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:52,850 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:52,850 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:52,850 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:53,187 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:53,188 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:53,188 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:53,189 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:53,327 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:53,525 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:53,532 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:53,532 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:53,534 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:53,865 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:53,866 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:53,866 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:53,867 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:54,205 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:54,206 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:54,206 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:54,208 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:54,327 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:54,328 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:54,543 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:54,544 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:54,544 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:54,545 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:54,879 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:54,880 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:54,880 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:54,881 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:55,218 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:55,219 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:55,219 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:55,219 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:55,328 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:55,555 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:55,556 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:55,556 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:55,557 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:55,893 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:55,894 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:55,894 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:55,895 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:56,231 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:56,232 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:56,233 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:56,233 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:56,328 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:21:56,329 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:56,567 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:56,568 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:56,569 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:56,569 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:56,569 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:56,904 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:56,905 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:56,906 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:56,906 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:57,236 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: partial_history
+2024-03-30 08:21:57,237 DEBUG   SenderThread:2968 [sender.py:send():379] send: history
+2024-03-30 08:21:57,237 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: summary_record
+2024-03-30 08:21:57,238 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:57,285 DEBUG   SenderThread:2968 [sender.py:send():379] send: telemetry
+2024-03-30 08:21:57,287 DEBUG   SenderThread:2968 [sender.py:send():379] send: exit
+2024-03-30 08:21:57,287 INFO    SenderThread:2968 [sender.py:send_exit():586] handling exit code: 0
+2024-03-30 08:21:57,287 INFO    SenderThread:2968 [sender.py:send_exit():588] handling runtime: 118
+2024-03-30 08:21:57,287 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:57,287 INFO    SenderThread:2968 [sender.py:send_exit():594] send defer
+2024-03-30 08:21:57,287 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,287 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 0
+2024-03-30 08:21:57,288 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,288 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-03-30 08:21:57,288 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 1
+2024-03-30 08:21:57,288 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,288 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 1
+2024-03-30 08:21:57,288 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,288 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-03-30 08:21:57,288 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 2
+2024-03-30 08:21:57,288 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,289 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 2
+2024-03-30 08:21:57,289 INFO    HandlerThread:2968 [system_monitor.py:finish():203] Stopping system monitor
+2024-03-30 08:21:57,289 DEBUG   SystemMonitor:2968 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-03-30 08:21:57,289 DEBUG   SystemMonitor:2968 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-03-30 08:21:57,289 INFO    HandlerThread:2968 [interfaces.py:finish():202] Joined cpu monitor
+2024-03-30 08:21:57,290 INFO    HandlerThread:2968 [interfaces.py:finish():202] Joined disk monitor
+2024-03-30 08:21:57,294 INFO    HandlerThread:2968 [interfaces.py:finish():202] Joined gpu monitor
+2024-03-30 08:21:57,294 INFO    HandlerThread:2968 [interfaces.py:finish():202] Joined memory monitor
+2024-03-30 08:21:57,294 INFO    HandlerThread:2968 [interfaces.py:finish():202] Joined network monitor
+2024-03-30 08:21:57,294 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,294 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-03-30 08:21:57,295 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 3
+2024-03-30 08:21:57,295 DEBUG   SenderThread:2968 [sender.py:send():379] send: stats
+2024-03-30 08:21:57,295 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,295 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 3
+2024-03-30 08:21:57,295 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,295 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-03-30 08:21:57,295 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 4
+2024-03-30 08:21:57,296 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,296 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 4
+2024-03-30 08:21:57,296 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,296 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-03-30 08:21:57,296 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 5
+2024-03-30 08:21:57,297 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,297 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 5
+2024-03-30 08:21:57,297 DEBUG   SenderThread:2968 [sender.py:send():379] send: summary
+2024-03-30 08:21:57,297 INFO    SenderThread:2968 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-03-30 08:21:57,297 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,298 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-03-30 08:21:57,298 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 6
+2024-03-30 08:21:57,298 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,298 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 6
+2024-03-30 08:21:57,298 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,298 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-03-30 08:21:57,301 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: status_report
+2024-03-30 08:21:57,329 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/wandb-summary.json
+2024-03-30 08:21:57,392 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 7
+2024-03-30 08:21:57,392 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:21:57,392 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 7
+2024-03-30 08:21:57,393 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:21:57,393 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-03-30 08:21:58,287 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 08:21:58,329 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/config.yaml
+2024-03-30 08:21:58,329 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:22:00,323 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 8
+2024-03-30 08:22:00,323 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: poll_exit
+2024-03-30 08:22:00,324 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:22:00,324 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 8
+2024-03-30 08:22:00,324 DEBUG   SenderThread:2968 [sender.py:send_request():406] send_request: defer
+2024-03-30 08:22:00,324 INFO    SenderThread:2968 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-03-30 08:22:00,324 INFO    SenderThread:2968 [job_builder.py:build():318] Attempting to build job artifact
+2024-03-30 08:22:00,325 INFO    SenderThread:2968 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-03-30 08:22:00,330 INFO    Thread-12 :2968 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/files/output.log
+2024-03-30 08:22:00,345 INFO    SenderThread:2968 [job_builder.py:build():431] adding wandb-job metadata file
+2024-03-30 08:22:00,348 INFO    SenderThread:2968 [sender.py:transition_state():614] send defer: 9
+2024-03-30 08:22:00,348 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: defer
+2024-03-30 08:22:00,348 INFO    HandlerThread:2968 [handler.py:handle_request_defer():172] handle defer: 9
+2024-03-30 08:22:00,351 DEBUG   SenderThread:2968 [sender.py:send():379] send: artifact
+2024-03-30 08:22:00,684 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:00,684 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:22:01,288 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 08:22:01,920 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:01,921 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:22:04,473 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:04,473 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:22:04,473 INFO    SenderThread:2968 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 369, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/wandb/sdk/lib/gql_request.py", line 59, in execute
+    request.raise_for_status()
+  File "/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://api.wandb.ai/graphql
+2024-03-30 08:22:06,289 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: keepalive
+2024-03-30 08:22:08,859 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:08,859 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:22:11,509 DEBUG   HandlerThread:2968 [handler.py:handle_request():146] handle_request: poll_exit
+2024-03-30 08:22:15,145 WARNING StreamThr :2968 [internal.py:is_dead():414] Internal process exiting, parent pid 2953 disappeared
+2024-03-30 08:22:15,145 ERROR   StreamThr :2968 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-03-30 08:22:15,510 INFO    HandlerThread:2968 [handler.py:finish():866] shutting down handler
+2024-03-30 08:22:15,510 INFO    WriterThread:2968 [datastore.py:close():296] close: /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/run-20240330_081957-b96oum9i/run-b96oum9i.wandb
+2024-03-30 08:22:18,605 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:18,605 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:22:35,125 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:22:35,125 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:23:14,000 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:23:14,000 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}
+2024-03-30 08:24:26,919 ERROR   SenderThread:2968 [internal_api.py:execute():373] 500 response executing GraphQL.
+2024-03-30 08:24:26,919 ERROR   SenderThread:2968 [internal_api.py:execute():374] {"errors":[{"message":"An internal error occurred. Please contact support.","path":["createArtifactManifest"]}],"data":{"createArtifactManifest":null}}

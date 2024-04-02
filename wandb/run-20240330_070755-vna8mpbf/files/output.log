@@ -1,0 +1,5 @@
+Error executing job with overrides: []
+Error in call to target 'AdaViT.utils.logging.WandbLogger':
+NameError("name 'gather_settings_train' is not defined")
+full_key: logger
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

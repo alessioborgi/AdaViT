@@ -1,0 +1,7 @@
+
+I arrive here
+Error executing job with overrides: []
+Error in call to target 'AdaViT.utils.logging.WandbLogger':
+FileNotFoundError(2, 'No such file or directory')
+full_key: logger
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

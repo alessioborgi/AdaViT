@@ -10,7 +10,6 @@
 #         ├── logs.txt
 #
 
-
 workspace: 'AdaViT'
 experiments_dir: '${workspace}/runs/'
 experiment_name: '${now:%Y-%m-%d-%H-%M-%S}'

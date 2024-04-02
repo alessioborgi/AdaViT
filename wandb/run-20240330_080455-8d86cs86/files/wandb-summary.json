@@ -1,0 +1,1 @@
+{"train/total_loss": 0.04185575991868973, "train/classification_loss": 0.04185575991868973, "_timestamp": 1711786202.9783385, "_runtime": 307.9384925365448, "_step": 815, "val/accuracy": 0.9844586253166199, "val/loss": 0.05353810923594621, "_wandb": {"runtime": 307}}
