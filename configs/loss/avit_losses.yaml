@@ -9,6 +9,7 @@ additional_losses:
         _target_:  AdaViT.utils.losses.AViTDPriorLoss
         target_depth: 7
         weight: 0.1
+        laplace_scaling: 0.1
     ponder_loss:
         _target_:  AdaViT.utils.losses.AViTPonderLoss
         weight: 0.0005
