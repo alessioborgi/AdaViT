@@ -116,6 +116,9 @@ class AViTEncoder(nn.Module):
 
         self.layers = nn.ModuleList(layers)
         self.ln = nn.LayerNorm(hidden_dim)
+        
+        # Instantiating the structure to get statistics over the Halting Metrics.
+        self.num_halted_tokens_per_layer = [0 for _ in range(num_layers)]# for each layer we have the sum of halted tokens
 
         # for token act part
         self.c_token = None
@@ -192,14 +195,25 @@ class AViTEncoder(nn.Module):
             # for token part
             c_token = c_token + h_token
             self.rho_token = self.rho_token + mask_token.float()
-
+            
+            
+            
             # Case 1: threshold reached in this iteration
             # token part
             reached_token = c_token > 1 - self.eps
+        
+            # Number of Halted Tokens at layer i.
+            num_halted = torch.sum(reached_token) 
+            self.num_halted_tokens_per_layer[i] += num_halted
+
             reached_token = reached_token.float() * mask_token.float()
             delta1 = block_output * R_token.view(bs, self.seq_length, 1) * reached_token.view(bs, self.seq_length, 1)
             self.rho_token = self.rho_token + R_token * reached_token
 
+            
+            
+            
+            
             # Case 2: threshold not reached
             # token part
             not_reached_token = c_token < 1 - self.eps

@@ -122,6 +122,9 @@ def train(cfg: DictConfig):
                 clip_grad_norm_(model.parameters(), max_norm=training_args['clip_grad_norm'])
             optimizer.step()
             logger.log({'train/total_loss': loss.detach().item(), 'train/classification_loss': main_loss.detach().item()} | add_loss_dict)
+            
+            # New addition
+            #logger.log({'tokens/num_halted_tokens_per_layer': })
         
         if scheduler:
             logger.log({'train/lr': scheduler.get_last_lr()[0]})
