@@ -1,0 +1,8 @@
+# TO DO
+
+
+- Write pos_embedding in AvitEncoder of adavit.py. Implements SPE and RoPE w.r.t. the actual BERT implementation.
+- Write Multivariate Gaussian for Distribution Loss
+- Write Multivariate Laplace for Distribution Loss
+- Make study by changing eps value
+- Make Idea of the Isotropic Tokens etc...
