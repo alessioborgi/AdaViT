@@ -197,7 +197,7 @@ def avit_distr_prior_loss(model, target_depth=7, laplace_scaling=None, **kwargs)
     #target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(0.5))
     #target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(0.25))
     #target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(0.1))
-    target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(0.01))
+    target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(laplace_scaling))
     
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)

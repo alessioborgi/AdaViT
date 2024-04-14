@@ -117,6 +117,7 @@ def train(cfg: DictConfig):
                     dict_prefix='train/')
             loss = main_loss + add_loss_val
             loss.backward()
+            
             # Apply gradient clipping
             if training_args['clip_grad_norm'] is not None:
                 clip_grad_norm_(model.parameters(), max_norm=training_args['clip_grad_norm'])
@@ -124,11 +125,14 @@ def train(cfg: DictConfig):
             logger.log({'train/total_loss': loss.detach().item(), 'train/classification_loss': main_loss.detach().item()} | add_loss_dict)
             
             # New addition
-            #logger.log({'tokens/num_halted_tokens_per_layer': })
+            for i in range(model.num_layers):
+                logger.log({f'train/num_halted_tokens_per_layer/layer_{i}': model.encoder.num_halted_tokens_per_layer[i]})
         
         if scheduler:
             logger.log({'train/lr': scheduler.get_last_lr()[0]})
             scheduler.step()
+
+            
 
     @torch.no_grad()
     def validate_epoch(model, loader, epoch, budget=''):

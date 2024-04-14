@@ -1,7 +1,7 @@
 train_batch_size: 128
 eval_batch_size: 128
 clip_grad_norm: 1.0
-num_epochs: 3
+num_epochs: 30
 eval_every: 100                    # -1 for no evaluation
 checkpoint_every: 10              # -1 for no checkpointing
 plot_masks_every: 10              # -1 for no plotting

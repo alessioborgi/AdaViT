@@ -197,22 +197,20 @@ class AViTEncoder(nn.Module):
             self.rho_token = self.rho_token + mask_token.float()
             
             
-            
             # Case 1: threshold reached in this iteration
             # token part
             reached_token = c_token > 1 - self.eps
         
             # Number of Halted Tokens at layer i.
             num_halted = torch.sum(reached_token) 
-            self.num_halted_tokens_per_layer[i] += num_halted
+            #self.num_halted_tokens_per_layer[i] += num_halted
+            self.num_halted_tokens_per_layer[i] = num_halted
+            #print("The number of Halted Tokens per Layer is: ",self.num_halted_tokens_per_layer)
 
             reached_token = reached_token.float() * mask_token.float()
             delta1 = block_output * R_token.view(bs, self.seq_length, 1) * reached_token.view(bs, self.seq_length, 1)
             self.rho_token = self.rho_token + R_token * reached_token
 
-            
-            
-            
             
             # Case 2: threshold not reached
             # token part
@@ -333,20 +331,19 @@ class AdaptiveVisionTransformer(nn.Module):
             gate_center
             )
 
-
+        
         self.seq_length = seq_length
 
         self.head = nn.Linear(hidden_dim, num_classes)
         nn.init.zeros_(self.head.weight)
         nn.init.zeros_(self.head.bias)
-
+    
 
         fan_in = self.conv_proj.in_channels * self.conv_proj.kernel_size[0] * self.conv_proj.kernel_size[1]
         nn.init.trunc_normal_(self.conv_proj.weight, std=math.sqrt(1 / fan_in))
         if self.conv_proj.bias is not None:
             nn.init.zeros_(self.conv_proj.bias)
         
-
         self.load_weights(torch_pretrained_weights, timm_pretrained_weights)
 
 
