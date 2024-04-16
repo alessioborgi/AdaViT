@@ -176,7 +176,7 @@ def avit_ponder_loss(model, **kwargs):
     return ponder_loss
 
 
-def avit_distr_prior_loss(model, target_depth=7, laplace_scaling=None, **kwargs):
+def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     """
     Computes the distribution prior loss of the model.
 
@@ -190,10 +190,10 @@ def avit_distr_prior_loss(model, target_depth=7, laplace_scaling=None, **kwargs)
     """
     
     # Gaussian_Distribution
-    #target_dist = torch.distributions.Normal(loc=target_depth, scale=1.0)
+    target_dist = torch.distributions.Normal(loc=target_depth, scale=1.0)
     
     # Laplace_Distribution
-    target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(laplace_scaling))
+    #target_dist = torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
     
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
@@ -208,14 +208,14 @@ def avit_distr_prior_loss(model, target_depth=7, laplace_scaling=None, **kwargs)
     return  distr_prior_loss
 
 
-def avit_distr_prior_loss_multivariate(model, target_depth=[5, 10], laplace_scaling=[None, None], **kwargs):
+def avit_distr_prior_loss_multivariate(model, target_depth=[5, 10], scaling=[None, None], **kwargs):
     """
     Computes the distribution prior loss of the model.
 
     Args:
         model: The model for which to compute the distribution prior loss.
         target_depth: A list of two integers representing the target depth for each component of the multivariate Laplace distribution.
-        laplace_scaling: A list of two integers representing the scaling parameter for each component of the Laplace distribution. Can be None for default value.
+        scaling: A list of two integers representing the scaling parameter for each component of the Laplace distribution. Can be None for default value.
         **kwargs: Additional keyword arguments.
 
     Returns:
@@ -229,14 +229,14 @@ def avit_distr_prior_loss_multivariate(model, target_depth=[5, 10], laplace_scal
     if target_depth[0] >= target_depth[1]:
         raise ValueError("target_depth values must be in increasing order.")
         
-    # Check laplace_scaling
-    if not isinstance(laplace_scaling, list) or len(laplace_scaling) != 2 or not all(isinstance(x, int) for x in laplace_scaling):
-        raise ValueError("laplace_scaling must be a list of two integers.")
+    # Check scaling
+    if not isinstance(scaling, list) or len(scaling) != 2 or not all(isinstance(x, int) for x in scaling):
+        raise ValueError("scaling must be a list of two integers.")
     
     
     # Multivariate Laplace Distribution
     loc = torch.tensor(target_depth)
-    scale = torch.tensor(laplace_scaling)
+    scale = torch.tensor(scaling)
     target_dist = torch.distributions.MultivariateLaplace(loc=loc, scale_tril=torch.diag(scale))
     
     target_probs = target_dist.log_prob(torch.arange(1, num_layers + 1).float())
@@ -283,10 +283,10 @@ class AViTDPriorLoss(ModelLoss):
     Computes the distribution prior loss of the model.
     """
 
-    def __init__(self, target_depth: int, laplace_scaling: Optional[float] = None) -> None:
+    def __init__(self, target_depth: int, scaling: Optional[float] = None) -> None:
         super().__init__()
         self.target_depth = target_depth
-        self.laplace_scaling = laplace_scaling
+        self.scaling = scaling
 
     def forward(self, model, **kwargs):
         """
@@ -299,7 +299,7 @@ class AViTDPriorLoss(ModelLoss):
         Returns:
             torch.Tensor: The distribution prior loss.
         """
-        return avit_distr_prior_loss(model, target_depth=self.target_depth, laplace_scaling=self.laplace_scaling)
+        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling)
 
 
 class AViTDPriorLossMultivariate(ModelLoss):
@@ -307,10 +307,10 @@ class AViTDPriorLossMultivariate(ModelLoss):
     Computes the distribution prior loss of the model.
     """
 
-    def __init__(self, target_depth: List[int], laplace_scaling: Optional[List[int]] = None) -> None:
+    def __init__(self, target_depth: List[int], scaling: Optional[List[int]] = None) -> None:
         super().__init__()
         self.target_depth = target_depth
-        self.laplace_scaling = laplace_scaling
+        self.scaling = scaling
 
     def forward(self, model, **kwargs):
         """
@@ -323,7 +323,7 @@ class AViTDPriorLossMultivariate(ModelLoss):
         Returns:
             torch.Tensor: The distribution prior loss.
         """
-        return avit_distr_prior_loss(model, target_depth=self.target_depth, laplace_scaling=self.laplace_scaling)
+        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling)
 
     
     

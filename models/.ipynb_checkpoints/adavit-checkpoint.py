@@ -199,7 +199,7 @@ class AViTEncoder(nn.Module):
             
             # Case 1: threshold reached in this iteration
             # token part
-            reached_token = c_token > 1 - self.eps
+            reached_token = c_token >= 1 - self.eps
         
             # Number of Halted Tokens at layer i.
             num_halted = torch.sum(reached_token) 
