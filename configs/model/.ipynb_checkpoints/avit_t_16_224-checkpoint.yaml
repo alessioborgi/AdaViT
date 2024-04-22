@@ -5,6 +5,6 @@ num_layers: 12
 hidden_dim: 192
 mlp_dim: 768
 num_heads: 3
-eps: 0.01
+eps: 0.05
 num_classes: ${dataset.num_classes}
 timm_pretrained_weights: ['facebookresearch/deit:main', 'deit_tiny_patch16_224']

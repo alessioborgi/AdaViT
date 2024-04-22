@@ -203,8 +203,8 @@ class AViTEncoder(nn.Module):
         
             # Number of Halted Tokens at layer i.
             num_halted = torch.sum(reached_token) 
-            #self.num_halted_tokens_per_layer[i] += num_halted
-            self.num_halted_tokens_per_layer[i] = num_halted
+            self.num_halted_tokens_per_layer[i] += num_halted
+            #self.num_halted_tokens_per_layer[i] = num_halted
             #print("The number of Halted Tokens per Layer is: ",self.num_halted_tokens_per_layer)
 
             reached_token = reached_token.float() * mask_token.float()

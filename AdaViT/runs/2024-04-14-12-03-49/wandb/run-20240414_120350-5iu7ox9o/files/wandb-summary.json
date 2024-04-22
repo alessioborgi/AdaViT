@@ -1,1 +1,0 @@
-{"train/total_loss": 6.817325592041016, "train/classification_loss": 2.3025848865509033, "train/distr_prior_loss": 4.508241176605225, "train/ponder_loss": 0.006499661598354578, "_timestamp": 1713096243.1037064, "_runtime": 12.69096040725708, "_step": 0, "_wandb": {"runtime": 12}}
