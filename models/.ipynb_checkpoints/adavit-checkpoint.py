@@ -132,7 +132,6 @@ class AViTEncoder(nn.Module):
 
 
     def forward(self, input: torch.Tensor):
-        
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
         input = input + self.pos_embedding
         input = self.dropout(input)

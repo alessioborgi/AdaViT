@@ -190,10 +190,14 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     """
     
     # Gaussian_Distribution
-    #target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
+    target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
     
     # Laplace_Distribution
-    target_dist = torch.distributions.Laplace(loc=target_depth, scale=scaling)
+    #target_dist = torch.distributions.Laplace(loc=target_depth, scale=scaling)
+    
+    # Create a Student's t-distribution with specified degrees of freedom
+    degrees_of_freedom = 5  # Adjust this parameter to control tail thickness
+    target_dist = torch.distributions.StudentT(loc=target_depth, scale=scaling, df=degrees_of_freedom)
     
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)

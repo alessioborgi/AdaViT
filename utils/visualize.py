@@ -786,6 +786,39 @@ def plot_reconstructed_images(model, images_to_plot, model_transform, visualizat
 
   
   return figs
+
+
+def plot_distribution(target_dist, x_min=None, x_max=None, num_bins=100):
+      """
+      Plots the probability density function (PDF) of a target distribution.
+
+      Args:
+          target_dist: A PyTorch distribution object (e.g., target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling))
+          x_min: Optional minimum value for the x-axis (default: None, inferred from distribution).
+          x_max: Optional maximum value for the x-axis (default: None, inferred from distribution).
+          num_bins: Number of bins for the histogram (default: 100).
+      """
+
+      # Get samples from the distribution
+      samples = target_dist.sample(sample_shape=torch.Size([num_bins * 10]))  # Sample more than needed for smoother curve
+
+      # Calculate the probability density for each sample
+      densities = target_dist.prob(samples)
+
+      # Define x-axis values based on distribution or provided limits
+      if x_min is None:
+        x_min = target_dist.loc - 3 * target_dist.scale  # Extend 3 standard deviations below mean
+      if x_max is None:
+        x_max = target_dist.loc + 3 * target_dist.scale  # Extend 3 standard deviations above mean
+
+      # Plot the histogram with appropriate bins
+      plt.hist(samples.detach().numpy(), bins=num_bins, density=True, range=(x_min, x_max))
+      plt.xlabel("Value")
+      plt.ylabel("Probability Density")
+      plt.title("Probability Density Function of the Distribution")
+      plt.show()
+
+
   
   
 
