@@ -1,0 +1,68 @@
+{
+    "os": "Linux-4.14.336-257.568.amzn2.x86_64-x86_64-with-glibc2.31",
+    "python": "3.9.16",
+    "heartbeatAt": "2024-04-25T14:04:56.116322",
+    "startedAt": "2024-04-25T14:04:53.891166",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py",
+    "codePathLocal": "train/train.py",
+    "codePath": "train/train.py",
+    "git": {
+        "remote": "https://github.com/alessioborgi/AdaViT.git",
+        "commit": "b7766059fb341791394235af8e6874a72c71e5f3"
+    },
+    "email": "borgi.1952442@studenti.uniroma1.it",
+    "root": "/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT",
+    "host": "default",
+    "username": "studio-lab-user",
+    "executable": "/home/studio-lab-user/.conda/envs/studiolab/bin/python",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 3201.2255,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3200.949,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3200.776,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3200.099,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3203.078,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 32.0,
+            "used": 7.62939453125e-05
+        }
+    },
+    "gpu": "Tesla T4",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "Tesla T4",
+            "memory_total": 16106127360
+        }
+    ],
+    "memory": {
+        "total": 15.362648010253906
+    }
+}
