@@ -8,6 +8,7 @@ from torch.special import entr
 from abc import ABC, abstractmethod
 from typing import List, Literal, Optional
 from hydra.utils import instantiate
+import numpy as np
 
 
 """
@@ -190,15 +191,18 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     """
     
     # Gaussian_Distribution
-    target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
+    #target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
     
     # Laplace_Distribution
-    #target_dist = torch.distributions.Laplace(loc=target_depth, scale=scaling)
+    #target_dist = torch.distributions.Laplace(loc=target_depth, scale=scaling/ (2 ** 0.5))
     
     # Create a Student's t-distribution with specified degrees of freedom
-    degrees_of_freedom = 5  # Adjust this parameter to control tail thickness
-    target_dist = torch.distributions.StudentT(loc=target_depth, scale=scaling, df=degrees_of_freedom)
+    #degrees_of_freedom = 30  # Adjust this parameter to control tail thickness
+    #target_dist = torch.distributions.StudentT(loc=target_depth, scale=scaling/ (2 ** 0.5), df=degrees_of_freedom)
     
+    # Cauchy Distribution
+    target_dist = torch.distributions.Cauchy(loc=target_depth, scale=scaling/ (2 ** 0.5))
+
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
     halting_score_distr = halting_score_distr / torch.sum(halting_score_distr)
@@ -212,6 +216,8 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     return  distr_prior_loss
 
 
+
+    
 def avit_distr_prior_loss_multivariate(model, target_depth=[5, 10], scaling=[None, None], **kwargs):
     """
     Computes the distribution prior loss of the model.
