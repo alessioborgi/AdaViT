@@ -1,0 +1,9 @@
+Archive found at AdaViT/imagenette_dataset/imagenette.zip, skipping download
+Extracted file found at AdaViT/imagenette_dataset/imagenette2-160, skipping extraction
+Warning: num_classes is not used for Imagenette dataset.
+Ignoring the argument and using default number of classes in this dataset (10).
+Error executing job with overrides: []
+Error in call to target 'AdaViT.models.adavit.AdaptiveVisionTransformer':
+TypeError("__init__() missing 1 required positional argument: 'num_buckets'")
+full_key: model
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

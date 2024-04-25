@@ -1,0 +1,11 @@
+Archive found at AdaViT/imagenette_dataset/imagenette.zip, skipping download
+Extracted file found at AdaViT/imagenette_dataset/imagenette2-160, skipping extraction
+Warning: num_classes is not used for Imagenette dataset.
+Ignoring the argument and using default number of classes in this dataset (10).
+/home/studio-lab-user/.conda/envs/studiolab/lib/python3.9/site-packages/torch/functional.py:507: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3549.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Error executing job with overrides: []
+Error in call to target 'AdaViT.models.adavit.AdaptiveVisionTransformer':
+AttributeError("'RelativePositionalEmbedding' object has no attribute 'num_buckets'")
+full_key: model
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

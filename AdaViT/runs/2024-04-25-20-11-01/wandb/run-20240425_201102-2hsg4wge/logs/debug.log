@@ -1,0 +1,28 @@
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Current SDK version is 0.16.1
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Configure stats pid to 4605
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/.config/wandb/settings
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Loading settings from /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/wandb/settings
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train/train.py', 'program_abspath': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py', 'program': '/home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/train/train.py'}
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:_log_setup():524] Logging user logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/AdaViT/runs/2024-04-25-20-11-01/wandb/run-20240425_201102-2hsg4wge/logs/debug.log
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:_log_setup():525] Logging internal logs to /home/studio-lab-user/sagemaker-studiolab-notebooks/AdaViT/AdaViT/runs/2024-04-25-20-11-01/wandb/run-20240425_201102-2hsg4wge/logs/debug-internal.log
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:init():564] calling init triggers
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {'logger': {'_target_': 'AdaViT.utils.logging.WandbLogger', 'wandb_entity': 'alessioborgi3', 'wandb_project': 'adavit', 'wandb_run': '2024-04-25-20-11-01'}, 'dataset': {'_target_': 'AdaViT.data.imagenette.Imagenette', 'root': 'AdaViT/imagenette_dataset', 'image_size': 224, 'num_classes': 10, 'augmentation_ops': 2, 'augmentation_magnitude': 9}, 'model': {'_target_': 'AdaViT.models.adavit.AdaptiveVisionTransformer', 'image_size': 224, 'patch_size': 16, 'num_layers': 12, 'hidden_dim': 192, 'mlp_dim': 768, 'num_heads': 3, 'eps': 0.25, 'num_classes': 10, 'timm_pretrained_weights': ['facebookresearch/deit:main', 'deit_tiny_patch16_224']}, 'training': {'train_batch_size': 128, 'eval_batch_size': 128, 'clip_grad_norm': 1.0, 'num_epochs': 150, 'eval_every': 100, 'checkpoint_every': 10, 'plot_masks_every': 10, 'num_images_to_plot': 10, 'reinit_class_tokens': True, 'train_backbone': False, 'num_workers': 4, 'val_budgets': [0.2, 0.8], 'train_budget': 0.9}, 'optimizer': {'_target_': 'torch.optim.Adam', 'lr': 0.001, 'weight_decay': 0}, 'loss': {'classification_loss': {'_target_': 'torch.nn.CrossEntropyLoss'}, 'additional_losses': {'distr_prior_loss': {'_target_': 'AdaViT.utils.losses.AViTDPriorLoss', 'target_depth': 7, 'weight': 0.1, 'scaling': 1}, 'ponder_loss': {'_target_': 'AdaViT.utils.losses.AViTPonderLoss', 'weight': 0.0005}}}, 'noise': {}, 'workspace': 'AdaViT', 'experiments_dir': 'AdaViT/runs/', 'experiment_name': '2024-04-25-20-11-01', 'device': 'cuda:0', 'seed': 31, 'load_from': None}
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:init():614] starting backend
+2024-04-25 20:11:02,407 INFO    MainThread:4605 [wandb_init.py:init():618] setting up manager
+2024-04-25 20:11:02,410 INFO    MainThread:4605 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-04-25 20:11:02,411 INFO    MainThread:4605 [wandb_init.py:init():624] backend started and connected
+2024-04-25 20:11:02,420 INFO    MainThread:4605 [wandb_init.py:init():716] updated telemetry
+2024-04-25 20:11:02,435 INFO    MainThread:4605 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2024-04-25 20:11:02,645 INFO    MainThread:4605 [wandb_run.py:_on_init():2254] communicating current version
+2024-04-25 20:11:02,686 INFO    MainThread:4605 [wandb_run.py:_on_init():2263] got version response upgrade_message: "wandb version 0.16.6 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-04-25 20:11:02,686 INFO    MainThread:4605 [wandb_init.py:init():800] starting run threads in backend
+2024-04-25 20:11:11,649 INFO    MainThread:4605 [wandb_run.py:_console_start():2233] atexit reg
+2024-04-25 20:11:11,649 INFO    MainThread:4605 [wandb_run.py:_redirect():2088] redirect: wrap_raw
+2024-04-25 20:11:11,649 INFO    MainThread:4605 [wandb_run.py:_redirect():2153] Wrapping output streams.
+2024-04-25 20:11:11,649 INFO    MainThread:4605 [wandb_run.py:_redirect():2178] Redirects installed.
+2024-04-25 20:11:11,650 INFO    MainThread:4605 [wandb_init.py:init():841] run started, returning control to user process
+2024-04-25 20:11:20,412 WARNING MsgRouterThr:4605 [router.py:message_loop():77] message_loop has been closed

@@ -191,7 +191,7 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     """
     
     # Gaussian_Distribution
-    #target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
+    target_dist = torch.distributions.Normal(loc=target_depth, scale=scaling)
     
     # Laplace_Distribution
     #target_dist = torch.distributions.Laplace(loc=target_depth, scale=scaling/ (2 ** 0.5))
@@ -201,7 +201,7 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
     #target_dist = torch.distributions.StudentT(loc=target_depth, scale=scaling/ (2 ** 0.5), df=degrees_of_freedom)
     
     # Cauchy Distribution
-    target_dist = torch.distributions.Cauchy(loc=target_depth, scale=scaling/ (2 ** 0.5))
+    #target_dist = torch.distributions.Cauchy(loc=target_depth, scale=scaling/ (2 ** 0.5))
 
     target_dist = target_dist.log_prob(torch.arange(model.num_layers) + 1)
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)

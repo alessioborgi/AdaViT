@@ -1,0 +1,9 @@
+Error executing job with overrides: []
+Error in call to target 'AdaViT.models.adavit.AdaptiveVisionTransformer':
+RuntimeError('The expanded size of the tensor (8) must match the existing size (4) at non-singleton dimension 1.  Target sizes: [197, 8].  Tensor sizes: [197, 4]')
+full_key: model
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+Archive found at AdaViT/imagenette_dataset/imagenette.zip, skipping download
+Extracted file found at AdaViT/imagenette_dataset/imagenette2-160, skipping extraction
+Warning: num_classes is not used for Imagenette dataset.
+Ignoring the argument and using default number of classes in this dataset (10).

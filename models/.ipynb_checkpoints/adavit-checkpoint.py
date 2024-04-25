@@ -9,6 +9,7 @@ from torchvision.models.vision_transformer import ViT_B_16_Weights, ViT_B_32_Wei
 
 import numpy as np
 from .blocks import SelfAttention, MLP
+from .pos_embedding import SinusoidalPositionalEmbedding, BERTPositionalEmbedding, RelativePositionalEmbedding
 from torch.autograd import Variable
  
 """
@@ -100,7 +101,20 @@ class AViTEncoder(nn.Module):
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
-        self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
+        
+        #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
+        
+        # 1) BERT
+        #self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        
+        # 2) Sinusoidal Positional Embedding (SPE)
+        #self.pos_embedding = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        
+        # 3) Relative Positional Embedding (RPE)
+        num_buckets = 16
+        self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
+        
+        
         self.dropout = nn.Dropout(dropout)
         layers: List = []
         for i in range(num_layers):
@@ -133,7 +147,7 @@ class AViTEncoder(nn.Module):
 
     def forward(self, input: torch.Tensor):
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
-        input = input + self.pos_embedding
+        input = input + self.pos_embedding()
         input = self.dropout(input)
 
         
