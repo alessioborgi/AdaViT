@@ -105,14 +105,14 @@ class AViTEncoder(nn.Module):
         #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
         
         # 1) BERT
-        #self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
         # 2) Sinusoidal Positional Embedding (SPE)
         #self.pos_embedding = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
         # 3) Relative Positional Embedding (RPE)
-        num_buckets = 16
-        self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
+        #num_buckets = 16
+        #self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
         
         
         self.dropout = nn.Dropout(dropout)
@@ -147,7 +147,7 @@ class AViTEncoder(nn.Module):
 
     def forward(self, input: torch.Tensor):
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
-        input = input + self.pos_embedding()
+        input = input + self.pos_embedding
         input = self.dropout(input)
 
         
