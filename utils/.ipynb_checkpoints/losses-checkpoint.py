@@ -177,7 +177,7 @@ def avit_ponder_loss(model, **kwargs):
     return ponder_loss
 
 
-def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
+def avit_distr_prior_loss_univariate(model, target_depth, scaling, **kwargs):
     """
     Computes the distribution prior loss of the model.
 
@@ -218,49 +218,65 @@ def avit_distr_prior_loss(model, target_depth, scaling, **kwargs):
 
 
     
-def avit_distr_prior_loss_multivariate(model, target_depth=[5, 10], scaling=[None, None], **kwargs):
+import torch
+from omegaconf import ListConfig
+
+def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], covariance_matrices=None, **kwargs):
     """
-    Computes the distribution prior loss of the model.
+    Computes the multivariate distribution prior loss of the model.
 
     Args:
         model: The model for which to compute the distribution prior loss.
-        target_depth: A list of two integers representing the target depth for each component of the multivariate Laplace distribution.
-        scaling: A list of two integers representing the scaling parameter for each component of the Laplace distribution. Can be None for default value.
+        target_depth: The target depths for each layer in the model.
+        scaling: The scaling factors for each layer in the model.
+        covariance_matrices: The covariance matrices for the multivariate distribution.
         **kwargs: Additional keyword arguments.
 
     Returns:
-        torch.Tensor: The distribution prior loss.
+        torch.Tensor: The multivariate distribution prior loss.
     """
-    num_layers = model.num_layers
     
-    # Check target_depth
-    if not isinstance(target_depth, list) or len(target_depth) != 2 or not all(isinstance(x, int) for x in target_depth):
-        raise ValueError("target_depth must be a list of two integers.")
-    if target_depth[0] >= target_depth[1]:
-        raise ValueError("target_depth values must be in increasing order.")
-        
-    # Check scaling
-    if not isinstance(scaling, list) or len(scaling) != 2 or not all(isinstance(x, int) for x in scaling):
-        raise ValueError("scaling must be a list of two integers.")
+    # Convert scaling to tensor if it's not None
+    if scaling is not None:
+        scaling_tensor = torch.tensor(scaling, dtype=torch.float32)
+    else:
+        scaling_tensor = None
     
+    # Convert target_depth to tensor
+    depth = torch.tensor(target_depth, dtype=torch.float32)
     
-    # Multivariate Laplace Distribution
-    loc = torch.tensor(target_depth)
-    scale = torch.tensor(scaling)
-    target_dist = torch.distributions.MultivariateLaplace(loc=loc, scale_tril=torch.diag(scale))
-    
-    target_probs = target_dist.log_prob(torch.arange(1, num_layers + 1).float())
-    
+    # Gaussian multivariate distribution
+    if covariance_matrices is None:
+        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  # Identity matrix as default
+
+    # Construct the multivariate normal distribution
+    if scaling_tensor is not None:
+        scaling_diagonal = torch.diag_embed(scaling_tensor)
+        target_dist = torch.distributions.MultivariateNormal(depth, scaling_diagonal @ covariance_matrices)
+    else:
+        target_dist = torch.distributions.MultivariateNormal(depth, covariance_matrices)
+
+    # Compute the log probabilities of the target depths
+    target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
+
+    # Get halting scores distribution from the model
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
     halting_score_distr = halting_score_distr / torch.sum(halting_score_distr)
     halting_score_distr = torch.clamp(halting_score_distr, 0.001, 0.999)
     
+    # Compute the Kullback-Leibler divergence between the halting scores distribution and the target distribution
     distr_prior_loss = torch.nn.functional.kl_div(halting_score_distr.log(),
-                                                   target_probs.to(halting_score_distr.device).detach(),
+                                                   target_dist_log_prob.to(halting_score_distr.device).detach(),
                                                    reduction='batchmean',
                                                    log_target=True)
 
     return distr_prior_loss
+
+
+
+
+
+
 
 
 ####################################################### class implementations ##################################################################

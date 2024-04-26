@@ -5,11 +5,19 @@ classification_loss:
 # they can be used for moes or residual models
 # for more info see peekvit/losses.py
 additional_losses:
+    # Univariate Approach
+    # distr_prior_loss:
+    #    _target_:  AdaViT.utils.losses.AViTDPriorLoss
+    #   target_depth: 7
+    #   weight: 0.1
+    #   scaling: 1
+    
+    # Multivariate Approach
     distr_prior_loss:
         _target_:  AdaViT.utils.losses.AViTDPriorLoss
-        target_depth: 7
+        target_depth: [5, 10]
         weight: 0.1
-        scaling: 1
+        scaling: [1, 1]
     ponder_loss:
         _target_:  AdaViT.utils.losses.AViTPonderLoss
         weight: 0.0005
