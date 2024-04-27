@@ -218,9 +218,7 @@ def avit_distr_prior_loss_univariate(model, target_depth, scaling, **kwargs):
 
 
     
-import torch
-from omegaconf import ListConfig
-
+# Multivariate Distribution Prior Loss implementation.    
 def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], covariance_matrices=None, **kwargs):
     """
     Computes the multivariate distribution prior loss of the model.
@@ -236,25 +234,43 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         torch.Tensor: The multivariate distribution prior loss.
     """
     
-    # Convert scaling to tensor if it's not None
-    if scaling is not None:
-        scaling_tensor = torch.tensor(scaling, dtype=torch.float32)
-    else:
-        scaling_tensor = None
-    
     # Convert target_depth to tensor
-    depth = torch.tensor(target_depth, dtype=torch.float32)
+    target_depth = torch.tensor(target_depth, dtype=torch.float32)
     
-    # Gaussian multivariate distribution
-    if covariance_matrices is None:
-        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  # Identity matrix as default
-
-    # Construct the multivariate normal distribution
-    if scaling_tensor is not None:
-        scaling_diagonal = torch.diag_embed(scaling_tensor)
-        target_dist = torch.distributions.MultivariateNormal(depth, scaling_diagonal @ covariance_matrices)
+    
+    # Gaussian Multivariate Distribution
+    
+    # Identity Covariance Matrix.
+    if (covariance_matrices is None) or (covariance_matrices.lower() in {"identity", "id", "i"}):
+        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
+        
+    # Strong Covariance Matrix.
+    # Positive Correlation (Earlier Halting in Deeper Layers)
+    elif covariance_matrices.lower() in {"strong", "s", "positive", "poscorr", "hard", "early", "earlier"}:
+        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
+        for i in range(len(target_depth) - 1):
+            for j in range(i + 1, len(target_depth)):
+                covariance_matrices[i, j] = 0.5  # Adjust value (0 to 1) based on desired correlation 
+                covariance_matrices[j, i] = 0.5  # Adjust value (0 to 1) based on desired correlation strength
+    
+    # Soft Covariance Matrix.
+    # Negative Correlation (Later Halting in Deeper Layers)
+    elif covariance_matrices.lower() in {"soft", "sf", "negative", "negcorr", "late", "later"}:
+        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
+        for i in range(len(target_depth) - 1):
+            for j in range(i + 1, len(target_depth)):
+                covariance_matrices[i, j] = -0.5  # Adjust value (0 to 1) based on desired correlation 
+                covariance_matrices[j, i] = -0.5  # Adjust value (0 to 1) based on desired correlation strength
+    
+    
+    # Convert scaling to tensor if it's not None and instantiate multivariate distribution.
+    if scaling is not None:
+        scaling = torch.tensor(scaling, dtype=torch.float32)
+        scaling_diagonal = torch.diag_embed(scaling)
+        target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
     else:
-        target_dist = torch.distributions.MultivariateNormal(depth, covariance_matrices)
+        target_dist = torch.distributions.MultivariateNormal(target_depth, covariance_matrices)
+        
 
     # Compute the log probabilities of the target depths
     target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
@@ -309,10 +325,11 @@ class AViTDPriorLoss(ModelLoss):
     Computes the distribution prior loss of the model.
     """
 
-    def __init__(self, target_depth: int, scaling: Optional[float] = None) -> None:
+    def __init__(self, target_depth: int, scaling: Optional[float] = None, covariance_matrices: Optional[float] = None,) -> None:
         super().__init__()
         self.target_depth = target_depth
         self.scaling = scaling
+        self.covariance_matrices = covariance_matrices
 
     def forward(self, model, **kwargs):
         """
@@ -325,7 +342,7 @@ class AViTDPriorLoss(ModelLoss):
         Returns:
             torch.Tensor: The distribution prior loss.
         """
-        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling)
+        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling, covariance_matrices=self.covariance_matrices)
 
 
 class AViTDPriorLossMultivariate(ModelLoss):

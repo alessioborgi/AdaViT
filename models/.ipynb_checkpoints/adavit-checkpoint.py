@@ -93,6 +93,7 @@ class AViTEncoder(nn.Module):
         mlp_dim: int,
         dropout: float,
         attention_dropout: float,
+        covariance_matrices: str ,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -101,6 +102,7 @@ class AViTEncoder(nn.Module):
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
+        self.covariance_matrices = covariance_matrices
         
         #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
         
@@ -268,6 +270,7 @@ class AdaptiveVisionTransformer(nn.Module):
         representation_size: Optional[int] = None,
         num_registers: int = 0,
         num_class_tokens: int = 1,
+        covariance_matrices: Optional[str] = None,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -289,6 +292,7 @@ class AdaptiveVisionTransformer(nn.Module):
             num_registers (int, optional): The number of register tokens to be added. Defaults to 0.
             num_class_tokens (int, optional): The number of class tokens to be added. Defaults to 1.
             eps (float, optional): The epsilon value for the ACT. Defaults to 0.01.
+            covariance_matrices (string, optional): The Covariance Matrix type in the Multivariate Approach.
             gate_scale (float, optional): The scale value for the ACT. Defaults to 10.
             gate_center (float, optional): The center value for the ACT. Defaults to 30.
             torch_pretrained_weights (str, optional): The path to the pretrained weights in the Torch format. Defaults to None
@@ -313,6 +317,7 @@ class AdaptiveVisionTransformer(nn.Module):
         self.num_class_tokens = num_class_tokens
         self.num_layers = num_layers
         self.eps = eps
+        self.covariance_matrices = covariance_matrices,
         self.gate_scale = gate_scale
         self.gate_center = gate_center
         
@@ -339,9 +344,10 @@ class AdaptiveVisionTransformer(nn.Module):
             mlp_dim,
             dropout,
             attention_dropout,
+            covariance_matrices,
             eps,
             gate_scale,
-            gate_center
+            gate_center,
             )
 
         
