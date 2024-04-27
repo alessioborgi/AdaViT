@@ -250,8 +250,8 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
         for i in range(len(target_depth) - 1):
             for j in range(i + 1, len(target_depth)):
-                covariance_matrices[i, j] = 0.5  # Adjust value (0 to 1) based on desired correlation 
-                covariance_matrices[j, i] = 0.5  # Adjust value (0 to 1) based on desired correlation strength
+                covariance_matrices[i, j] = 0.2  # Adjust value (0 to 1) based on desired correlation 
+                covariance_matrices[j, i] = 0.2  # Adjust value (0 to 1) based on desired correlation strength
     
     # Soft Covariance Matrix.
     # Negative Correlation (Later Halting in Deeper Layers)
@@ -259,17 +259,41 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
         for i in range(len(target_depth) - 1):
             for j in range(i + 1, len(target_depth)):
-                covariance_matrices[i, j] = -0.5  # Adjust value (0 to 1) based on desired correlation 
-                covariance_matrices[j, i] = -0.5  # Adjust value (0 to 1) based on desired correlation strength
+                covariance_matrices[i, j] = -0.2  # Adjust value (0 to 1) based on desired correlation 
+                covariance_matrices[j, i] = -0.2  # Adjust value (0 to 1) based on desired correlation strength
     
     
     # Convert scaling to tensor if it's not None and instantiate multivariate distribution.
     if scaling is not None:
         scaling = torch.tensor(scaling, dtype=torch.float32)
         scaling_diagonal = torch.diag_embed(scaling)
+
+        # 1) Multivariate Gaussian
         target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
+
+        # 2) Multivariate Laplace
+        #target_dist_laplace = torch.distributions.MultivariateLaplace(target_depth, scaling_diagonal @ covariance_matrices)
+
+        # 3) Multivariate Cauchy
+        #target_dist_cauchy = torch.distributions.MultivariateCauchy(target_depth, scaling_diagonal @ covariance_matrices)
+
+        # 4) Multivariate Student-t
+        #df = 30  # Degrees of freedom
+        #target_dist_student_t = torch.distributions.MultivariateStudentT(df, target_depth, scaling_diagonal @ covariance_matrices)
     else:
+        # 1) Multivariate Gaussian
         target_dist = torch.distributions.MultivariateNormal(target_depth, covariance_matrices)
+
+        # 2) Multivariate Laplace
+        #target_dist_laplace = torch.distributions.MultivariateLaplace(target_depth, covariance_matrices)
+
+        # 3) Multivariate Cauchy
+        #target_dist_cauchy = torch.distributions.MultivariateCauchy(target_depth, covariance_matrices)
+
+        # 4) Multivariate Student-t
+        #df = 2  # Degrees of freedom
+        #target_dist_student_t = torch.distributions.MultivariateStudentT(df, target_depth, covariance_matrices)
+
         
 
     # Compute the log probabilities of the target depths
