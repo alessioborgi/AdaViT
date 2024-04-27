@@ -1,7 +1,85 @@
-import torch
-from torch.distributions import Distribution
-from torch.distributions import constraints
 import math
+
+import torch
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.utils import _standard_normal, lazy_property
+
+__all__ = ["MultivariateLaplace"]
+
+
+def _batch_mv(bmat, bvec):
+    r"""
+    Performs a batched matrix-vector product, with compatible but different batch shapes.
+
+    This function takes as input `bmat`, containing :math:`n \times n` matrices, and
+    `bvec`, containing length :math:`n` vectors.
+
+    Both `bmat` and `bvec` may have any number of leading dimensions, which correspond
+    to a batch shape. They are not necessarily assumed to have the same batch shape,
+    just ones which can be broadcasted.
+    """
+    return torch.matmul(bmat, bvec.unsqueeze(-1)).squeeze(-1)
+
+
+def _batch_mahalanobis(bL, bx):
+    r"""
+    Computes the squared Mahalanobis distance :math:`\mathbf{x}^\top\mathbf{M}^{-1}\mathbf{x}`
+    for a factored :math:`\mathbf{M} = \mathbf{L}\mathbf{L}^\top`.
+
+    Accepts batches for both bL and bx. They are not necessarily assumed to have the same batch
+    shape, but `bL` one should be able to broadcasted to `bx` one.
+    """
+    n = bx.size(-1)
+    bx_batch_shape = bx.shape[:-1]
+
+    # Assume that bL.shape = (i, 1, n, n), bx.shape = (..., i, j, n),
+    # we are going to make bx have shape (..., 1, j,  i, 1, n) to apply batched tri.solve
+    bx_batch_dims = len(bx_batch_shape)
+    bL_batch_dims = bL.dim() - 2
+    outer_batch_dims = bx_batch_dims - bL_batch_dims
+    old_batch_dims = outer_batch_dims + bL_batch_dims
+    new_batch_dims = outer_batch_dims + 2 * bL_batch_dims
+    # Reshape bx with the shape (..., 1, i, j, 1, n)
+    bx_new_shape = bx.shape[:outer_batch_dims]
+    for sL, sx in zip(bL.shape[:-2], bx.shape[outer_batch_dims:-1]):
+        bx_new_shape += (sx // sL, sL)
+    bx_new_shape += (n,)
+    bx = bx.reshape(bx_new_shape)
+    # Permute bx to make it have shape (..., 1, j, i, 1, n)
+    permute_dims = (
+        list(range(outer_batch_dims))
+        + list(range(outer_batch_dims, new_batch_dims, 2))
+        + list(range(outer_batch_dims + 1, new_batch_dims, 2))
+        + [new_batch_dims]
+    )
+    bx = bx.permute(permute_dims)
+
+    flat_L = bL.reshape(-1, n, n)  # shape = b x n x n
+    flat_x = bx.reshape(-1, flat_L.size(0), n)  # shape = c x b x n
+    flat_x_swap = flat_x.permute(1, 2, 0)  # shape = b x n x c
+    M_swap = (
+        torch.linalg.solve_triangular(flat_L, flat_x_swap, upper=False).pow(2).sum(-2)
+    )  # shape = b x c
+    M = M_swap.t()  # shape = c x b
+
+    # Now we revert the above reshape and permute operators.
+    permuted_M = M.reshape(bx.shape[:-1])  # shape = (..., 1, j, i, 1)
+    permute_inv_dims = list(range(outer_batch_dims))
+    for i in range(bL_batch_dims):
+        permute_inv_dims += [outer_batch_dims + i, old_batch_dims + i]
+    reshaped_M = permuted_M.permute(permute_inv_dims)  # shape = (..., 1, i, j, 1)
+    return reshaped_M.reshape(bx_batch_shape)
+
+
+def _precision_to_scale_tril(P):
+    # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
+    Lf = torch.linalg.cholesky(torch.flip(P, (-2, -1)))
+    L_inv = torch.transpose(torch.flip(Lf, (-2, -1)), -2, -1)
+    Id = torch.eye(P.shape[-1], dtype=P.dtype, device=P.device)
+    L = torch.linalg.solve_triangular(L_inv, Id, upper=False)
+    return L
+
 
 class MultivariateLaplace(Distribution):
     r"""
@@ -125,33 +203,33 @@ class MultivariateLaplace(Distribution):
         return new
 
 
-    
+    @lazy_property
     def scale_tril(self):
         return self._unbroadcasted_scale_tril.expand(
             self._batch_shape + self._event_shape + self._event_shape
         )
 
-    
+    @lazy_property
     def covariance_matrix(self):
         return torch.matmul(
             self._unbroadcasted_scale_tril, self._unbroadcasted_scale_tril.mT
         ).expand(self._batch_shape + self._event_shape + self._event_shape)
 
-    
+    @lazy_property
     def precision_matrix(self):
         return torch.cholesky_inverse(self._unbroadcasted_scale_tril).expand(
             self._batch_shape + self._event_shape + self._event_shape
         )
 
-    
+    @property
     def mean(self):
         return self.loc
 
-    
+    @property
     def mode(self):
         return self.loc
 
-    
+    @property
     def variance(self):
         return (
             self._unbroadcasted_scale_tril.pow(2)
@@ -172,14 +250,14 @@ class MultivariateLaplace(Distribution):
         # Ensure value is a tensor
         value = torch.as_tensor(value)
 
-        # Compute the log probability for each target depth individually
-        log_prob = -torch.sum(torch.abs(value - self.loc) / self._unbroadcasted_scale_tril, dim=-1) - self._unbroadcasted_scale_tril.diagonal(dim1=-2, dim2=-1).log().sum(-1)
-        log_prob_tensor = log_prob.mean(dim=0)  # Directly calculate average within the loop
+        # Compute the Mahalanobis distance
+        diff = value - self.loc
+        M = _batch_mahalanobis(self._unbroadcasted_scale_tril, diff)
 
-        return log_prob_tensor.mean(dim=1)
+        # Compute the log probability
+        log_prob = -torch.norm(M, p=1, dim=-1)  # Using L1 norm for multivariate Laplace
 
-
-
+        return log_prob
 
 
     def entropy(self):

@@ -218,31 +218,6 @@ def avit_distr_prior_loss_univariate(model, target_depth, scaling, **kwargs):
 
 
 
-class MultivariateLaplace(torch.nn.Module):
-    def __init__(self, loc, scale_diag):
-        super(MultivariateLaplace, self).__init__()
-        self.loc = loc
-        self.scale_diag = scale_diag
-
-    def forward(self):
-        # Implement the forward pass to sample from the Laplace distribution
-        # Here, you can use element-wise operations on tensors for efficiency
-        epsilon = torch.rand(self.loc.shape, device=self.loc.device)  # Random noise
-        return self.loc - self.scale_diag * torch.sign(epsilon - 0.5) * torch.log(1 - 2 * torch.abs(epsilon - 0.5))
-
-    def log_prob(self, value):
-        # Calculate the log probability of the given value under the Laplace distribution
-        # Assume value has shape [batch_size, num_layers]
-        
-        # Calculate the absolute difference between the value and the mean (loc)
-        abs_diff = torch.abs(value.unsqueeze(-1) - self.loc.unsqueeze(1))
-
-        # Calculate the log probability using the Laplace probability density function
-        # Note: We sum along the dimension corresponding to the layers
-        log_prob = -torch.sum(abs_diff / self.scale_diag + torch.log(2 * self.scale_diag), dim=-1)
-
-        return log_prob
-
 
 # Usage:
 #laplace_dist = MultivariateLaplace(target_depth.to(device), scaling_diagonal.to(device))
@@ -304,7 +279,8 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
 
         # 2) Multivariate Laplace
         target_dist = MultivariateLaplace(target_depth, scaling_diagonal @ covariance_matrices)
-        target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
+        #print(target_dist)
+        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
 
         # 3) Multivariate Cauchy
         #target_dist = torch.distributions.MultivariateCauchy(target_depth, scaling_diagonal @ covariance_matrices)
@@ -319,7 +295,8 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
 
         # 2) Multivariate Laplace
         target_dist = MultivariateLaplace(target_depth, scaling_diagonal @ covariance_matrices)
-        target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
+        #print(target_dist)
+        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
 
         # 3) Multivariate Cauchy
         #target_dist = torch.distributions.MultivariateCauchy(target_depth, covariance_matrices)
@@ -328,7 +305,8 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         #df = 2  # Degrees of freedom
         #target_dist = torch.distributions.MultivariateStudentT(df, target_depth, covariance_matrices)
 
-
+    #print(target_dist_log_prob)
+    target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
 
     # Get halting scores distribution from the model
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
