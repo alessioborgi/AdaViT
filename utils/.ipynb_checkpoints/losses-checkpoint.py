@@ -274,7 +274,7 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         scaling_diagonal = torch.diag_embed(scaling)
 
         # 1) Multivariate Gaussian
-        #target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
+        target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
 
         # 2) Multivariate Laplace
         #target_dist = MultivariateLaplace(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
@@ -283,8 +283,8 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
         #target_dist = MultivariateCauchy(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
 
         # 4) Multivariate Student-t
-        df = 30  # Degrees of freedom
-        target_dist_student_t = MultivariateStudentT(df, target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
+        #df = 30  # Degrees of freedom
+        #target_dist_student_t = MultivariateStudentT(df, target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
         
         
     #else:
