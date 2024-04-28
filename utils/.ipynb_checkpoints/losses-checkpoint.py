@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 from typing import List, Literal, Optional
 from hydra.utils import instantiate
 import numpy as np
-from .MultivariateLaplace import MultivariateLaplace 
+from .distributions import MultivariateLaplace, MultivariateCauchy, MultivariateStudentT
 
 
 """
@@ -275,28 +275,24 @@ def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], cov
 
         # 1) Multivariate Gaussian
         #target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
-        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
 
         # 2) Multivariate Laplace
-        target_dist = MultivariateLaplace(target_depth, scaling_diagonal @ covariance_matrices)
-        #print(target_dist)
-        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
+        #target_dist = MultivariateLaplace(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
 
         # 3) Multivariate Cauchy
-        #target_dist = torch.distributions.MultivariateCauchy(target_depth, scaling_diagonal @ covariance_matrices)
+        #target_dist = MultivariateCauchy(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
 
         # 4) Multivariate Student-t
-        #df = 30  # Degrees of freedom
-        #target_dist_student_t = torch.distributions.MultivariateStudentT(df, target_depth, scaling_diagonal @ covariance_matrices)
-    else:
+        df = 30  # Degrees of freedom
+        target_dist_student_t = MultivariateStudentT(df, target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
+        
+        
+    #else:
         # 1) Multivariate Gaussian
         #target_dist = torch.distributions.MultivariateNormal(target_depth, covariance_matrices)
-        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
 
         # 2) Multivariate Laplace
-        target_dist = MultivariateLaplace(target_depth, scaling_diagonal @ covariance_matrices)
-        #print(target_dist)
-        #target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1).mean(dim=1)
+        #target_dist = MultivariateLaplace(target_depth, (scaling_diagonal / (2 ** 0.5) )  @ covariance_matrices)
 
         # 3) Multivariate Cauchy
         #target_dist = torch.distributions.MultivariateCauchy(target_depth, covariance_matrices)
