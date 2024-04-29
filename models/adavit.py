@@ -147,7 +147,7 @@ class AViTEncoder(nn.Module):
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
         
         # Hybrid Positional Embedding Approach:
-        pos_embedding = self.bert_embedding + self.spe_embedding()
+        pos_embedding = self.pos_embedding_bert + self.pos_embedding_spe
         input = input + pos_embedding
         input = self.dropout(input)
 
