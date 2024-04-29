@@ -9,7 +9,7 @@ from torchvision.models.vision_transformer import ViT_B_16_Weights, ViT_B_32_Wei
 
 import numpy as np
 from .blocks import SelfAttention, MLP
-from .pos_embedding import SinusoidalPositionalEmbedding, BERTPositionalEmbedding, RelativePositionalEmbedding
+from .pos_embedding import SinusoidalPositionalEmbedding, BERTPositionalEmbedding
 from torch.autograd import Variable
  
 """
@@ -104,18 +104,14 @@ class AViTEncoder(nn.Module):
         self.eps = eps
         self.covariance_matrices = covariance_matrices
         
-        #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
-        
+        # Both BERT and SPE implement a learnable parameter.
         # 1) BERT
-        self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        #self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        self.pos_embedding_bert = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
         # 2) Sinusoidal Positional Embedding (SPE)
         #self.pos_embedding = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
-        
-        # 3) Relative Positional Embedding (RPE)
-        #num_buckets = 16
-        #self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
-        
+        self.pos_embedding_spe = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
         self.dropout = nn.Dropout(dropout)
         layers: List = []
@@ -149,7 +145,10 @@ class AViTEncoder(nn.Module):
 
     def forward(self, input: torch.Tensor):
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
-        input = input + self.pos_embedding
+        
+        # Hybrid Positional Embedding Approach:
+        pos_embedding = self.bert_embedding + self.spe_embedding()
+        input = input + pos_embedding
         input = self.dropout(input)
 
         
@@ -463,5 +462,11 @@ class AdaptiveVisionTransformer(nn.Module):
                 timm_pretrained_weights = timm_pretrained_weights['model']
             adapted_state_dict = adapt_timm_state_dict(timm_pretrained_weights, num_classes=self.num_classes)
             self.load_state_dict(adapted_state_dict, strict=False)
+    
+
+    
+    
+
+    
     
     
