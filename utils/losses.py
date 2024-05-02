@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 from typing import List, Literal, Optional
 from hydra.utils import instantiate
 import numpy as np
-from .distributions import MultivariateLaplace, MultivariateCauchy, MultivariateStudentT
+import torch.nn.functional as F
 
 
 """
@@ -178,7 +178,7 @@ def avit_ponder_loss(model, **kwargs):
     return ponder_loss
 
 
-def avit_distr_prior_loss_univariate(model, target_depth, scaling, **kwargs):
+def avit_distr_prior_loss_unimodal(model, target_depth, scaling, **kwargs):
     """
     Computes the distribution prior loss of the model.
 
@@ -218,108 +218,66 @@ def avit_distr_prior_loss_univariate(model, target_depth, scaling, **kwargs):
 
 
 
-
-# Usage:
-#laplace_dist = MultivariateLaplace(target_depth.to(device), scaling_diagonal.to(device))
-#samples = laplace_dist()  # Samples from the multivariate Laplace distribution
-    
-# Multivariate Distribution Prior Loss implementation.    
-def avit_distr_prior_loss(model, target_depth=[5, 10], scaling=[None, None], covariance_matrices=None, **kwargs):
+def avit_distr_prior_loss(model, target_depth, scaling, weights, **kwargs):
     """
-    Computes the multivariate distribution prior loss of the model.
+    Computes the distribution prior loss of the model.
 
     Args:
         model: The model for which to compute the distribution prior loss.
-        target_depth: The target depths for each layer in the model.
-        scaling: The scaling factors for each layer in the model.
-        covariance_matrices: The covariance matrices for the multivariate distribution.
+        target_depth: The target depth for the distribution.
+        scaling: The scaling parameter for the distribution.
         **kwargs: Additional keyword arguments.
 
     Returns:
-        torch.Tensor: The multivariate distribution prior loss.
+        torch.Tensor: The distribution prior loss.
     """
     
-    # Convert target_depth to tensor
-    target_depth = torch.tensor(target_depth, dtype=torch.float32)
+    # Create a bimodal Gaussian distribution
+    #std = scaling / (2 ** 0.5)
+
+    # 1) Bimodal (Gaussian)
+    target_dist = torch.distributions.MixtureSameFamily(
+        torch.distributions.Categorical(torch.tensor(weights)),
+        torch.distributions.Normal(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
+    )
+    
+    # 2) Bimodal (Laplace)
+    #target_dist = torch.distributions.MixtureSameFamily(
+    #    torch.distributions.Categorical(torch.tensor(weights)),
+    #    torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)))
+    #)
+    
+    # 3) Bimodal (StudentT)
+    #degrees_of_freedom = 30 
+    #target_dist = torch.distributions.MixtureSameFamily(
+    #    torch.distributions.Categorical(torch.tensor(weights)),
+    #    torch.distributions.StudentT(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)), df=degrees_of_freedom)
+    #)
+    
+    # 4) Bimodal (Cauchy)
+    #target_dist = torch.distributions.MixtureSameFamily(
+    #    torch.distributions.Categorical(torch.tensor(weights)),
+    #    torch.distributions.Cauchy(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)))
+    #)
     
     
-    # Gaussian Multivariate Distribution
-    
-    # Identity Covariance Matrix.
-    if (covariance_matrices is None) or (covariance_matrices.lower() in {"identity", "id", "i"}):
-        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
-        
-    # Strong Covariance Matrix.
-    # Positive Correlation (Earlier Halting in Deeper Layers)
-    elif covariance_matrices.lower() in {"strong", "s", "positive", "poscorr", "hard", "early", "earlier"}:
-        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
-        for i in range(len(target_depth) - 1):
-            for j in range(i + 1, len(target_depth)):
-                covariance_matrices[i, j] = 0.2  # Adjust value (0 to 1) based on desired correlation 
-                covariance_matrices[j, i] = 0.2  # Adjust value (0 to 1) based on desired correlation strength
-    
-    # Soft Covariance Matrix.
-    # Negative Correlation (Later Halting in Deeper Layers)
-    elif covariance_matrices.lower() in {"soft", "sf", "negative", "negcorr", "late", "later"}:
-        covariance_matrices = torch.eye(len(target_depth), dtype=torch.float32)  
-        for i in range(len(target_depth) - 1):
-            for j in range(i + 1, len(target_depth)):
-                covariance_matrices[i, j] = -0.2  # Adjust value (0 to 1) based on desired correlation 
-                covariance_matrices[j, i] = -0.2  # Adjust value (0 to 1) based on desired correlation strength
     
     
-    # Convert scaling to tensor if it's not None and instantiate multivariate distribution.
-    if scaling is not None:
-        scaling = torch.tensor(scaling, dtype=torch.float32)
-        scaling_diagonal = torch.diag_embed(scaling)
-
-        # 1) Multivariate Gaussian
-        target_dist = torch.distributions.MultivariateNormal(target_depth, scaling_diagonal @ covariance_matrices)
-
-        # 2) Multivariate Laplace
-        #target_dist = MultivariateLaplace(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
-
-        # 3) Multivariate Cauchy
-        #target_dist = MultivariateCauchy(target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
-
-        # 4) Multivariate Student-t
-        #df = 30  # Degrees of freedom
-        #target_dist_student_t = MultivariateStudentT(df, target_depth, ( scaling_diagonal / (2 ** 0.5) ) @ covariance_matrices)
-        
-        
-    #else:
-        # 1) Multivariate Gaussian
-        #target_dist = torch.distributions.MultivariateNormal(target_depth, covariance_matrices)
-
-        # 2) Multivariate Laplace
-        #target_dist = MultivariateLaplace(target_depth, (scaling_diagonal / (2 ** 0.5) )  @ covariance_matrices)
-
-        # 3) Multivariate Cauchy
-        #target_dist = torch.distributions.MultivariateCauchy(target_depth, covariance_matrices)
-
-        # 4) Multivariate Student-t
-        #df = 2  # Degrees of freedom
-        #target_dist = torch.distributions.MultivariateStudentT(df, target_depth, covariance_matrices)
-
-    #print(target_dist_log_prob)
-    target_dist_log_prob = target_dist.log_prob(torch.arange(model.num_layers, dtype=torch.float32).repeat(len(target_depth), 1).t() + 1)
-
-    # Get halting scores distribution from the model
+    # Compute log probabilities for the target distribution
+    target_log_probs = target_dist.log_prob(torch.arange(model.num_layers) + 1)
+    
+    # Get the halting scores distribution from the model
     halting_score_distr = torch.stack(model.encoder.halting_score_layer)
     halting_score_distr = halting_score_distr / torch.sum(halting_score_distr)
     halting_score_distr = torch.clamp(halting_score_distr, 0.001, 0.999)
     
-    # Compute the Kullback-Leibler divergence between the halting scores distribution and the target distribution
-    distr_prior_loss = torch.nn.functional.kl_div(halting_score_distr.log(),
-                                                   target_dist_log_prob.to(halting_score_distr.device).detach(),
-                                                   reduction='batchmean',
-                                                   log_target=True)
+    # Compute KL divergence between the halting scores distribution and target distribution
+    distr_prior_loss = F.kl_div(halting_score_distr.log(),
+                                target_log_probs.to(halting_score_distr.device).detach(),
+                                reduction='batchmean',
+                                log_target=True)
 
     return distr_prior_loss
-
-
-
-
 
 
 
@@ -354,11 +312,11 @@ class AViTDPriorLoss(ModelLoss):
     Computes the distribution prior loss of the model.
     """
 
-    def __init__(self, target_depth: int, scaling: Optional[float] = None, covariance_matrices: Optional[float] = None,) -> None:
+    def __init__(self, target_depth: int, scaling: Optional[float] = None, weights: Optional[float] = None,) -> None:
         super().__init__()
         self.target_depth = target_depth
         self.scaling = scaling
-        self.covariance_matrices = covariance_matrices
+        self.weights = weights
 
     def forward(self, model, **kwargs):
         """
@@ -371,7 +329,7 @@ class AViTDPriorLoss(ModelLoss):
         Returns:
             torch.Tensor: The distribution prior loss.
         """
-        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling, covariance_matrices=self.covariance_matrices)
+        return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling, weights=self.weights)
 
 
 class AViTDPriorLossMultivariate(ModelLoss):

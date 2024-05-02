@@ -93,7 +93,7 @@ class AViTEncoder(nn.Module):
         mlp_dim: int,
         dropout: float,
         attention_dropout: float,
-        covariance_matrices: str ,
+        #covariance_matrices: str ,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -102,16 +102,20 @@ class AViTEncoder(nn.Module):
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
-        self.covariance_matrices = covariance_matrices
+        #self.covariance_matrices = covariance_matrices
         
-        # Both BERT and SPE implement a learnable parameter.
+        #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
+        
         # 1) BERT
-        #self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
-        self.pos_embedding_bert = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
         # 2) Sinusoidal Positional Embedding (SPE)
         #self.pos_embedding = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
-        self.pos_embedding_spe = SinusoidalPositionalEmbedding(seq_length, hidden_dim).pos_embedding
+        
+        # 3) Relative Positional Embedding (RPE)
+        #num_buckets = 16
+        #self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
+        
         
         self.dropout = nn.Dropout(dropout)
         layers: List = []
@@ -145,10 +149,7 @@ class AViTEncoder(nn.Module):
 
     def forward(self, input: torch.Tensor):
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
-        
-        # Hybrid Positional Embedding Approach:
-        pos_embedding = self.pos_embedding_bert + self.pos_embedding_spe
-        input = input + pos_embedding
+        input = input + self.pos_embedding
         input = self.dropout(input)
 
         
@@ -269,7 +270,7 @@ class AdaptiveVisionTransformer(nn.Module):
         representation_size: Optional[int] = None,
         num_registers: int = 0,
         num_class_tokens: int = 1,
-        covariance_matrices: Optional[str] = None,
+        #covariance_matrices: Optional[str] = None,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -316,7 +317,7 @@ class AdaptiveVisionTransformer(nn.Module):
         self.num_class_tokens = num_class_tokens
         self.num_layers = num_layers
         self.eps = eps
-        self.covariance_matrices = covariance_matrices,
+        #self.covariance_matrices = covariance_matrices,
         self.gate_scale = gate_scale
         self.gate_center = gate_center
         
@@ -343,7 +344,7 @@ class AdaptiveVisionTransformer(nn.Module):
             mlp_dim,
             dropout,
             attention_dropout,
-            covariance_matrices,
+       #     covariance_matrices,
             eps,
             gate_scale,
             gate_center,
@@ -462,11 +463,5 @@ class AdaptiveVisionTransformer(nn.Module):
                 timm_pretrained_weights = timm_pretrained_weights['model']
             adapted_state_dict = adapt_timm_state_dict(timm_pretrained_weights, num_classes=self.num_classes)
             self.load_state_dict(adapted_state_dict, strict=False)
-    
-
-    
-    
-
-    
     
     

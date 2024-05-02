@@ -5,21 +5,21 @@ classification_loss:
 # they can be used for moes or residual models
 # for more info see peekvit/losses.py
 additional_losses:
-    # Univariate Approach
+    # UniModal Approach
     # distr_prior_loss:
     #    _target_:  AdaViT.utils.losses.AViTDPriorLoss
     #   target_depth: 7
     #   weight: 0.1
     #   scaling: 1
     
-    # Multivariate Approach
+    # MultiModal Approach
     distr_prior_loss:
         _target_:  AdaViT.utils.losses.AViTDPriorLoss
         target_depth: [3, 7]
         weight: 0.1
         scaling: [1, 1]
+        weights: [0.5, 0.5]
         # Put either "id"(Identity), "hard"(Positive Correlation (Earlier Halting in Deeper Layers)) or "soft" (Negative Correlation (Later Halting in Deeper Layers))
-        covariance_matrices: "id"      
     ponder_loss:
         _target_:  AdaViT.utils.losses.AViTPonderLoss
         weight: 0.0005
