@@ -26,3 +26,10 @@ config: {'logger': {'_target_': 'AdaViT.utils.logging.WandbLogger', 'wandb_entit
 2024-05-02 05:57:32,275 INFO    MainThread:3937 [wandb_run.py:_redirect():2243] Wrapping output streams.
 2024-05-02 05:57:32,275 INFO    MainThread:3937 [wandb_run.py:_redirect():2268] Redirects installed.
 2024-05-02 05:57:32,276 INFO    MainThread:3937 [wandb_init.py:init():848] run started, returning control to user process
+2024-05-02 07:14:04,943 INFO    MainThread:3937 [wandb_run.py:_finish():2052] finishing run alessioborgi3/adavit/74x2di6b
+2024-05-02 07:14:04,943 INFO    MainThread:3937 [wandb_run.py:_atexit_cleanup():2292] got exitcode: 0
+2024-05-02 07:14:04,943 INFO    MainThread:3937 [wandb_run.py:_restore():2275] restore
+2024-05-02 07:14:04,944 INFO    MainThread:3937 [wandb_run.py:_restore():2281] restore done
+2024-05-02 07:14:11,102 INFO    MainThread:3937 [wandb_run.py:_footer_history_summary_info():3920] rendering history
+2024-05-02 07:14:11,103 INFO    MainThread:3937 [wandb_run.py:_footer_history_summary_info():3952] rendering summary
+2024-05-02 07:14:11,106 INFO    MainThread:3937 [wandb_run.py:_footer_sync_info():3879] logging synced files

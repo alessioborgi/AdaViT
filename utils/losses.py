@@ -236,32 +236,29 @@ def avit_distr_prior_loss(model, target_depth, scaling, weights, **kwargs):
     #std = scaling / (2 ** 0.5)
 
     # 1) Bimodal (Gaussian)
-    target_dist = torch.distributions.MixtureSameFamily(
-        torch.distributions.Categorical(torch.tensor(weights)),
-        torch.distributions.Normal(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
-    )
-    
-    # 2) Bimodal (Laplace)
     #target_dist = torch.distributions.MixtureSameFamily(
     #    torch.distributions.Categorical(torch.tensor(weights)),
-    #    torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)))
+    #    torch.distributions.Normal(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
     #)
+    
+    # 2) Bimodal (Laplace)
+    target_dist = torch.distributions.MixtureSameFamily(
+        torch.distributions.Categorical(torch.tensor(weights)),
+        torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling)/(2 ** 0.5))
+    )
     
     # 3) Bimodal (StudentT)
     #degrees_of_freedom = 30 
     #target_dist = torch.distributions.MixtureSameFamily(
     #    torch.distributions.Categorical(torch.tensor(weights)),
-    #    torch.distributions.StudentT(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)), df=degrees_of_freedom)
+    #    torch.distributions.StudentT(loc=torch.tensor(target_depth), scale=torch.tensor(scaling)/(2 ** 0.5), df=degrees_of_freedom)
     #)
     
     # 4) Bimodal (Cauchy)
     #target_dist = torch.distributions.MixtureSameFamily(
     #    torch.distributions.Categorical(torch.tensor(weights)),
-    #    torch.distributions.Cauchy(loc=torch.tensor(target_depth), scale=torch.tensor(scaling/(2 ** 0.5)))
+    #    torch.distributions.Cauchy(loc=torch.tensor(target_depth), scale=torch.tensor(scaling)/(2 ** 0.5))
     #)
-    
-    
-    
     
     # Compute log probabilities for the target distribution
     target_log_probs = target_dist.log_prob(torch.arange(model.num_layers) + 1)
@@ -276,6 +273,11 @@ def avit_distr_prior_loss(model, target_depth, scaling, weights, **kwargs):
                                 target_log_probs.to(halting_score_distr.device).detach(),
                                 reduction='batchmean',
                                 log_target=True)
+    
+    #distr_prior_loss = F.kl_div(halting_score_distr.log(),
+    #                            target_log_probs.to(halting_score_distr.device).detach(),
+    #                            reduction='sum',
+    #                           log_target=True)
 
     return distr_prior_loss
 
@@ -332,7 +334,7 @@ class AViTDPriorLoss(ModelLoss):
         return avit_distr_prior_loss(model, target_depth=self.target_depth, scaling=self.scaling, weights=self.weights)
 
 
-class AViTDPriorLossMultivariate(ModelLoss):
+class AViTDPriorLossUniModal(ModelLoss):
     """
     Computes the distribution prior loss of the model.
     """
