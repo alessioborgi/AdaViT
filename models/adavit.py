@@ -2,6 +2,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 import math
+import random
 from typing import Optional, List
 from abc import ABC
 import os
@@ -59,9 +60,6 @@ class AViTBlock(nn.Module):
 
         # x is bs, seq_len, token_dim
         # mask is bs, seq_len
-        # print('Input shape', x.shape)
-        # print('Mask shape', mask.shape)
-        # print('Mask', 1-mask)
 
         if mask is None:
             x = x + self.self_attention(self.ln_1(x))
@@ -80,6 +78,70 @@ class AViTBlock(nn.Module):
 
         return x, halting_score
 
+    
+
+
+
+'''
+def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
+    # Deep copy of new_halted_tokens_per_layer
+    new_halted_tokens_copy = new_halted_tokens_per_layer.clone()
+    
+    # Set seed for reproducibility
+    torch.manual_seed(31)
+    
+    # Get indices of True values
+    true_indices = torch.nonzero(new_halted_tokens_copy, as_tuple=False)
+    
+    # Shuffle the indices in-place
+    torch.randperm(true_indices.size(0), out=true_indices[:, 0])
+    
+    # Calculate the number of True values to retain based on the percentage
+    num_true_to_retain = int(percentage * true_indices.size(0))
+    
+    # Select only the top percentage of True values
+    selected_true_indices = true_indices[:num_true_to_retain]
+    
+    # Reset all values to False
+    new_halted_tokens_copy.fill_(False)
+    
+    # Set the selected indices to True
+    new_halted_tokens_copy[selected_true_indices[:, 0], selected_true_indices[:, 1]] = True
+        
+    # Halt the left and right tokens
+    mask_token[:, :-1][new_halted_tokens_copy] = 0
+    mask_token[:, 1:][new_halted_tokens_copy] = 0
+    
+    return mask_token
+'''
+def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
+    
+    # Set seed for reproducibility
+    torch.manual_seed(31)
+    
+    # Find the indices of True values
+    true_indices = torch.nonzero(new_halted_tokens_per_layer, as_tuple=False)
+
+    # Calculate the number of True values to retain based on the percentage
+    num_true_to_retain = int(percentage * len(true_indices))
+
+    # Randomly select a subset of indices
+    selected_indices = random.sample(range(len(true_indices)), num_true_to_retain)
+
+    # Reset the new_halted_tokens_per_layer to all False
+    new_halted_tokens_per_layer.fill_(False)
+
+    # Set the selected indices to True
+    for idx in selected_indices:
+        new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
+        
+    # Halt the left and right tokens
+    mask_token[:, :-1][new_halted_tokens_per_layer] = 0
+    mask_token[:, 1:][new_halted_tokens_per_layer] = 0
+    
+    return mask_token
+    
+
 
 # ViT Encoder
 class AViTEncoder(nn.Module):
@@ -93,7 +155,6 @@ class AViTEncoder(nn.Module):
         mlp_dim: int,
         dropout: float,
         attention_dropout: float,
-        #covariance_matrices: str ,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -102,10 +163,8 @@ class AViTEncoder(nn.Module):
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
-        #self.covariance_matrices = covariance_matrices
         
-        #self.pos_embedding = nn.Parameter(torch.empty(1, seq_length, hidden_dim).normal_(std=0.02))  # from BERT
-        
+        ############### Positional Embedding ###############
         # 1) BERT
         self.pos_embedding = BERTPositionalEmbedding(seq_length, hidden_dim).pos_embedding
         
@@ -116,6 +175,7 @@ class AViTEncoder(nn.Module):
         #num_buckets = 16
         #self.pos_embedding = RelativePositionalEmbedding(seq_length, hidden_dim, num_buckets)
         
+        ############################################################
         
         self.dropout = nn.Dropout(dropout)
         layers: List = []
@@ -159,7 +219,7 @@ class AViTEncoder(nn.Module):
 
         
         return self.forward_features_act_token(input)
-    
+
 
     def forward_features_act_token(self, x):
         
@@ -187,8 +247,11 @@ class AViTEncoder(nn.Module):
         # Use out to backbone
         out = x
         
+        # Initialize list for seeing the # of halted tokens per layer.
         self.halting_score_layer = []
-    
+        # Initialize additional halted tokens mask. This will report the new_halted_tokens w.r.t. the previous layer.
+        new_halted_tokens_per_layer = torch.zeros(bs, self.seq_length).bool().cuda()  # Initialize as boolean mask  
+        
         # For each of the 12 layers.
         for i, adaptive_layer in enumerate(self.layers):
 
@@ -223,7 +286,7 @@ class AViTEncoder(nn.Module):
             # For token part
             c_token = c_token + h_token
             self.rho_token = self.rho_token + mask_token.float()
-            
+
             
             ############### Case 1: Halting Threshold Reached ###############
             # Computing the reached_token mask T/F.
@@ -232,6 +295,8 @@ class AViTEncoder(nn.Module):
         
             # Counting Number of Halted Tokens at layer i.
             num_halted = torch.sum(reached_token) 
+            new_halted_tokens = reached_token & (~mask_token.bool())  # Newly halted tokens
+            new_halted_tokens_per_layer |= new_halted_tokens  # Update additional halted tokens mask
             self.num_halted_tokens_per_layer[i] += num_halted
             
             # Transform the reached Token into float.
@@ -249,7 +314,7 @@ class AViTEncoder(nn.Module):
             # By summing these contributions over all layers, self.rho_token provides a measure of the overall progress or "importance" of each token in the computation process.
             # In essence, self.rho_token reflects how much each token has been involved in the computation across all layers, with higher values indicating tokens that have played a more significant role in the final output.
             self.rho_token = self.rho_token + R_token * reached_token
-
+            
             
             ############### Case 2: Halting Threshold Not Reached yet ###############
             # token part
@@ -268,7 +333,16 @@ class AViTEncoder(nn.Module):
             #    subsequent layers (corresponding entry = 0),i.e., Masked.
             mask_token = c_token < 1 - self.eps       # Tensor of True/False values.
             # mask_token.shape = [128, 197]
-            print("The mask_token shape is: ", mask_token)
+            # new_halted_tokens_per_layer.shape = [128, 197]  and contains all False or True.
+            
+            #################### SPEED-UP HALTING NOVELTY ####################################################################################################
+            
+            # Call speed_up_halting function to modify the mask_token
+            #mask_token = speed_up_halting(mask_token[:, 1:], new_halted_tokens_per_layer[:, 1:], percentage=0.3, discard_level="cross")
+            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer[:, 1:], percentage=0.3, discard_level="cross")
+            
+            ##################################################################################################################################################
+            
 
             if output is None:
                 output = delta1 + delta2
@@ -278,10 +352,11 @@ class AViTEncoder(nn.Module):
         x = self.ln(output)
 
         return x
+            
         
-
-
-
+        
+        
+        
 
 class AdaptiveVisionTransformer(nn.Module):
     """Vision Transformer as per https://arxiv.org/abs/2010.11929."""
@@ -301,7 +376,6 @@ class AdaptiveVisionTransformer(nn.Module):
         representation_size: Optional[int] = None,
         num_registers: int = 0,
         num_class_tokens: int = 1,
-        #covariance_matrices: Optional[str] = None,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -323,7 +397,6 @@ class AdaptiveVisionTransformer(nn.Module):
             num_registers (int, optional): The number of register tokens to be added. Defaults to 0.
             num_class_tokens (int, optional): The number of class tokens to be added. Defaults to 1.
             eps (float, optional): The epsilon value for the ACT. Defaults to 0.01.
-            covariance_matrices (string, optional): The Covariance Matrix type in the Multivariate Approach.
             gate_scale (float, optional): The scale value for the ACT. Defaults to 10.
             gate_center (float, optional): The center value for the ACT. Defaults to 30.
             torch_pretrained_weights (str, optional): The path to the pretrained weights in the Torch format. Defaults to None
@@ -348,7 +421,6 @@ class AdaptiveVisionTransformer(nn.Module):
         self.num_class_tokens = num_class_tokens
         self.num_layers = num_layers
         self.eps = eps
-        #self.covariance_matrices = covariance_matrices,
         self.gate_scale = gate_scale
         self.gate_center = gate_center
         
@@ -357,7 +429,6 @@ class AdaptiveVisionTransformer(nn.Module):
         self.conv_proj = nn.Conv2d(in_channels=3, out_channels=hidden_dim, kernel_size=patch_size, stride=patch_size)
 
         seq_length = (image_size // patch_size) ** 2
-
         # Add class tokens
         self.class_tokens = nn.Parameter(torch.zeros(1, num_class_tokens, hidden_dim))
         seq_length += num_class_tokens
@@ -375,7 +446,6 @@ class AdaptiveVisionTransformer(nn.Module):
             mlp_dim,
             dropout,
             attention_dropout,
-       #     covariance_matrices,
             eps,
             gate_scale,
             gate_center,
