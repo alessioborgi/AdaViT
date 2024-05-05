@@ -236,16 +236,16 @@ def avit_distr_prior_loss(model, target_depth, scaling, weights, **kwargs):
     #std = scaling / (2 ** 0.5)
 
     # 1) Bimodal (Gaussian)
-    #target_dist = torch.distributions.MixtureSameFamily(
-    #    torch.distributions.Categorical(torch.tensor(weights)),
-    #    torch.distributions.Normal(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
-    #)
-    
-    # 2) Bimodal (Laplace)
     target_dist = torch.distributions.MixtureSameFamily(
         torch.distributions.Categorical(torch.tensor(weights)),
-        torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling)/(2 ** 0.5))
+        torch.distributions.Normal(loc=torch.tensor(target_depth), scale=torch.tensor(scaling))
     )
+    
+    # 2) Bimodal (Laplace)
+    #target_dist = torch.distributions.MixtureSameFamily(
+    #    torch.distributions.Categorical(torch.tensor(weights)),
+    #    torch.distributions.Laplace(loc=torch.tensor(target_depth), scale=torch.tensor(scaling)/(2 ** 0.5))
+    #)
     
     # 3) Bimodal (StudentT)
     #degrees_of_freedom = 30 

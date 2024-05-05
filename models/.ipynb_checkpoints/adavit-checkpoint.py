@@ -148,8 +148,13 @@ class AViTEncoder(nn.Module):
 
 
     def forward(self, input: torch.Tensor):
+        
         torch._assert(input.dim() == 3, f"Expected (batch_size, seq_length, hidden_dim) got {input.shape}")
+        
+        # Shape before pos_embedding is [128, 197, 192]
         input = input + self.pos_embedding
+
+        # Shape after pos_embedding is the same, i.e.: [128, 197, 192]. Indeed it's an addition not a concatenation!
         input = self.dropout(input)
 
         
@@ -158,9 +163,9 @@ class AViTEncoder(nn.Module):
 
     def forward_features_act_token(self, x):
         
-
-        # now start the act part
-        bs = x.size()[0]  # The batch size
+        # Now we start the action part. x.shape is [128, 197, 192]. 
+        bs = x.size()[0]  # The batch size 
+        
 
 
         if self.c_token is None or bs != self.c_token.size()[0]:
@@ -181,53 +186,72 @@ class AViTEncoder(nn.Module):
         output = None
         # Use out to backbone
         out = x
-
         
         self.halting_score_layer = []
-
+    
+        # For each of the 12 layers.
         for i, adaptive_layer in enumerate(self.layers):
 
-            # block out all the parts that are not used
-            out.data = out.data * mask_token.float().view(bs, self.seq_length, 1)
+            # Block out all the parts that are not used
+            out.data = out.data * mask_token.float().view(bs, self.seq_length, 1)     # out.data.shape = [128, 197, 192].
+            
 
-            # evaluate layer and get halting probability for each sample
+            # Evaluate layer and get Halting Probability for Each Sample
             # block_output, h_lst = l.forward_act(out)    # h is a vector of length bs, block_output a 3D tensor
             block_output, h_lst = adaptive_layer.forward_act(out, 1.-mask_token.float())    # h is a vector of length bs, block_output a 3D tensor
+            # block_output.shape = [128, 197, 192]. Tensor
+            # dim(h_lst) = [-1, halting_scores]. List
 
             self.halting_score_layer.append(torch.mean(h_lst[1][1:]))
 
             out = block_output.clone()              # Deep copy needed for the next layer
+            # out.shape = [128, 197, 192]
 
             _, h_token = h_lst # h is layer_halting score, h_token is token halting score, first position discarded
+            # h_token.shape = [128, 197]
 
             # here, 1 is remaining, 0 is blocked
             block_output = block_output * mask_token.float().view(bs, self.seq_length, 1)
+            # block_output.shape = [128, 197, 192]
 
             # Is this the last layer in the block?
             if i==len(self.layers)-1:
                 h_token = nn.Parameter(torch.ones(bs, self.seq_length).cuda())
-
-            # for token part
+            
+            # h_token.shape = [128, 197]
+            # c_token.shape = [128, 197]
+            # For token part
             c_token = c_token + h_token
             self.rho_token = self.rho_token + mask_token.float()
             
             
-            # Case 1: threshold reached in this iteration
-            # token part
-            reached_token = c_token >= 1 - self.eps
+            ############### Case 1: Halting Threshold Reached ###############
+            # Computing the reached_token mask T/F.
+            reached_token = c_token >= 1 - self.eps    # Tensor of boolean values True/False
+            
         
-            # Number of Halted Tokens at layer i.
+            # Counting Number of Halted Tokens at layer i.
             num_halted = torch.sum(reached_token) 
             self.num_halted_tokens_per_layer[i] += num_halted
-            #self.num_halted_tokens_per_layer[i] = num_halted
-            #print("The number of Halted Tokens per Layer is: ",self.num_halted_tokens_per_layer)
-
-            reached_token = reached_token.float() * mask_token.float()
+            
+            # Transform the reached Token into float.
+            reached_token = reached_token.float() * mask_token.float()         # reached_token.shape = [128, 197]
+            # reached_token is now literally a mask containing either 0. or 1. ( float).
+            
+            # R_token represents the "remaining" halting scores for each token.
+            # delta1 contains the contributions of tokens that have reached their halting threshold to the output of the current layer. 
+            # These contributions are weighted by the remaining halting scores of each token (R_token). 
+            # In other words, delta1 represents the "active" or "contributing" tokens in the output of the layer. 
             delta1 = block_output * R_token.view(bs, self.seq_length, 1) * reached_token.view(bs, self.seq_length, 1)
+            
+            # self.rho_token contains the cumulative sum of halting scores across layers for each token. 
+            # This product represents the contribution of each token that has reached its halting threshold in advancing through the layers. 
+            # By summing these contributions over all layers, self.rho_token provides a measure of the overall progress or "importance" of each token in the computation process.
+            # In essence, self.rho_token reflects how much each token has been involved in the computation across all layers, with higher values indicating tokens that have played a more significant role in the final output.
             self.rho_token = self.rho_token + R_token * reached_token
 
             
-            # Case 2: threshold not reached
+            ############### Case 2: Halting Threshold Not Reached yet ###############
             # token part
             not_reached_token = c_token < 1 - self.eps
             not_reached_token = not_reached_token.float()
@@ -236,8 +260,15 @@ class AViTEncoder(nn.Module):
 
             self.counter_token = self.counter_token + not_reached_token # These data points will need at least one more layer
 
-            # Update the mask
-            mask_token = c_token < 1 - self.eps
+            # Update the Mask.
+            # The update is done based on whether their cumulative halting score (c_token) is less than the threshold 1 - self.eps. 
+            # If the cumulative halting score of a token is below the threshold, it means that the token has not yet reached its halting threshold and should be allowed to proceed to the next layer (corresponding entry = 1),i.e., 
+            #    notmasked.
+            # Else, if the cumulative halting score of a token is equal to or greater than the threshold, it means that the token has reached its halting threshold and should be halted, preventing it from further processing in 
+            #    subsequent layers (corresponding entry = 0),i.e., Masked.
+            mask_token = c_token < 1 - self.eps       # Tensor of True/False values.
+            # mask_token.shape = [128, 197]
+            print("The mask_token shape is: ", mask_token)
 
             if output is None:
                 output = delta1 + delta2
