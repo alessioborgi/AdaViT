@@ -84,38 +84,8 @@ class AViTBlock(nn.Module):
 
 '''
 def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
-    # Deep copy of new_halted_tokens_per_layer
-    new_halted_tokens_copy = new_halted_tokens_per_layer.clone()
     
-    # Set seed for reproducibility
-    torch.manual_seed(31)
-    
-    # Get indices of True values
-    true_indices = torch.nonzero(new_halted_tokens_copy, as_tuple=False)
-    
-    # Shuffle the indices in-place
-    torch.randperm(true_indices.size(0), out=true_indices[:, 0])
-    
-    # Calculate the number of True values to retain based on the percentage
-    num_true_to_retain = int(percentage * true_indices.size(0))
-    
-    # Select only the top percentage of True values
-    selected_true_indices = true_indices[:num_true_to_retain]
-    
-    # Reset all values to False
-    new_halted_tokens_copy.fill_(False)
-    
-    # Set the selected indices to True
-    new_halted_tokens_copy[selected_true_indices[:, 0], selected_true_indices[:, 1]] = True
-        
-    # Halt the left and right tokens
-    mask_token[:, :-1][new_halted_tokens_copy] = 0
-    mask_token[:, 1:][new_halted_tokens_copy] = 0
-    
-    return mask_token
-'''
-def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
-    
+    # print(mask_token)
     # Set seed for reproducibility
     torch.manual_seed(31)
     
@@ -134,10 +104,45 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
     # Set the selected indices to True
     for idx in selected_indices:
         new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
-        
-    # Halt the left and right tokens
-    mask_token[:, :-1][new_halted_tokens_per_layer] = 0
-    mask_token[:, 1:][new_halted_tokens_per_layer] = 0
+                
+    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
+    mask_token[:, :-1][new_halted_tokens_per_layer] = False
+    mask_token[:, 1:][new_halted_tokens_per_layer] = False
+    
+    return mask_token
+'''
+
+def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
+    # Set seed for reproducibility
+    torch.manual_seed(31)
+    
+    # Find the indices of True values
+    true_indices = torch.nonzero(new_halted_tokens_per_layer, as_tuple=False)
+
+    # Calculate the number of True values to retain based on the percentage
+    num_true_to_retain = int(percentage * len(true_indices))
+
+    # Randomly select a subset of indices
+    selected_indices = random.sample(range(len(true_indices)), num_true_to_retain)
+
+    # Reset the new_halted_tokens_per_layer to all False
+    new_halted_tokens_per_layer.fill_(False)
+
+    # Set the selected indices to True
+    for idx in selected_indices:
+        new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
+
+    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
+    left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+    right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+
+    # Check if the indices are not on the border of the image (every 14 pixels)
+    left_border_check = left_indices[:, 1] % 14 != 0
+    right_border_check = (right_indices[:, 1] + 1) % 14 != 0
+
+    # Apply halting only if the indices are not on the border of the image
+    mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+    mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
     
     return mask_token
     
@@ -297,7 +302,7 @@ class AViTEncoder(nn.Module):
             num_halted = torch.sum(reached_token) 
             new_halted_tokens = reached_token & (~mask_token.bool())  # Newly halted tokens
             new_halted_tokens_per_layer |= new_halted_tokens  # Update additional halted tokens mask
-            self.num_halted_tokens_per_layer[i] += num_halted
+            #self.num_halted_tokens_per_layer[i] += num_halted
             
             # Transform the reached Token into float.
             reached_token = reached_token.float() * mask_token.float()         # reached_token.shape = [128, 197]
@@ -328,22 +333,29 @@ class AViTEncoder(nn.Module):
             # Update the Mask.
             # The update is done based on whether their cumulative halting score (c_token) is less than the threshold 1 - self.eps. 
             # If the cumulative halting score of a token is below the threshold, it means that the token has not yet reached its halting threshold and should be allowed to proceed to the next layer (corresponding entry = 1),i.e., 
-            #    notmasked.
+            #    notmasked. (True)
             # Else, if the cumulative halting score of a token is equal to or greater than the threshold, it means that the token has reached its halting threshold and should be halted, preventing it from further processing in 
-            #    subsequent layers (corresponding entry = 0),i.e., Masked.
+            #    subsequent layers (corresponding entry = 0),i.e., Masked. (False)
             mask_token = c_token < 1 - self.eps       # Tensor of True/False values.
+            
+            # Find the indices of False (Halted) values
+            num_zeros = (mask_token == 0).sum().item()
+            #print("Number of zeros BEFORE SPEED-UP:", num_zeros) 
             # mask_token.shape = [128, 197]
             # new_halted_tokens_per_layer.shape = [128, 197]  and contains all False or True.
-            
             #################### SPEED-UP HALTING NOVELTY ####################################################################################################
             
             # Call speed_up_halting function to modify the mask_token
             #mask_token = speed_up_halting(mask_token[:, 1:], new_halted_tokens_per_layer[:, 1:], percentage=0.3, discard_level="cross")
-            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer[:, 1:], percentage=0.3, discard_level="cross")
-            
+            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross")
             ##################################################################################################################################################
+                        
+            # Find the indices of False (Halted) values
+            num_zeros = (mask_token == 0).sum().item()
+            #print("Number of zeros AFTER SPEED-UP:", num_zeros)            
+            self.num_halted_tokens_per_layer[i] += num_zeros
             
-
+            
             if output is None:
                 output = delta1 + delta2
             else:

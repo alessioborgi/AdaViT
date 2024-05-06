@@ -15,7 +15,7 @@ additional_losses:
     # MultiModal Approach
     distr_prior_loss:
         _target_:  AdaViT.utils.losses.AViTDPriorLoss
-        target_depth: [5,7]
+        target_depth: [5,10]
         weight: 0.1
         scaling: [1,1]
         weights: [0.7,0.3]
