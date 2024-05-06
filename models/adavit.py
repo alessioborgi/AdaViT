@@ -84,35 +84,6 @@ class AViTBlock(nn.Module):
 
 '''
 def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
-    
-    # print(mask_token)
-    # Set seed for reproducibility
-    torch.manual_seed(31)
-    
-    # Find the indices of True values
-    true_indices = torch.nonzero(new_halted_tokens_per_layer, as_tuple=False)
-
-    # Calculate the number of True values to retain based on the percentage
-    num_true_to_retain = int(percentage * len(true_indices))
-
-    # Randomly select a subset of indices
-    selected_indices = random.sample(range(len(true_indices)), num_true_to_retain)
-
-    # Reset the new_halted_tokens_per_layer to all False
-    new_halted_tokens_per_layer.fill_(False)
-
-    # Set the selected indices to True
-    for idx in selected_indices:
-        new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
-                
-    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
-    mask_token[:, :-1][new_halted_tokens_per_layer] = False
-    mask_token[:, 1:][new_halted_tokens_per_layer] = False
-    
-    return mask_token
-'''
-
-def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
     # Set seed for reproducibility
     torch.manual_seed(31)
     
@@ -145,6 +116,43 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
     mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
     
     return mask_token
+'''
+
+def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level, patch_width):
+    # Set seed for reproducibility
+    torch.manual_seed(31)
+    
+    # Find the indices of True values
+    true_indices = torch.nonzero(new_halted_tokens_per_layer, as_tuple=False)
+
+    # Calculate the number of True values to retain based on the percentage
+    num_true_to_retain = int(percentage * len(true_indices))
+
+    # Randomly select a subset of indices
+    selected_indices = random.sample(range(len(true_indices)), num_true_to_retain)
+
+    # Reset the new_halted_tokens_per_layer to all False
+    new_halted_tokens_per_layer.fill_(False)
+
+    # Set the selected indices to True
+    for idx in selected_indices:
+        new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
+
+    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
+    left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+    right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+
+    # Check if the indices are not on the border of the image (every patch_width pixels)
+    left_border_check = left_indices[:, 1] % patch_width != 0
+    right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
+
+    # Apply halting only if the indices are not on the border of the image
+    mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+    mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+    
+    return mask_token
+
+
     
 
 
@@ -154,6 +162,7 @@ class AViTEncoder(nn.Module):
     def __init__(
         self,
         seq_length: int,
+        patch_width: int,
         num_layers: int,
         num_heads: int,
         hidden_dim: int,
@@ -165,9 +174,11 @@ class AViTEncoder(nn.Module):
         gate_center: float = 30,
     ):
         super().__init__()
+
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
+        self.patch_width = patch_width
         
         ############### Positional Embedding ###############
         # 1) BERT
@@ -221,8 +232,7 @@ class AViTEncoder(nn.Module):
 
         # Shape after pos_embedding is the same, i.e.: [128, 197, 192]. Indeed it's an addition not a concatenation!
         input = self.dropout(input)
-
-        
+                
         return self.forward_features_act_token(input)
 
 
@@ -346,8 +356,9 @@ class AViTEncoder(nn.Module):
             #################### SPEED-UP HALTING NOVELTY ####################################################################################################
             
             # Call speed_up_halting function to modify the mask_token
-            #mask_token = speed_up_halting(mask_token[:, 1:], new_halted_tokens_per_layer[:, 1:], percentage=0.3, discard_level="cross")
-            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross")
+            #mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross")
+            #print("The image_size is equal to: ", self.image_size)
+            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross", patch_width=self.patch_width)
             ##################################################################################################################################################
                         
             # Find the indices of False (Halted) values
@@ -435,6 +446,7 @@ class AdaptiveVisionTransformer(nn.Module):
         self.eps = eps
         self.gate_scale = gate_scale
         self.gate_center = gate_center
+        self.patch_width = self.image_size / self.patch_size
         
 
 
@@ -452,6 +464,7 @@ class AdaptiveVisionTransformer(nn.Module):
 
         self.encoder = AViTEncoder(
             seq_length,
+            self.patch_width,
             num_layers,
             num_heads,
             hidden_dim,
