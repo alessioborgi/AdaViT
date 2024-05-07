@@ -137,19 +137,115 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
     # Set the selected indices to True
     for idx in selected_indices:
         new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
-
-    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
-    left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
-    right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
-
-    # Check if the indices are not on the border of the image (every patch_width pixels)
-    left_border_check = left_indices[:, 1] % patch_width != 0
-    right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
-
-    # Apply halting only if the indices are not on the border of the image
-    mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
-    mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
     
+    # 1 --> 1
+    if discard_level == "identity":
+    # Return the mask token unchanged
+    return mask_token
+
+    # 1 --> 3
+    elif discard_level == "nearby":
+        # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
+        left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+        right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+
+        # Check if the indices are not on the border of the image (every patch_width pixels)
+        left_border_check = left_indices[:, 1] % patch_width != 0
+        right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
+
+        # Apply halting only if the indices are not on the border of the image
+        mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+        mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+    
+    # 1 --> 5
+    elif discard_level == "cross":
+        # Halt the left, right, up, and down tokens to the mask_token's token that correspond to be True in the new_halted_tokens_per_layer.
+        left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+        right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+        up_indices = torch.clamp(true_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
+        down_indices = torch.clamp(true_indices + torch.tensor([[1, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+        # Check if the indices are not on the border of the image (every patch_width pixels)
+        left_border_check = left_indices[:, 1] % patch_width != 0
+        right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
+        up_border_check = up_indices[:, 0] % patch_width != 0
+        down_border_check = (down_indices[:, 0] + 1) % patch_width != 0
+
+        # Apply halting only if the indices are not on the border of the image
+        mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+        mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+        mask_token[true_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
+        mask_token[true_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
+    
+    # 1 --> 9
+    elif discard_level == "square":
+        # Halt the left, right, up, down, top-left, top-right, bottom-left, and bottom-right tokens to the mask_token's token 
+        # that correspond to be True in the new_halted_tokens_per_layer.
+        left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+        right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+        up_indices = torch.clamp(true_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
+        down_indices = torch.clamp(true_indices + torch.tensor([[1, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+        top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
+        top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
+        bottom_left_indices = torch.clamp(true_indices + torch.tensor([[1, -1]]).to("cuda"), max=mask_token.size(0) - 1)
+        bottom_right_indices = torch.clamp(true_indices + torch.tensor([[1, 1]]).to("cuda"), max=mask_token.size(0) - 1, max=mask_token.size(1) - 1)
+
+        # Check if the indices are not on the border of the image (every patch_width pixels).
+        left_border_check = left_indices[:, 1] % patch_width != 0
+        right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
+        up_border_check = up_indices[:, 0] % patch_width != 0
+        down_border_check = (down_indices[:, 0] + 1) % patch_width != 0
+        top_left_border_check = (top_left_indices[:, 0] % patch_width != 0) & (top_left_indices[:, 1] % patch_width != 0)
+        top_right_border_check = (top_right_indices[:, 0] % patch_width != 0) & ((top_right_indices[:, 1] + 1) % patch_width != 0)
+        bottom_left_border_check = ((bottom_left_indices[:, 0] + 1) % patch_width != 0) & (bottom_left_indices[:, 1] % patch_width != 0)
+        bottom_right_border_check = ((bottom_right_indices[:, 0] + 1) % patch_width != 0) & ((bottom_right_indices[:, 1] + 1) % patch_width != 0)
+
+        # Apply halting only if the indices are not on the border of the image.
+        mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+        mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+        mask_token[true_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
+        mask_token[true_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
+        mask_token[true_indices[top_left_border_check][:, 0], top_left_indices[top_left_border_check][:, 1]] = False
+        mask_token[true_indices[top_right_border_check][:, 0], top_right_indices[top_right_border_check][:, 1]] = False
+        mask_token[true_indices[bottom_left_border_check][:, 0], bottom_left_indices[bottom_left_border_check][:, 1]] = False
+        mask_token[true_indices[bottom_right_border_check][:, 0], bottom_right_indices[bottom_right_border_check][:, 1]] = False
+        
+    # 1 --> 13
+    elif  discard_level == "isotropic":
+        # Halt tokens in a circular pattern around the True tokens
+
+        # Define indices for halting tokens in all directions
+        left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+        right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+        up_indices = torch.clamp(true_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
+        down_indices = torch.clamp(true_indices + torch.tensor([[1, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+        top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
+        top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
+        bottom_left_indices = torch.clamp(true_indices + torch.tensor([[1, -1]]).to("cuda"), max=mask_token.size(0) - 1)
+        bottom_right_indices = torch.clamp(true_indices + torch.tensor([[1, 1]]).to("cuda"), max=mask_token.size(0) - 1, max=mask_token.size(1) - 1)
+
+        # Halt the tokens at the True indices
+        mask_token[true_indices[:, 0], true_indices[:, 1]] = False
+
+        # Apply halting to tokens at the defined indices
+        mask_token[left_indices[:, 0], left_indices[:, 1]] = False
+        mask_token[right_indices[:, 0], right_indices[:, 1]] = False
+        mask_token[up_indices[:, 0], up_indices[:, 1]] = False
+        mask_token[down_indices[:, 0], down_indices[:, 1]] = False
+        mask_token[top_left_indices[:, 0], top_left_indices[:, 1]] = False
+        mask_token[top_right_indices[:, 0], top_right_indices[:, 1]] = False
+        mask_token[bottom_left_indices[:, 0], bottom_left_indices[:, 1]] = False
+        mask_token[bottom_right_indices[:, 0], bottom_right_indices[:, 1]] = False
+
+        # Additional halting for diagonal tokens
+        mask_token[true_indices[top_left_indices[:, 0], top_left_indices[:, 1]]] = False
+        mask_token[true_indices[top_right_indices[:, 0], top_right_indices[:, 1]]] = False
+        mask_token[true_indices[bottom_left_indices[:, 0], bottom_left_indices[:, 1]]] = False
+        mask_token[true_indices[bottom_right_indices[:, 0], bottom_right_indices[:, 1]]] = False
+    
+    else: 
+        print("The discard level doesn't reflect any of the listed discard level. It should be one in {identity, nearby, cross, square, isotropic}")
+
     return mask_token
 
 
