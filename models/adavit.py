@@ -102,12 +102,12 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
     
     # 1 --> 1
-    if discard_level == "identity":
+    if discard_level.lower() in {"identity", "id", "i"}:
         # Return the mask token unchanged
         return mask_token
 
     # 1 --> 3
-    elif discard_level == "nearby":
+    elif discard_level.lower() in {"nearby", "near", "next", "n"}:
         # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
         left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
         right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
@@ -121,7 +121,7 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
     
     # 1 --> 5
-    elif discard_level == "cross":
+    elif discard_level.lower() in {"cross", "neighbours", "c"}:
         # Halt the left, right, up, and down tokens to the mask_token's token that correspond to be True in the new_halted_tokens_per_layer.
         left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
         right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
@@ -147,7 +147,7 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
     # Two tokens above
     # Two tokens below
     # Four tokens diagonally (one in each direction: top-right, top-left, bottom-right, bottom-left)
-    elif discard_level == "square":
+    elif discard_level.lower() in {"square", "sq", "s"}:
         # Halt the left, right, up, down, top-left, top-right, bottom-left, and bottom-right tokens to the mask_token's token 
         # that correspond to be True in the new_halted_tokens_per_layer.
         left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
@@ -193,7 +193,7 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
 
         
     # 1 --> 13
-    elif discard_level == "isotropic":
+    elif discard_level.lower() in {"isotropic", "iso", "circle", "is"}:
         # Define indices for halting tokens in all directions
         left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
         right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
@@ -270,6 +270,8 @@ class AViTEncoder(nn.Module):
         # we have batch_first=True in nn.MultiAttention() by default
         self.eps = eps
         self.patch_width = patch_width
+        self.discard_level = discard_level
+        self.percentage = percentage
         
         ############### Positional Embedding ###############
         # 1) BERT
