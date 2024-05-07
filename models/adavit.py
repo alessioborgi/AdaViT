@@ -81,43 +81,6 @@ class AViTBlock(nn.Module):
     
 
 
-
-'''
-def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level):
-    # Set seed for reproducibility
-    torch.manual_seed(31)
-    
-    # Find the indices of True values
-    true_indices = torch.nonzero(new_halted_tokens_per_layer, as_tuple=False)
-
-    # Calculate the number of True values to retain based on the percentage
-    num_true_to_retain = int(percentage * len(true_indices))
-
-    # Randomly select a subset of indices
-    selected_indices = random.sample(range(len(true_indices)), num_true_to_retain)
-
-    # Reset the new_halted_tokens_per_layer to all False
-    new_halted_tokens_per_layer.fill_(False)
-
-    # Set the selected indices to True
-    for idx in selected_indices:
-        new_halted_tokens_per_layer[true_indices[idx][0], true_indices[idx][1]] = True
-
-    # Halt the left and right tokens to the mask_token's token that correspond to be a True in the new_halted_tokens_per_layer.
-    left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
-    right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
-
-    # Check if the indices are not on the border of the image (every 14 pixels)
-    left_border_check = left_indices[:, 1] % 14 != 0
-    right_border_check = (right_indices[:, 1] + 1) % 14 != 0
-
-    # Apply halting only if the indices are not on the border of the image
-    mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
-    mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
-    
-    return mask_token
-'''
-
 def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discard_level, patch_width):
     # Set seed for reproducibility
     torch.manual_seed(31)
@@ -140,8 +103,8 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
     
     # 1 --> 1
     if discard_level == "identity":
-    # Return the mask token unchanged
-    return mask_token
+        # Return the mask token unchanged
+        return mask_token
 
     # 1 --> 3
     elif discard_level == "nearby":
@@ -178,6 +141,12 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         mask_token[true_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
     
     # 1 --> 9
+    # 13 halted tokens are: The True token itself (1 token)
+    # Two tokens to the right
+    # Two tokens to the left
+    # Two tokens above
+    # Two tokens below
+    # Four tokens diagonally (one in each direction: top-right, top-left, bottom-right, bottom-left)
     elif discard_level == "square":
         # Halt the left, right, up, down, top-left, top-right, bottom-left, and bottom-right tokens to the mask_token's token 
         # that correspond to be True in the new_halted_tokens_per_layer.
@@ -188,7 +157,9 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
         top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
         bottom_left_indices = torch.clamp(true_indices + torch.tensor([[1, -1]]).to("cuda"), max=mask_token.size(0) - 1)
-        bottom_right_indices = torch.clamp(true_indices + torch.tensor([[1, 1]]).to("cuda"), max=mask_token.size(0) - 1, max=mask_token.size(1) - 1)
+        bottom_right_indices_row = torch.clamp(true_indices[:, 0] + 1, max=mask_token.size(0) - 1)
+        bottom_right_indices_col = torch.clamp(true_indices[:, 1] + 1, max=mask_token.size(1) - 1)
+        bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
 
         # Check if the indices are not on the border of the image (every patch_width pixels).
         left_border_check = left_indices[:, 1] % patch_width != 0
@@ -200,20 +171,29 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         bottom_left_border_check = ((bottom_left_indices[:, 0] + 1) % patch_width != 0) & (bottom_left_indices[:, 1] % patch_width != 0)
         bottom_right_border_check = ((bottom_right_indices[:, 0] + 1) % patch_width != 0) & ((bottom_right_indices[:, 1] + 1) % patch_width != 0)
 
-        # Apply halting only if the indices are not on the border of the image.
-        mask_token[true_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
-        mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
-        mask_token[true_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
-        mask_token[true_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
-        mask_token[true_indices[top_left_border_check][:, 0], top_left_indices[top_left_border_check][:, 1]] = False
-        mask_token[true_indices[top_right_border_check][:, 0], top_right_indices[top_right_border_check][:, 1]] = False
-        mask_token[true_indices[bottom_left_border_check][:, 0], bottom_left_indices[bottom_left_border_check][:, 1]] = False
-        mask_token[true_indices[bottom_right_border_check][:, 0], bottom_right_indices[bottom_right_border_check][:, 1]] = False
+        # Halt the tokens at the True indices
+        mask_token[true_indices[:, 0], true_indices[:, 1]] = False
+
+        # Apply halting to tokens at the defined indices
+        mask_token[left_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+        mask_token[right_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+        mask_token[up_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
+        mask_token[down_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
+        mask_token[top_left_indices[top_left_border_check][:, 0], top_left_indices[top_left_border_check][:, 1]] = False
+        mask_token[top_right_indices[top_right_border_check][:, 0], top_right_indices[top_right_border_check][:, 1]] = False
+        mask_token[bottom_left_indices[bottom_left_border_check][:, 0], bottom_left_indices[bottom_left_border_check][:, 1]] = False
+        mask_token[bottom_right_indices[bottom_right_border_check][:, 0], bottom_right_indices[bottom_right_border_check][:, 1]] = False
+
+        # Additional halting for diagonal tokens
+        mask_token[true_indices[top_left_indices[:, 0], top_left_indices[:, 1]]] = False
+        mask_token[true_indices[top_right_indices[:, 0], top_right_indices[:, 1]]] = False
+        mask_token[true_indices[bottom_left_indices[:, 0], bottom_left_indices[:, 1]]] = False
+        mask_token[true_indices[bottom_right_indices[:, 0], bottom_right_indices[:, 1]]] = False
+
+
         
     # 1 --> 13
-    elif  discard_level == "isotropic":
-        # Halt tokens in a circular pattern around the True tokens
-
+    elif discard_level == "isotropic":
         # Define indices for halting tokens in all directions
         left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
         right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
@@ -222,27 +202,40 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
         top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
         bottom_left_indices = torch.clamp(true_indices + torch.tensor([[1, -1]]).to("cuda"), max=mask_token.size(0) - 1)
-        bottom_right_indices = torch.clamp(true_indices + torch.tensor([[1, 1]]).to("cuda"), max=mask_token.size(0) - 1, max=mask_token.size(1) - 1)
+        bottom_right_indices_row = torch.clamp(true_indices[:, 0] + 1, max=mask_token.size(0) - 1)
+        bottom_right_indices_col = torch.clamp(true_indices[:, 1] + 1, max=mask_token.size(1) - 1)
+        bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
+
+        # Check if the indices are not on the border of the image (every patch_width pixels).
+        left_border_check = left_indices[:, 1] % patch_width != 0
+        right_border_check = (right_indices[:, 1] + 1) % patch_width != 0
+        up_border_check = up_indices[:, 0] % patch_width != 0
+        down_border_check = (down_indices[:, 0] + 1) % patch_width != 0
+        top_left_border_check = (top_left_indices[:, 0] % patch_width != 0) & (top_left_indices[:, 1] % patch_width != 0)
+        top_right_border_check = (top_right_indices[:, 0] % patch_width != 0) & ((top_right_indices[:, 1] + 1) % patch_width != 0)
+        bottom_left_border_check = ((bottom_left_indices[:, 0] + 1) % patch_width != 0) & (bottom_left_indices[:, 1] % patch_width != 0)
+        bottom_right_border_check = ((bottom_right_indices[:, 0] + 1) % patch_width != 0) & ((bottom_right_indices[:, 1] + 1) % patch_width != 0)
 
         # Halt the tokens at the True indices
         mask_token[true_indices[:, 0], true_indices[:, 1]] = False
 
-        # Apply halting to tokens at the defined indices
-        mask_token[left_indices[:, 0], left_indices[:, 1]] = False
-        mask_token[right_indices[:, 0], right_indices[:, 1]] = False
-        mask_token[up_indices[:, 0], up_indices[:, 1]] = False
-        mask_token[down_indices[:, 0], down_indices[:, 1]] = False
-        mask_token[top_left_indices[:, 0], top_left_indices[:, 1]] = False
-        mask_token[top_right_indices[:, 0], top_right_indices[:, 1]] = False
-        mask_token[bottom_left_indices[:, 0], bottom_left_indices[:, 1]] = False
-        mask_token[bottom_right_indices[:, 0], bottom_right_indices[:, 1]] = False
+        # Apply halting to tokens at the defined indices if they are within the image boundaries
+        mask_token[left_indices[left_border_check][:, 0], left_indices[left_border_check][:, 1]] = False
+        mask_token[right_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
+        mask_token[up_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
+        mask_token[down_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
+        mask_token[top_left_indices[top_left_border_check][:, 0], top_left_indices[top_left_border_check][:, 1]] = False
+        mask_token[top_right_indices[top_right_border_check][:, 0], top_right_indices[top_right_border_check][:, 1]] = False
+        mask_token[bottom_left_indices[bottom_left_border_check][:, 0], bottom_left_indices[bottom_left_border_check][:, 1]] = False
+        mask_token[bottom_right_indices[bottom_right_border_check][:, 0], bottom_right_indices[bottom_right_border_check][:, 1]] = False
 
-        # Additional halting for diagonal tokens
+        # Additional halting for diagonal tokens within the image boundaries
         mask_token[true_indices[top_left_indices[:, 0], top_left_indices[:, 1]]] = False
         mask_token[true_indices[top_right_indices[:, 0], top_right_indices[:, 1]]] = False
         mask_token[true_indices[bottom_left_indices[:, 0], bottom_left_indices[:, 1]]] = False
         mask_token[true_indices[bottom_right_indices[:, 0], bottom_right_indices[:, 1]]] = False
-    
+
+
     else: 
         print("The discard level doesn't reflect any of the listed discard level. It should be one in {identity, nearby, cross, square, isotropic}")
 
@@ -265,6 +258,8 @@ class AViTEncoder(nn.Module):
         mlp_dim: int,
         dropout: float,
         attention_dropout: float,
+        discard_level: str,
+        percentage: float,
         eps: float = 0.01,
         gate_scale: float = 10,
         gate_center: float = 30,
@@ -452,9 +447,9 @@ class AViTEncoder(nn.Module):
             #################### SPEED-UP HALTING NOVELTY ####################################################################################################
             
             # Call speed_up_halting function to modify the mask_token
-            #mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross")
+            
             #print("The image_size is equal to: ", self.image_size)
-            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=1.0, discard_level="cross", patch_width=self.patch_width)
+            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
             ##################################################################################################################################################
                         
             # Find the indices of False (Halted) values
@@ -491,6 +486,8 @@ class AdaptiveVisionTransformer(nn.Module):
         mlp_dim: int,
         dropout: float = 0.0,
         attention_dropout: float = 0.0,
+        discard_level: str = "identity",
+        percentage: float = 1.0,
         num_classes: int = 1000,
         representation_size: Optional[int] = None,
         num_registers: int = 0,
@@ -533,6 +530,8 @@ class AdaptiveVisionTransformer(nn.Module):
         self.mlp_dim = mlp_dim
         self.attention_dropout = attention_dropout
         self.dropout = dropout
+        self.discard_level = discard_level
+        self.percentage = percentage
         self.num_classes = num_classes
         self.representation_size = representation_size
         self.num_heads = num_heads
@@ -567,6 +566,8 @@ class AdaptiveVisionTransformer(nn.Module):
             mlp_dim,
             dropout,
             attention_dropout,
+            self.discard_level,
+            self.percentage,
             eps,
             gate_scale,
             gate_center,
