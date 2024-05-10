@@ -6,7 +6,7 @@ hidden_dim: 192
 mlp_dim: 768
 num_heads: 3
 eps: 0.25
-discard_level: "cross"
+discard_level: "diag"
 percentage: 1.0
 num_classes: ${dataset.num_classes}
 timm_pretrained_weights: ['facebookresearch/deit:main', 'deit_tiny_patch16_224']

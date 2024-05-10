@@ -147,14 +147,33 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
             mask_token[true_indices[right_border_check][:, 0], right_indices[right_border_check][:, 1]] = False
             mask_token[true_indices[up_border_check][:, 0], up_indices[up_border_check][:, 1]] = False
             mask_token[true_indices[down_border_check][:, 0], down_indices[down_border_check][:, 1]] = False
+        
+        # 1 --> 5
+        elif discard_level.lower() in {"diag", "diagonal", "d"}:
 
-        # 1 --> 9
-        # 13 halted tokens are: The True token itself (1 token)
-        # Two tokens to the right
-        # Two tokens to the left
-        # Two tokens above
-        # Two tokens below
-        # Four tokens diagonally (one in each direction: top-right, top-left, bottom-right, bottom-left)
+            # Compute diagonal indices
+            top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
+            top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_left_indices = torch.clamp(true_indices + torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_right_indices_row = torch.clamp(true_indices[:, 0] + 1, min=0, max=mask_token.size(0) - 1)
+            bottom_right_indices_col = torch.clamp(true_indices[:, 1] + 1, min=0, max=mask_token.size(1) - 1)
+            bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
+
+            # Halt the tokens at the True indices
+            mask_token[true_indices[:, 0], true_indices[:, 1]] = False
+
+            # Apply halting to diagonal tokens within the image boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1))
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1))
+
+            mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
+            mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
+            mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
+            mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
+
+
         # 1 --> 9
         elif discard_level.lower() in {"square", "sq", "s"}:
 
