@@ -150,7 +150,6 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         
         # 1 --> 5
         elif discard_level.lower() in {"diag", "diagonal", "d"}:
-
             # Compute diagonal indices
             top_left_indices = torch.clamp(true_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
             top_right_indices = torch.clamp(true_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
@@ -159,26 +158,27 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
             bottom_right_indices_col = torch.clamp(true_indices[:, 1] + 1, min=0, max=mask_token.size(1) - 1)
             bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
 
+            # Check if the indices are within the image boundaries and do not cross row boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0) & (top_left_indices[:, 1] % patch_width >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1)) & (top_right_indices[:, 1] % patch_width < patch_width - 1)
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0) & (bottom_left_indices[:, 1] % patch_width >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1)) & (bottom_right_indices[:, 1] % patch_width < patch_width - 1)
+
             # Halt the tokens at the True indices
             mask_token[true_indices[:, 0], true_indices[:, 1]] = False
 
-            # Apply halting to diagonal tokens within the image boundaries
-            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0)
-            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1))
-            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0)
-            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1))
-
+            # Apply halting to diagonal tokens within the image boundaries and do not cross row boundaries
             mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
             mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
             mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
             mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
 
 
+
         # 1 --> 9
         elif discard_level.lower() in {"square", "sq", "s"}:
-
             # Halt the left, right, up, down, top-left, top-right, bottom-left, and bottom-right tokens
-            # to the mask_token's token that correspond to be True in the new_halted_tokens_per_layer.
+            # to the mask_token's token that correspond to True in the new_halted_tokens_per_layer.
             left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
             right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
             up_indices = torch.clamp(true_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
@@ -192,36 +192,37 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
             bottom_right_indices_col = torch.clamp(true_indices[:, 1] + 1, min=0, max=mask_token.size(1) - 1)
             bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
 
-            # Check if the indices are within the image boundaries
-            left_inside_image = left_indices[:, 1] >= 0
-            right_inside_image = right_indices[:, 1] < mask_token.size(1)
-            up_inside_image = up_indices[:, 0] >= 0
-            down_inside_image = down_indices[:, 0] < mask_token.size(0)
+            # Check if the indices are within the image boundaries and do not cross row boundaries
+            left_inside_image = (left_indices[:, 1] >= 0) & (left_indices[:, 1] % patch_width >= 0)
+            right_inside_image = (right_indices[:, 1] < mask_token.size(1)) & (right_indices[:, 1] % patch_width < patch_width - 1)
+            up_inside_image = (up_indices[:, 0] >= 0)
+            down_inside_image = (down_indices[:, 0] < mask_token.size(0))
 
             # Halt the tokens at the True indices
             mask_token[true_indices[:, 0], true_indices[:, 1]] = False
 
-            # Apply halting to tokens at the defined indices if they are within the image boundaries
+            # Apply halting to tokens at the defined indices if they are within the image boundaries and do not cross row boundaries
             mask_token[left_indices[left_inside_image][:, 0], left_indices[left_inside_image][:, 1]] = False
             mask_token[right_indices[right_inside_image][:, 0], right_indices[right_inside_image][:, 1]] = False
             mask_token[up_indices[up_inside_image][:, 0], up_indices[up_inside_image][:, 1]] = False
             mask_token[down_indices[down_inside_image][:, 0], down_indices[down_inside_image][:, 1]] = False
 
-            # Apply halting to diagonal tokens within the image boundaries
-            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0)
-            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1))
-            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0)
-            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1))
+            # Apply halting to diagonal tokens within the image boundaries and do not cross row boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0) & (top_left_indices[:, 1] % patch_width >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1)) & (top_right_indices[:, 1] % patch_width < patch_width - 1)
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0) & (bottom_left_indices[:, 1] % patch_width >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1)) & (bottom_right_indices[:, 1] % patch_width < patch_width - 1)
 
             mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
             mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
             mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
             mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
-
+        
+        
         # 1 --> 13
         elif discard_level.lower() in {"isotropic", "iso", "circle", "is"}:
-            # Halt the two at the left, two at the right, two at the up, two at the down, top-left, top-right, bottom-left, and bottom-right tokens
-            # to the mask_token's token that correspond to be True in the new_halted_tokens_per_layer.
+            # Halt the tokens at the left, right, up, down, top-left, top-right, bottom-left, and bottom-right positions
+            # to the mask_token's token that correspond to True in the new_halted_tokens_per_layer.
             left_indices = torch.clamp(true_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
             right_indices = torch.clamp(true_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
             up_indices = torch.clamp(true_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
@@ -241,38 +242,38 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
             two_distant_up_indices = torch.clamp(true_indices - torch.tensor([[2, 0]]).to("cuda"), min=0)
             two_distant_down_indices = torch.clamp(true_indices + torch.tensor([[2, 0]]).to("cuda"), max=mask_token.size(0) - 1)
 
-            # Check if the indices are within the image boundaries
-            left_inside_image = left_indices[:, 1] >= 0
-            right_inside_image = right_indices[:, 1] < mask_token.size(1)
-            up_inside_image = up_indices[:, 0] >= 0
-            down_inside_image = down_indices[:, 0] < mask_token.size(0)
+            # Check if the indices are within the image boundaries and do not cross row boundaries
+            left_inside_image = (left_indices[:, 1] >= 0) & (left_indices[:, 1] % patch_width >= 0)
+            right_inside_image = (right_indices[:, 1] < mask_token.size(1)) & (right_indices[:, 1] % patch_width < patch_width - 1)
+            up_inside_image = (up_indices[:, 0] >= 0)
+            down_inside_image = (down_indices[:, 0] < mask_token.size(0))
 
-            two_distant_left_inside_image = two_distant_left_indices[:, 1] >= 0
-            two_distant_right_inside_image = two_distant_right_indices[:, 1] < mask_token.size(1)
-            two_distant_up_inside_image = two_distant_up_indices[:, 0] >= 0
-            two_distant_down_inside_image = two_distant_down_indices[:, 0] < mask_token.size(0)
+            two_distant_left_inside_image = (two_distant_left_indices[:, 1] >= 0) & (two_distant_left_indices[:, 1] % patch_width >= 0)
+            two_distant_right_inside_image = (two_distant_right_indices[:, 1] < mask_token.size(1)) & (two_distant_right_indices[:, 1] % patch_width < patch_width - 1)
+            two_distant_up_inside_image = (two_distant_up_indices[:, 0] >= 0)
+            two_distant_down_inside_image = (two_distant_down_indices[:, 0] < mask_token.size(0))
 
             # Halt the tokens at the True indices
             mask_token[true_indices[:, 0], true_indices[:, 1]] = False
 
-            # Apply halting to tokens at the defined indices if they are within the image boundaries
+            # Apply halting to tokens at the defined indices if they are within the image boundaries and do not cross row boundaries
             mask_token[left_indices[left_inside_image][:, 0], left_indices[left_inside_image][:, 1]] = False
             mask_token[right_indices[right_inside_image][:, 0], right_indices[right_inside_image][:, 1]] = False
             mask_token[up_indices[up_inside_image][:, 0], up_indices[up_inside_image][:, 1]] = False
             mask_token[down_indices[down_inside_image][:, 0], down_indices[down_inside_image][:, 1]] = False
 
-            # Apply halting to diagonal tokens within the image boundaries
-            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0)
-            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1))
-            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0)
-            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1))
+            # Apply halting to diagonal tokens within the image boundaries and do not cross row boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0) & (top_left_indices[:, 1] % patch_width >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1)) & (top_right_indices[:, 1] % patch_width < patch_width - 1)
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0) & (bottom_left_indices[:, 1] % patch_width >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1)) & (bottom_right_indices[:, 1] % patch_width < patch_width - 1)
 
             mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
             mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
             mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
             mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
 
-            # Apply halting to two distant tokens if they are within the image boundaries
+            # Apply halting to two distant tokens if they are within the image boundaries and do not cross row boundaries
             mask_token[two_distant_left_indices[two_distant_left_inside_image][:, 0], two_distant_left_indices[two_distant_left_inside_image][:, 1]] = False
             mask_token[two_distant_right_indices[two_distant_right_inside_image][:, 0], two_distant_right_indices[two_distant_right_inside_image][:, 1]] = False
             mask_token[two_distant_up_indices[two_distant_up_inside_image][:, 0], two_distant_up_indices[two_distant_up_inside_image][:, 1]] = False
@@ -280,11 +281,6 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
 
         return mask_token
 
-
-
-
-
-    
 
 
 # ViT Encoder
@@ -310,6 +306,7 @@ class AViTEncoder(nn.Module):
 
         # Note that batch_size is on the first dim because
         # we have batch_first=True in nn.MultiAttention() by default
+        self.num_layers = num_layers
         self.eps = eps
         self.patch_width = patch_width
         self.discard_level = discard_level
@@ -493,7 +490,11 @@ class AViTEncoder(nn.Module):
             # Call speed_up_halting function to modify the mask_token
             
             #print("The image_size is equal to: ", self.image_size)
-            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
+            # mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
+            
+            # Do the Halting Speed-Up only on the first half of the layers (we want to accelerate halting on the first layers).
+            if i <= (self.num_layers // 2):
+                mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
             ##################################################################################################################################################
                         
             # Find the indices of False (Halted) values
