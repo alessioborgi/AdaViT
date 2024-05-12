@@ -235,7 +235,7 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
         
         
         # 1 --> 13
-        elif discard_level.lower() in {"isotropic", "iso", "circle", "is"}:
+        elif discard_level.lower() in {"isotropic", "iso", "is"}:
             # Halt the tokens at the left, right, up, down, top-left, top-right, bottom-left, and bottom-right positions
             # to the mask_token's token that correspond to True in the new_halted_tokens_per_layer.
             left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
@@ -291,7 +291,175 @@ def speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage, discar
             mask_token[two_distant_right_indices[two_distant_right_inside_image][:, 0], two_distant_right_indices[two_distant_right_inside_image][:, 1]] = False
             mask_token[two_distant_up_indices[two_distant_up_inside_image][:, 0], two_distant_up_indices[two_distant_up_inside_image][:, 1]] = False
             mask_token[two_distant_down_indices[two_distant_down_inside_image][:, 0], two_distant_down_indices[two_distant_down_inside_image][:, 1]] = False
+        
+        # 1 --> 21 
+        elif discard_level.lower() in {"circle", "crcl"}:
+            # Halt the tokens at the left, right, up, down, top-left, top-right, bottom-left, and bottom-right positions
+            # to the mask_token's token that correspond to True in the new_halted_tokens_per_layer.
+            left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+            right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+            up_indices = torch.clamp(sampled_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
+            down_indices = torch.clamp(sampled_indices + torch.tensor([[1, 0]]).to("cuda"), max=mask_token.size(0) - 1)
 
+            # Compute diagonal indices
+            top_left_indices = torch.clamp(sampled_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
+            top_right_indices = torch.clamp(sampled_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_left_indices = torch.clamp(sampled_indices + torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_right_indices_row = torch.clamp(sampled_indices[:, 0] + 1, min=0, max=mask_token.size(0) - 1)
+            bottom_right_indices_col = torch.clamp(sampled_indices[:, 1] + 1, min=0, max=mask_token.size(1) - 1)
+            bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
+
+            # Compute two distant indices
+            two_distant_left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 2]]).to("cuda"), min=0)
+            two_distant_right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 2]]).to("cuda"), max=mask_token.size(1) - 1)
+            two_distant_up_indices = torch.clamp(sampled_indices - torch.tensor([[2, 0]]).to("cuda"), min=0)
+            two_distant_down_indices = torch.clamp(sampled_indices + torch.tensor([[2, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+            # Compute double square indices
+            double_square_left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 2]]).to("cuda"), min=0)
+            double_square_right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 2]]).to("cuda"), max=mask_token.size(1) - 1)
+            double_square_up_indices = torch.clamp(sampled_indices - torch.tensor([[2, 0]]).to("cuda"), min=0)
+            double_square_down_indices = torch.clamp(sampled_indices + torch.tensor([[2, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+            # Check if the indices are within the image boundaries and do not cross row boundaries
+            left_inside_image = (left_indices[:, 1] >= 0) & (left_indices[:, 1] % patch_width >= 0)
+            right_inside_image = (right_indices[:, 1] < mask_token.size(1)) & (right_indices[:, 1] % patch_width < patch_width - 1)
+            up_inside_image = (up_indices[:, 0] >= 0)
+            down_inside_image = (down_indices[:, 0] < mask_token.size(0))
+
+            two_distant_left_inside_image = (two_distant_left_indices[:, 1] >= 0) & (two_distant_left_indices[:, 1] % patch_width >= 0)
+            two_distant_right_inside_image = (two_distant_right_indices[:, 1] < mask_token.size(1)) & (two_distant_right_indices[:, 1] % patch_width < patch_width - 1)
+            two_distant_up_inside_image = (two_distant_up_indices[:, 0] >= 0)
+            two_distant_down_inside_image = (two_distant_down_indices[:, 0] < mask_token.size(0))
+
+            double_square_left_inside_image = (double_square_left_indices[:, 1] >= 0) & (double_square_left_indices[:, 1] % patch_width >= 0)
+            double_square_right_inside_image = (double_square_right_indices[:, 1] < mask_token.size(1)) & (double_square_right_indices[:, 1] % patch_width < patch_width - 1)
+            double_square_up_inside_image = (double_square_up_indices[:, 0] >= 0)
+            double_square_down_inside_image = (double_square_down_indices[:, 0] < mask_token.size(0))
+
+            # Apply halting to tokens at the defined indices if they are within the image boundaries and do not cross row boundaries
+            mask_token[left_indices[left_inside_image][:, 0], left_indices[left_inside_image][:, 1]] = False
+            mask_token[right_indices[right_inside_image][:, 0], right_indices[right_inside_image][:, 1]] = False
+            mask_token[up_indices[up_inside_image][:, 0], up_indices[up_inside_image][:, 1]] = False
+            mask_token[down_indices[down_inside_image][:, 0], down_indices[down_inside_image][:, 1]] = False
+
+            # Apply halting to diagonal tokens within the image boundaries and do not cross row boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0) & (top_left_indices[:, 1] % patch_width >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1)) & (top_right_indices[:, 1] % patch_width < patch_width - 1)
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0) & (bottom_left_indices[:, 1] % patch_width >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1)) & (bottom_right_indices[:, 1] % patch_width < patch_width - 1)
+
+            mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
+            mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
+            mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
+            mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
+
+            # Apply halting to two distant tokens if they are within the image boundaries and do not cross row boundaries
+            mask_token[two_distant_left_indices[two_distant_left_inside_image][:, 0], two_distant_left_indices[two_distant_left_inside_image][:, 1]] = False
+            mask_token[two_distant_right_indices[two_distant_right_inside_image][:, 0], two_distant_right_indices[two_distant_right_inside_image][:, 1]] = False
+            mask_token[two_distant_up_indices[two_distant_up_inside_image][:, 0], two_distant_up_indices[two_distant_up_inside_image][:, 1]] = False
+            mask_token[two_distant_down_indices[two_distant_down_inside_image][:, 0], two_distant_down_indices[two_distant_down_inside_image][:, 1]] = False
+
+            # Apply halting to tokens in the double square if they are within the image boundaries and do not cross row boundaries
+            mask_token[double_square_left_indices[double_square_left_inside_image][:, 0], double_square_left_indices[double_square_left_inside_image][:, 1]] = False
+            mask_token[double_square_right_indices[double_square_right_inside_image][:, 0], double_square_right_indices[double_square_right_inside_image][:, 1]] = False
+            mask_token[double_square_up_indices[double_square_up_inside_image][:, 0], double_square_up_indices[double_square_up_inside_image][:, 1]] = False
+            mask_token[double_square_down_indices[double_square_down_inside_image][:, 0], double_square_down_indices[double_square_down_inside_image][:, 1]] = False
+            
+        # 1 --> 25
+        elif discard_level.lower() in {"double-square", "dou-sq", "dq"}:
+            # Halt the tokens at the left, right, up, down, top-left, top-right, bottom-left, and bottom-right positions
+            # to the mask_token's token that correspond to True in the new_halted_tokens_per_layer.
+            left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 1]]).to("cuda"), min=0)
+            right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 1]]).to("cuda"), max=mask_token.size(1) - 1)
+            up_indices = torch.clamp(sampled_indices - torch.tensor([[1, 0]]).to("cuda"), min=0)
+            down_indices = torch.clamp(sampled_indices + torch.tensor([[1, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+            # Compute diagonal indices
+            top_left_indices = torch.clamp(sampled_indices - torch.tensor([[1, 1]]).to("cuda"), min=0)
+            top_right_indices = torch.clamp(sampled_indices - torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_left_indices = torch.clamp(sampled_indices + torch.tensor([[1, -1]]).to("cuda"), min=0)
+            bottom_right_indices_row = torch.clamp(sampled_indices[:, 0] + 1, min=0, max=mask_token.size(0) - 1)
+            bottom_right_indices_col = torch.clamp(sampled_indices[:, 1] + 1, min=0, max=mask_token.size(1) - 1)
+            bottom_right_indices = torch.stack((bottom_right_indices_row, bottom_right_indices_col), dim=1)
+
+            # Compute two distant indices
+            two_distant_left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 2]]).to("cuda"), min=0)
+            two_distant_right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 2]]).to("cuda"), max=mask_token.size(1) - 1)
+            two_distant_up_indices = torch.clamp(sampled_indices - torch.tensor([[2, 0]]).to("cuda"), min=0)
+            two_distant_down_indices = torch.clamp(sampled_indices + torch.tensor([[2, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+            # Compute double square indices
+            double_square_left_indices = torch.clamp(sampled_indices - torch.tensor([[0, 2]]).to("cuda"), min=0)
+            double_square_right_indices = torch.clamp(sampled_indices + torch.tensor([[0, 2]]).to("cuda"), max=mask_token.size(1) - 1)
+            double_square_up_indices = torch.clamp(sampled_indices - torch.tensor([[2, 0]]).to("cuda"), min=0)
+            double_square_down_indices = torch.clamp(sampled_indices + torch.tensor([[2, 0]]).to("cuda"), max=mask_token.size(0) - 1)
+
+            # Compute double diagonal indices
+            double_diagonal_top_left_indices = torch.clamp(sampled_indices - torch.tensor([[2, 2]]).to("cuda"), min=0)
+            double_diagonal_top_right_indices = torch.clamp(sampled_indices - torch.tensor([[2, -2]]).to("cuda"), min=0)
+            double_diagonal_bottom_left_indices = torch.clamp(sampled_indices + torch.tensor([[2, -2]]).to("cuda"), min=0)
+            double_diagonal_bottom_right_indices_row = torch.clamp(sampled_indices[:, 0] + 2, min=0, max=mask_token.size(0) - 1)
+            double_diagonal_bottom_right_indices_col = torch.clamp(sampled_indices[:, 1] + 2, min=0, max=mask_token.size(1) - 1)
+            double_diagonal_bottom_right_indices = torch.stack((double_diagonal_bottom_right_indices_row, double_diagonal_bottom_right_indices_col), dim=1)
+
+            # Check if the indices are within the image boundaries and do not cross row boundaries
+            left_inside_image = (left_indices[:, 1] >= 0) & (left_indices[:, 1] % patch_width >= 0)
+            right_inside_image = (right_indices[:, 1] < mask_token.size(1)) & (right_indices[:, 1] % patch_width < patch_width - 1)
+            up_inside_image = (up_indices[:, 0] >= 0)
+            down_inside_image = (down_indices[:, 0] < mask_token.size(0))
+
+            two_distant_left_inside_image = (two_distant_left_indices[:, 1] >= 0) & (two_distant_left_indices[:, 1] % patch_width >= 0)
+            two_distant_right_inside_image = (two_distant_right_indices[:, 1] < mask_token.size(1)) & (two_distant_right_indices[:, 1] % patch_width < patch_width - 1)
+            two_distant_up_inside_image = (two_distant_up_indices[:, 0] >= 0)
+            two_distant_down_inside_image = (two_distant_down_indices[:, 0] < mask_token.size(0))
+
+            double_square_left_inside_image = (double_square_left_indices[:, 1] >= 0) & (double_square_left_indices[:, 1] % patch_width >= 0)
+            double_square_right_inside_image = (double_square_right_indices[:, 1] < mask_token.size(1)) & (double_square_right_indices[:, 1] % patch_width < patch_width - 1)
+            double_square_up_inside_image = (double_square_up_indices[:, 0] >= 0)
+            double_square_down_inside_image = (double_square_down_indices[:, 0] < mask_token.size(0))
+
+            double_diagonal_top_left_inside_image = (double_diagonal_top_left_indices[:, 0] >= 0) & (double_diagonal_top_left_indices[:, 1] >= 0) & (double_diagonal_top_left_indices[:, 1] % patch_width >= 0)
+            double_diagonal_top_right_inside_image = (double_diagonal_top_right_indices[:, 0] >= 0) & (double_diagonal_top_right_indices[:, 1] < mask_token.size(1)) & (double_diagonal_top_right_indices[:, 1] % patch_width < patch_width - 1)
+            double_diagonal_bottom_left_inside_image = (double_diagonal_bottom_left_indices[:, 0] < mask_token.size(0)) & (double_diagonal_bottom_left_indices[:, 1] >= 0) & (double_diagonal_bottom_left_indices[:, 1] % patch_width >= 0)
+            double_diagonal_bottom_right_inside_image = (double_diagonal_bottom_right_indices[:, 0] < mask_token.size(0)) & (double_diagonal_bottom_right_indices[:, 1] < mask_token.size(1)) & (double_diagonal_bottom_right_indices[:, 1] % patch_width < patch_width - 1)
+
+            # Apply halting to tokens at the defined indices if they are within the image boundaries and do not cross row boundaries
+            mask_token[left_indices[left_inside_image][:, 0], left_indices[left_inside_image][:, 1]] = False
+            mask_token[right_indices[right_inside_image][:, 0], right_indices[right_inside_image][:, 1]] = False
+            mask_token[up_indices[up_inside_image][:, 0], up_indices[up_inside_image][:, 1]] = False
+            mask_token[down_indices[down_inside_image][:, 0], down_indices[down_inside_image][:, 1]] = False
+
+            # Apply halting to diagonal tokens within the image boundaries and do not cross row boundaries
+            top_left_inside_image = (top_left_indices[:, 0] >= 0) & (top_left_indices[:, 1] >= 0) & (top_left_indices[:, 1] % patch_width >= 0)
+            top_right_inside_image = (top_right_indices[:, 0] >= 0) & (top_right_indices[:, 1] < mask_token.size(1)) & (top_right_indices[:, 1] % patch_width < patch_width - 1)
+            bottom_left_inside_image = (bottom_left_indices[:, 0] < mask_token.size(0)) & (bottom_left_indices[:, 1] >= 0) & (bottom_left_indices[:, 1] % patch_width >= 0)
+            bottom_right_inside_image = (bottom_right_indices[:, 0] < mask_token.size(0)) & (bottom_right_indices[:, 1] < mask_token.size(1)) & (bottom_right_indices[:, 1] % patch_width < patch_width - 1)
+
+            mask_token[top_left_indices[top_left_inside_image][:, 0], top_left_indices[top_left_inside_image][:, 1]] = False
+            mask_token[top_right_indices[top_right_inside_image][:, 0], top_right_indices[top_right_inside_image][:, 1]] = False
+            mask_token[bottom_left_indices[bottom_left_inside_image][:, 0], bottom_left_indices[bottom_left_inside_image][:, 1]] = False
+            mask_token[bottom_right_indices[bottom_right_inside_image][:, 0], bottom_right_indices[bottom_right_inside_image][:, 1]] = False
+
+            # Apply halting to two distant tokens if they are within the image boundaries and do not cross row boundaries
+            mask_token[two_distant_left_indices[two_distant_left_inside_image][:, 0], two_distant_left_indices[two_distant_left_inside_image][:, 1]] = False
+            mask_token[two_distant_right_indices[two_distant_right_inside_image][:, 0], two_distant_right_indices[two_distant_right_inside_image][:, 1]] = False
+            mask_token[two_distant_up_indices[two_distant_up_inside_image][:, 0], two_distant_up_indices[two_distant_up_inside_image][:, 1]] = False
+            mask_token[two_distant_down_indices[two_distant_down_inside_image][:, 0], two_distant_down_indices[two_distant_down_inside_image][:, 1]] = False
+
+            # Apply halting to tokens in the double square if they are within the image boundaries and do not cross row boundaries
+            mask_token[double_square_left_indices[double_square_left_inside_image][:, 0], double_square_left_indices[double_square_left_inside_image][:, 1]] = False
+            mask_token[double_square_right_indices[double_square_right_inside_image][:, 0], double_square_right_indices[double_square_right_inside_image][:, 1]] = False
+            mask_token[double_square_up_indices[double_square_up_inside_image][:, 0], double_square_up_indices[double_square_up_inside_image][:, 1]] = False
+            mask_token[double_square_down_indices[double_square_down_inside_image][:, 0], double_square_down_indices[double_square_down_inside_image][:, 1]] = False
+
+            # Apply halting to tokens in the double diagonals if they are within the image boundaries and do not cross row boundaries
+            mask_token[double_diagonal_top_left_indices[double_diagonal_top_left_inside_image][:, 0], double_diagonal_top_left_indices[double_diagonal_top_left_inside_image][:, 1]] = False
+            mask_token[double_diagonal_top_right_indices[double_diagonal_top_right_inside_image][:, 0], double_diagonal_top_right_indices[double_diagonal_top_right_inside_image][:, 1]] = False
+            mask_token[double_diagonal_bottom_left_indices[double_diagonal_bottom_left_inside_image][:, 0], double_diagonal_bottom_left_indices[double_diagonal_bottom_left_inside_image][:, 1]] = False
+            mask_token[double_diagonal_bottom_right_indices[double_diagonal_bottom_right_inside_image][:, 0], double_diagonal_bottom_right_indices[double_diagonal_bottom_right_inside_image][:, 1]] = False
+
+        
         return mask_token
 
 
