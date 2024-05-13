@@ -580,6 +580,7 @@ class AViTEncoder(nn.Module):
         # Initialize additional halted tokens mask. This will report the new_halted_tokens w.r.t. the previous layer.
         new_halted_tokens_per_layer = torch.zeros(bs, self.seq_length).bool().cuda()  # Initialize as boolean mask  
         
+        increment_percentage = 1 / self.num_layers
         # For each of the 12 layers.
         for i, adaptive_layer in enumerate(self.layers):
 
@@ -674,14 +675,16 @@ class AViTEncoder(nn.Module):
             #print("The image_size is equal to: ", self.image_size)
             
             ### 1) COMPLETE HALTING ###
-            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
+            # mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
             
             ### 2) FIRST-LAYERS HALTING###
             # Do the Halting Speed-Up only on the first half of the layers (we want to accelerate halting on the first layers).
             #if i <= (self.num_layers // 2):
             #    mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage, discard_level=self.discard_level, patch_width=self.patch_width)
             ##################################################################################################################################################
-                        
+            
+            ### 3) INCREMENTAL DECREASING ###
+            mask_token = speed_up_halting(mask_token, new_halted_tokens_per_layer, percentage=self.percentage-(i*increment_percentage), discard_level=self.discard_level, patch_width=self.patch_width)
             # Find the indices of False (Halted) values
             num_zeros = (mask_token == 0).sum().item()
             #print("Number of zeros AFTER SPEED-UP:", num_zeros)            
