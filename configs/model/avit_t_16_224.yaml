@@ -5,7 +5,7 @@ num_layers: 12
 hidden_dim: 192
 mlp_dim: 768
 num_heads: 3
-eps: 0.25
+eps: 0.5
 discard_level: "double-square"
 percentage: 1.0
 num_classes: ${dataset.num_classes}

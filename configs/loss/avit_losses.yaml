@@ -15,11 +15,10 @@ additional_losses:
     # MultiModal Approach
     distr_prior_loss:
         _target_:  AdaViT.utils.losses.AViTDPriorLoss
-        target_depth: [5,10]
+        target_depth: [2,10]
         weight: 0.1
         scaling: [1,1]
         weights: [0.7,0.3]
-        # Put either "id"(Identity), "hard"(Positive Correlation (Earlier Halting in Deeper Layers)) or "soft" (Negative Correlation (Later Halting in Deeper Layers))
     ponder_loss:
         _target_:  AdaViT.utils.losses.AViTPonderLoss
         weight: 0.0005
