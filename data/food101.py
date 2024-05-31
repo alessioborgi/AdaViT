@@ -32,7 +32,6 @@ class Food101Dataset:
 
         if 'num_classes' in kwargs:
             print(f'Warning: num_classes is not used for {self.__class__.__name__}. \nIgnoring the argument and using default number of classes in this dataset (101).')
-        
         self.train_dataset, self.val_dataset = None, None
         if 'train' in split:
             self.train_dataset = Food101(root, split='train', download=download, transform=train_transform, target_transform=target_transform)

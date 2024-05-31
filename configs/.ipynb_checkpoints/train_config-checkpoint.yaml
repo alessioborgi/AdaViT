@@ -26,7 +26,7 @@ hydra:
 
 defaults:
   - logger: wandb
-  - dataset: imagenette
+  - dataset: food101
   - model: avit_t_16_224
   - training: finetune
   - optimizer: adam
