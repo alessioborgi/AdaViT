@@ -1,4 +1,7 @@
 # AdaViT (Adaptive Vision Transformers)
+
+An Adaptive Vision Transformer designed for efficient image classification. This project implements dynamic token sparsification, optimizing computational resources while maintaining high accuracy. Ideal for research and applications requiring adaptive and efficient computer vision models.
+
 ## Introduction ##
 In this project we propose an implementation and possible improvements of **AdaViT**, a method proposed in the 2021 paper [AdaViT: Adaptive Tokens for Efficient Vision Transformer](https://arxiv.org/abs/2112.07658), which is able to significantly speed up inference time in Vision Transformer architectures (ViT) by automatically reducing the number of tokens processed through the network, trying to discord redundant tokens, through a process denoted as **Halting**. Moreover, this is done without utilizing additional parameters or changing in any way the structure of the original network. This obviously creates an evident trade-off between accuracy and halting, as discarding a lot of token may result in loss in information, and consequently to an accuracy drop.
 
