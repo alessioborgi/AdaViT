@@ -1,5 +1,8 @@
 # AdaViT (Adaptive Vision Transformers)
 
+**Copyright © 2024 Alessio Borgi**
+
+
 An Adaptive Vision Transformer designed for efficient image classification. This project implements dynamic token sparsification, optimizing computational resources while maintaining high accuracy. Ideal for research and applications requiring adaptive and efficient computer vision models.
 
 ## Introduction ##
